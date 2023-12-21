@@ -6,8 +6,6 @@ Task description: [link](https://adventofcode.com/2023/day/5)
 
 ## Results
 
-<!--RESULTS-->
-
 ```
 Time part 1: 0.253ms
 Time part 2: 367113.692ms
