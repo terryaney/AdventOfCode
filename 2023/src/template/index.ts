@@ -1,15 +1,27 @@
 import run from "aocrunner";
 import * as util from '../utils/index.js';
 
-const solve = (rawInput: string, isPart2: boolean) => {
+const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
-	return;
+	return lines;
+};
+
+const solve = (rawInput: string, isPart2: boolean) => {
+	const input = parseInput(rawInput);
+
+	if ( !isPart2 ) {
+	}
+	else {
+	}
+
+	return input;
 };
 
 const part1 = (rawInput: string) => solve(rawInput, false);
 const part2 = (rawInput: string) => solve(rawInput, true);
 
 run({
+	onlyTests: true,
 	part1: {
 		tests: [
 			{
@@ -30,6 +42,5 @@ run({
 		],
 		solution: part2,
 	},
-	trimTestInputs: true,
-	onlyTests: true,
+	trimTestInputs: true
 });
