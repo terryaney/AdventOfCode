@@ -1,8 +1,9 @@
 import run from "aocrunner";
+import * as util from '../utils/index.js';
 
-const parseInput = (rawInput: string): { inputs: Array<string>, patterns: Array<{ value: string, word: string }> } => {
+const parseInput = (rawInput: string): { lines: Array<string>, patterns: Array<{ value: string, word: string }> } => {
 	return {
-		inputs: rawInput.split("\n"),
+		lines: util.parseLines(rawInput),
 		patterns: [
 			{ value: "1", word: "one" },
 			{ value: "2", word: "two" },
@@ -19,7 +20,7 @@ const parseInput = (rawInput: string): { inputs: Array<string>, patterns: Array<
 
 const solve = (rawInput: string, isPart2: boolean) => {
 	const input = parseInput(rawInput);	
-	return input.inputs.reduce((sum, i) => {
+	return input.lines.reduce((sum, i) => {
 		let positions = input.patterns.map(p => ({ item: p.value, position: i.indexOf(p.value), lastPosition: i.lastIndexOf(p.value), value: Number(p.value) }));
 
 		if ( isPart2 )
