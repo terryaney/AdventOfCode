@@ -4,6 +4,16 @@
 
 Task description: [link](https://adventofcode.com/2023/day/1)
 
+## Results
+
+<!--RESULTS-->
+
+```
+Time part 1: 1.76ms
+Time part 2: 2.944ms
+Both parts: 4.704ms
+```
+
 ## Notes
 
 ...
