@@ -27,20 +27,20 @@ run({
 			{
 				input: `
 				`,
-				expected: 0,
+				expected: 0
 			}
 		],
-		solution: part1,
+		solution: part1
 	},
 	part2: {
 		tests: [
 			{
 				input: `
 				`,
-				expected: 0,
+				expected: 0
 			}
 		],
-		solution: part2,
+		solution: part2
 	},
 	trimTestInputs: true
 });
