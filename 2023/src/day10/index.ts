@@ -185,8 +185,6 @@ const solve = (rawInput: string, isPart2: boolean) => {
 		});
 		return pointsInsideLoop;		
 	}
-
-	return input;
 };
 
 const part1 = (rawInput: string) => solve(rawInput, false);

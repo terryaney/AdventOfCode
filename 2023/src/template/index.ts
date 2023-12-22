@@ -14,7 +14,7 @@ const solve = (rawInput: string, isPart2: boolean) => {
 	else {
 	}
 
-	return input;
+	console.log(input);
 };
 
 const part1 = (rawInput: string) => solve(rawInput, false);

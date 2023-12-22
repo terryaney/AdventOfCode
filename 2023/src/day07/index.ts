@@ -156,16 +156,15 @@ class CamelHand {
 
 function compareHands(handA: CamelHand, handB: CamelHand): number {
 	// Compare hand types...
-	if (handA.type != handB.type) {
-		return handA.type - handB.type;
-	}
-	else {
+	if (handA.type == handB.type) {
 		for (let index = 0; index < handA.cards.length; index++) {
 			if (handA.cards[index] != handB.cards[index]) {
 				return handA.cards[index] - handB.cards[index];
 			}			
 		}
 	}
+
+	return handA.type - handB.type;
 }
 
 const parseInput = (rawInput: string) => {
