@@ -1,7 +1,7 @@
 import run from "aocrunner";
 import * as util from '../utils/index.js';
-import { mod, re } from "mathjs";
-import { stat } from "fs";
+import { lcm } from "mathjs";
+import { assert } from "console";
 
 class Pulse {
 	public type: number;
@@ -23,7 +23,7 @@ class Module {
 	public destinations: string[];
 	public type: ModuleType;
 	public state = 0;
-	public inputs?: Array<{ name: string, state: number }> = [];
+	public memory: Array<{ name: string, state: number }> = [];
 
 	constructor(name: string, type: ModuleType, destinations: string[]) {
 		this.name = name;
@@ -35,130 +35,131 @@ class Module {
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
 	const modules: ModuleDictionary = {};
-	const flipFlops: Module[] = [];
-	const conjunctions: Module[] = [];
-	const inputs: { [destination: string]: Array<string> } = {};
 	
 	lines.forEach(line => {
-		const [name, dest] = line.split(' -> ');
+		const [left, right] = line.split(' -> ');
 		
 		const type: ModuleType = 
-			name == "broadcaster" ? "Broadcaster" :
-				name.startsWith('&') ? "Conjunction" :
-					name.startsWith('%') ? "FlipFlop" :
+			left == "broadcaster" ? "Broadcaster" :
+				left.startsWith('&') ? "Conjunction" :
+					left.startsWith('%') ? "FlipFlop" :
 						"None";
 				
-		const destinations = dest.split(",").map(d => d.trim());
+		const destinations = right.split(",").map(d => d.trim());
 
 		const module = new Module(
-			type == "Conjunction" || type == "FlipFlop" ? name.substring(1) : name,
+			type == "Conjunction" || type == "FlipFlop" ? left.substring(1) : left,
 			type,
 			destinations
 		);
 
-		destinations.forEach(destination => {
-			if (inputs[destination] == undefined) {
-				inputs[destination] = [];
-			}
-			inputs[destination].push(module.name);
-		});
-	
-		if (type == "Conjunction") {
-			conjunctions.push(module);
-		}
-		else if (type == "FlipFlop") {
-			flipFlops.push(module);
-		}
 		modules[module.name] = module;
 	});
 
-	conjunctions.forEach(conjunction => {
-		conjunction.inputs = inputs[conjunction.name].map( name => ({ name: name, state: 0 }));
-	});
+	const rxInputs: Array<Module> = [];
 
-	return { modules, flipFlops, conjunctions };
+	// Find rx input module (part 2) and initialize all conjunction module memories
+	for (const name in modules) {
+		const module = modules[name];
+
+		module.destinations.forEach(destination => {
+			if (destination == "rx") {
+				rxInputs.push(module);
+			}
+
+			if (modules[destination] != undefined && modules[destination].type == "Conjunction") {
+				modules[destination].memory?.push({ name: name, state: 0 });
+			}
+		});
+	}
+	
+	// console.log(rxInputs);
+	// assert(rxInputs.length <= 1, "There should be exactly one rx input");
+
+	const lcmModules: { [name: string]: { cylclesToHigh: number, seen: number } } = {};
+	const rxInput = rxInputs.length == 1 ? rxInputs[0] : undefined;
+
+	// My input, &rs -> rx.  Outputs lo to rx if/only if all rs inputs are high.
+	// See readme for the reason for LCM modules (the modules that feed into the module that feeds into rx)
+	if (rxInput != undefined) {
+		for (const name in modules) {
+			const module = modules[name];
+			if (module.destinations.includes(rxInput.name)) {
+				lcmModules[name] = { cylclesToHigh: 0, seen: 0 };
+			}
+		}
+	}
+
+	return { modules, rxInput: rxInput, lcmModules: lcmModules };
 };
 
 const solve = (rawInput: string, isPart2: boolean, buttonPresses: number) => {
 	const input = parseInput(rawInput);
-	const modules = input.modules;	
-
+	const modules = input.modules;
+	
 	let lowPulses = 0;
 	let highPulses = 0;
-	const pressCache: Array<{ low: number, high: number }> = [];
-	
-	for (let i = 0; i < buttonPresses; i++) {
+	let i = 0;
+
+	while (i < buttonPresses) {
 		const pulses = [new Pulse(0, "button", "broadcaster")];
-		let rxPulses = 0;
 		
 		while (pulses.length > 0) {
 			const pulse = pulses.shift()!;
-			const module = modules[pulse.destination];
 			// console.log(`${pulse.source} -${pulse.type == 1 ? "high" : "low"}-> ${pulse.destination}`);
 			
-			rxPulses += pulse.destination == "rx" && pulse.type == 0 ? 1 : 0;
-
 			if (pulse.type == 1) {
 				highPulses++;
+
+				if (pulse.destination == input.rxInput?.name) {
+					input.lcmModules[pulse.source].cylclesToHigh = i + 1;
+					input.lcmModules[pulse.source].seen++;
+
+					if ( isPart2 && Object.values(input.lcmModules).every(m => m.seen > 0)) {
+						return Object.values(input.lcmModules).reduce((acc, m) => lcm(acc, (m.cylclesToHigh / m.seen)), 1);
+					}
+				}
 			}
 			else {
 				lowPulses++;
 			}
 
+			const module = modules[pulse.destination];
 			if (module != undefined) {
 				if (module.type == "FlipFlop" && pulse.type == 0) {
 					module.state = (module.state + 1) % 2;
 				}
 				else if (module.type == "Conjunction") {
-					module.inputs!.find(i => i.name == pulse.source)!.state = pulse.type;
+					module.memory.find(i => i.name == pulse.source)!.state = pulse.type;
 				}
 
 				const pulseToSend =
 					module.type == "FlipFlop" ? module.state :
-					module.type == "Conjunction" ? module.inputs!.every(i => i.state == 1) ? 0 : 1 :
+					module.type == "Conjunction" ? module.memory.every(i => i.state == 1) ? 0 : 1 :
 					pulse.type;
 
 				module.destinations.forEach(destination => {
-					if (module.type == "Broadcaster") {
+					if (module.type == "FlipFlop" && pulse.type == 0) {
 						pulses.push(new Pulse(pulseToSend, module.name, destination));
 					}
-					else if (module.type == "FlipFlop" && pulse.type == 0) {
+					else if (module.type != "FlipFlop") {
 						pulses.push(new Pulse(pulseToSend, module.name, destination));
-					}
-					else if (module.type == "Conjunction") {
-						pulses.push(new Pulse(pulseToSend, module.name, destination));
-					}
-					else {
-						// console.log(`Unknown module type ${module.type}`);
 					}
 				});
 			}
 		}
 
-		pressCache.push({ low: lowPulses, high: highPulses });
+		i++;
+	};
 
-		if (!isPart2 && input.flipFlops.every(flipFlop => flipFlop.state == 0) && input.conjunctions.every(conjunction => conjunction.inputs!.every(i => i.state == 0))) {
-			break;
-		}
-		else if (isPart2 && rxPulses == 1) {
-			break;
-		}
-	}
-
-	if (!isPart2) {
-		const factor = buttonPresses / pressCache.length;
-		const remainder = buttonPresses % pressCache.length;
-		return (factor * highPulses * factor * lowPulses) + ( remainder != 0 ? pressCache[remainder - 1].high * pressCache[remainder - 1].low : 0);
-	}
-	else {
-		return buttonPresses;
-	}
+	// Part 1
+	return highPulses * lowPulses;
 
 	// console.log(modules);
 };
 
 const part1 = (rawInput: string) => solve(rawInput, false, 1000);
-const part2 = (rawInput: string) => solve(rawInput, true, 1000);
+const part2 = (rawInput: string) => solve(rawInput, true, Math.pow(10, 7));
 
 run({
 	onlyTests: false,
@@ -188,18 +189,6 @@ run({
 		solution: part1
 	},
 	part2: {
-		tests: [
-			{
-				input: `
-				broadcaster -> a, b, c
-				%a -> b
-				%b -> c
-				%c -> inv
-				&inv -> a
-				`,
-				expected: 1
-			}
-		],
 		solution: part2
 	},
 	trimTestInputs: true
