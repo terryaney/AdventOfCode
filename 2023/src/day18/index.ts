@@ -115,7 +115,7 @@ function findItemsInsideLoop(grid: Array<Array<{ shape: string } | undefined>>, 
 					else {
 						const shape = locations[ray]!.shape;
 	
-						if (shape == "|" || ( "L7".indexOf(shape) > -1 && "L7".indexOf(lastCorner!) > -1 ) || ( "FJ".indexOf(shape) > -1 && "FJ".indexOf(lastCorner) > -1 ) ) {
+						if (shape == "|" || ( "L7".indexOf(shape) > -1 && "L7".indexOf(lastCorner!) > -1 ) || ( "FJ".indexOf(shape) > -1 && "FJ".indexOf(lastCorner!) > -1 ) ) {
 							crossings++;
 						}
 						
