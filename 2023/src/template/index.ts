@@ -33,13 +33,6 @@ run({
 		solution: part1
 	},
 	part2: {
-		tests: [
-			{
-				input: `
-				`,
-				expected: 0
-			}
-		],
 		solution: part2
 	},
 	trimTestInputs: true
