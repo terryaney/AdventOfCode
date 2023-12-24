@@ -3,18 +3,17 @@ import * as util from '../utils/index.js';
 
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
+	console.log(lines);
 	return lines;
 };
 
 const solve = (rawInput: string, isPart1: boolean) => {
 	const input = parseInput(rawInput);
 
-	if ( !isPart1 ) {
+	if ( isPart1 ) {
 	}
 	else {
 	}
-
-	console.log(input);
 };
 
 const part1 = (rawInput: string) => solve(rawInput, true);
