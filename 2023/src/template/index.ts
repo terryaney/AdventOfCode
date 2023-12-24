@@ -6,10 +6,10 @@ const parseInput = (rawInput: string) => {
 	return lines;
 };
 
-const solve = (rawInput: string, isPart2: boolean) => {
+const solve = (rawInput: string, isPart1: boolean) => {
 	const input = parseInput(rawInput);
 
-	if ( !isPart2 ) {
+	if ( !isPart1 ) {
 	}
 	else {
 	}
@@ -17,8 +17,8 @@ const solve = (rawInput: string, isPart2: boolean) => {
 	console.log(input);
 };
 
-const part1 = (rawInput: string) => solve(rawInput, false);
-const part2 = (rawInput: string) => solve(rawInput, true);
+const part1 = (rawInput: string) => solve(rawInput, true);
+const part2 = (rawInput: string) => solve(rawInput, false);
 
 run({
 	onlyTests: true,
