@@ -30,11 +30,9 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 	// Find all points of interest by finding nodes with 3 or more valid neighbors
 	for (let y = 0; y < lines.length; y++) {
 		for (let x = 0; x < lines[y].length; x++) {
-			if (lines[y][x] != "#") {
-				// Pass false for possible moves here b/c everything is allowed
-				if (getPossibleMoves(lines, x, y, false).length >= 3) {
-					points.set(`${x},${y}`, { x, y });
-				}
+			// Pass false for possible moves here b/c everything is allowed
+			if (getPossibleMoves(lines, x, y, false).length >= 3) {
+				points.set(`${x},${y}`, { x, y });
 			}
 		}
 	}
