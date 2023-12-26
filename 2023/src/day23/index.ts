@@ -10,9 +10,11 @@ const directionsAllowed: Record<string, Array<{ x: number, y: number }>> = {
 };
 
 const getPossibleMoves = (lines: string[], x: number, y: number, isPart1: boolean) => {
+	if (lines[y][x] == "#") return [];
+
 	const possibleMoves = isPart1
 		? directionsAllowed[lines[y][x]]
-		: lines[y][x] != "#" ? directionsAllowed["."] : [];
+		: directionsAllowed["."];
 
 	return possibleMoves
 		.map(n => ({ x: x + n.x, y: y + n.y }))
@@ -71,13 +73,15 @@ const solve = (rawInput: string, isPart1: boolean) => {
 	const input = parseInput(rawInput, isPart1);
 	const finish = `${input.finish.x},${input.finish.y}`;
 
+	/*
 	if (!isPart1) {
 		console.log(input)
 	}
+	*/
 
 	const seen = new Set<string>();
 
-	const bfs = (pt: string) => {
+	const dfs = (pt: string) => {
 		if (pt == finish) {
 			return 0;
 		}
@@ -88,14 +92,14 @@ const solve = (rawInput: string, isPart1: boolean) => {
 		seen.add(pt);
 		input.graph.get(pt)!.forEach((distance, neighbor) => {
 			if (!seen.has(neighbor)) {
-				maxDistance = Math.max(maxDistance, bfs(neighbor) + distance);
+				maxDistance = Math.max(maxDistance, dfs(neighbor) + distance);
 			}
 		});
 		seen.delete(pt);
 		return maxDistance;
 	};
 	
-	return bfs(`${input.start.x},${input.start.y}`);
+	return dfs(`${input.start.x},${input.start.y}`);
 };
 
 const part1 = (rawInput: string) => solve(rawInput, true);
