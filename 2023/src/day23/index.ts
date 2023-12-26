@@ -91,27 +91,17 @@ const solve = (rawInput: string, isPart1: boolean) => {
 		return maxDistance;
 	};
 	
+	if (!isPart1) {
+		console.log(input)
+	}
 	return bfs(`${input.start.x},${input.start.y}`);
 };
-
-function printPath(lines: string[], node: Node | undefined) {
-	const pathNodes: Map<string, string> = new Map();
-	
-	while (node != undefined) {
-		pathNodes.set(`${node.x},${node.y}`, "0");
-		node = node.parent;
-	}
-	
-	console.log("");
-	// console.log(lines.map((line, row) => line.split("").map((c, col) => ` ${c}${pathNodes.has(`${col},${row}`) && pathNodes.get(`${col},${row}`) != c ? pathNodes.get(`${col},${row}`) : " "}`).join("")).join("\r\n"));
-	console.log(lines.map((line, row) => line.split("").map((c, col) => `${pathNodes.has(`${col},${row}`) ? "0" : c}`).join("")).join("\r\n"));
-}
 
 const part1 = (rawInput: string) => solve(rawInput, true);
 const part2 = (rawInput: string) => solve(rawInput, false);
 
 run({
-	onlyTests: true,
+	onlyTests: false,
 	part1: {
 		tests: [
 			{
