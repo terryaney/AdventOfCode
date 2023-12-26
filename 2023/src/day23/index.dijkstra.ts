@@ -22,102 +22,76 @@ class Node {
 	}
 }
 
-const parseInput = (rawInput: string, isPart1: boolean) => {
+const manhattanDistance = (a: { x: number, y: number }, b: { x: number, y: number } ) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+
+const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);	
-	const start = { x: lines[0].indexOf("."), y: 0 };
 	const finish = { x: lines[lines.length - 1].indexOf("."), y: lines.length - 1 };
-
-	// Changing to be 'edge contraction' friendly, so identify all nodes that have 2 possible neighbors
-	const points = new Map<string, { x: number, y: number }>([start, finish].map(n => [`${n.x},${n.y}`, n]));
-
-	// Find all points of interest by finding nodes with 3 or more valid neighbors
-	for (let y = 0; y < lines.length; y++) {
-		for (let x = 0; x < lines[y].length; x++) {
-			if (lines[y][x] != "#") {
-				const neighbors = [
-					{ x: x - 1, y: y },
-					{ x: x + 1, y: y },
-					{ x: x, y: y - 1 },
-					{ x: x, y: y + 1 }
-				].filter(n => n.x >= 0 && n.x < lines[0].length && n.y >= 0 && n.y < lines.length && lines[n.y][n.x] != "#");
-
-				if (neighbors.length >= 3) {
-					points.set(`${x},${y}`, { x, y });
-				}
-			}
-		}
-	}
-
-	const graph: Map<string, Map<string, number>> = new Map();
-		
-	const directionsAllowed: Record<string, Array<{ x: number, y: number }>> = {
-		"<": [{ x: -1, y: 0 }],
-		">": [{ x: 1, y: 0 }],
-		"^": [{ x: 0, y: -1 }],
-		"v": [{ x: 0, y: 1 }],
-		".": [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: -1 }, { x: 0, y: 1 }]
-	};
-	
-	// Find distance to next point of interest and make a graph element
-	points.forEach(start => {
-		const stack = [{ x: start.x, y: start.y, distance: 0 }]
-		const startKey = `${start.x},${start.y}`;
-		const visited = new Set([startKey]);
-		
-		while (stack.length > 0) {
-			const current = stack.pop()!;
-			const currentKey = `${current.x},${current.y}`;
-
-			if (current.distance != 0 && points.has(currentKey)) {
-				const graphItem = graph.get(startKey) ?? graph.set(startKey, new Map()).get(startKey)!;
-				graphItem.set(currentKey, current.distance);
-				continue;
-			}
-
-			const possibleMoves = isPart1
-				? directionsAllowed[lines[current.y][current.x]]
-				: lines[current.y][current.x] != "#" ? directionsAllowed["."] : [];
-			
-			possibleMoves
-				.map(n => ({ x: current.x + n.x, y: current.y + n.y }))
-				.filter(n => n.x >= 0 && n.x < lines[0].length && n.y >= 0 && n.y < lines.length && lines[n.y][n.x] != "#" && !visited.has(`${n.x},${n.y}`))
-				.forEach(n => {
-					stack.push({ x: n.x, y: n.y, distance: current.distance + 1 });
-					visited.add(`${n.x},${n.y}`);
-				});
-		}
-	});
-
-	const input = { graph, start, finish };
+	const startCol = lines[0].indexOf(".");
+	const input = { map: lines, start: new Node(startCol, 0, 0, manhattanDistance({ x: startCol, y: 0 }, finish)), finish: finish };
 	// console.log(input);
 	return input;
 };
 
 const solve = (rawInput: string, isPart1: boolean) => {
-	const input = parseInput(rawInput, isPart1);
-	const finish = `${input.finish.x},${input.finish.y}`;
+	const input = parseInput(rawInput);
 
-	const seen = new Set<string>();
+	const map = input.map;
+	const open: Array<Node> = [input.start]
+	const closed: Map<string, number> = new Map();
 
-	const bfs = (pt: string) => {
-		if (pt == finish) {
-			return 0;
+	let finishNode: Node | undefined = undefined;
+
+	while (open.length > 0) {
+		const current = open.shift()!;
+		const key = `${current.x},${current.y}`;
+		closed.set(key, current.cost);
+		
+		if ( current.x == input.finish.x && current.y == input.finish.y ) {
+			if (finishNode == undefined || current.cost > finishNode.cost) {
+				finishNode = current;
+			}
+			continue;
 		}
 
-		let maxDistance = -1;
+		const part2Allowed = ".<>^v";
+		const moves = [
+			{ x: current.x - 1, y: current.y, allowed: ".<" },
+			{ x: current.x + 1, y: current.y, allowed: ".>" },
+			{ x: current.x, y: current.y - 1, allowed: ".^" },
+			{ x: current.x, y: current.y + 1, allowed: ".v" }
+		].filter(n => n.x >= 0 && n.x < map[0].length && n.y >= 0 && n.y < map.length && ( isPart1 ? n.allowed : part2Allowed ).indexOf(map[n.y][n.x]) > -1 && !current.visited.has(`${n.x},${n.y}`));
 
-		// Prevent cycles/backtracking
-		seen.add(pt);
-		input.graph.get(pt)!.forEach((distance, neighbor) => {
-			if (!seen.has(neighbor)) {
-				maxDistance = Math.max(maxDistance, bfs(neighbor) + distance);
+		moves.forEach(n => {
+			const neighbor = new Node(n.x, n.y, current.cost + 1, manhattanDistance(n, input.finish), current);
+			
+			let openIndex = -1;
+			
+			if ((openIndex = open.findIndex(n => n.key == neighbor.key)) > -1 && neighbor.cost > open[openIndex].cost) {
+				open.splice(openIndex, 1);
+				openIndex = -1; // we removed the node from the list
+			}
+			else if (closed.has(neighbor.key) && neighbor.cost > closed.get(neighbor.key)!) {
+				closed.delete(neighbor.key);
+			}
+
+			if (openIndex == -1 && !closed.has(neighbor.key)) {
+				let insertIndex = -1;
+				for (let index = 0; index < open.length; index++) {
+					if (open[index].totalCost < neighbor.totalCost) {
+						insertIndex = index
+						break;
+					}
+				}
+
+				open.splice(Math.max(insertIndex, 0), 0, neighbor);
 			}
 		});
-		seen.delete(pt);
-		return maxDistance;
-	};
-	
-	return bfs(`${input.start.x},${input.start.y}`);
+	}
+
+	// printPath(input.map, finishNode);
+
+	return finishNode!.cost;
 };
 
 function printPath(lines: string[], node: Node | undefined) {
@@ -137,7 +111,7 @@ const part1 = (rawInput: string) => solve(rawInput, true);
 const part2 = (rawInput: string) => solve(rawInput, false);
 
 run({
-	onlyTests: true,
+	onlyTests: false,
 	part1: {
 		tests: [
 			{
