@@ -41,7 +41,7 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 	points.forEach(start => {
 		const stack = [{ x: start.x, y: start.y, distance: 0 }]
 		const startKey = `${start.x},${start.y}`;
-		const visited = new Set([startKey]);
+		const seen = new Set([startKey]);
 		
 		while (stack.length > 0) {
 			const current = stack.shift()!;
@@ -54,10 +54,10 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 			}
 
 			getPossibleMoves(lines, current.x, current.y, isPart1)
-				.filter(n => !visited.has(`${n.x},${n.y}`))
+				.filter(n => !seen.has(`${n.x},${n.y}`))
 				.forEach(n => {
 					stack.push({ x: n.x, y: n.y, distance: current.distance + 1 });
-					visited.add(`${n.x},${n.y}`);
+					seen.add(`${n.x},${n.y}`);
 				});
 		}
 	});
@@ -70,6 +70,10 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 const solve = (rawInput: string, isPart1: boolean) => {
 	const input = parseInput(rawInput, isPart1);
 	const finish = `${input.finish.x},${input.finish.y}`;
+
+	if (!isPart1) {
+		console.log(input)
+	}
 
 	const seen = new Set<string>();
 
@@ -91,9 +95,6 @@ const solve = (rawInput: string, isPart1: boolean) => {
 		return maxDistance;
 	};
 	
-	if (!isPart1) {
-		console.log(input)
-	}
 	return bfs(`${input.start.x},${input.start.y}`);
 };
 
