@@ -1,6 +1,24 @@
 import run from "aocrunner";
 import * as util from '../utils/index.js';
 
+const directionsAllowed: Record<string, Array<{ x: number, y: number }>> = {
+	"<": [{ x: -1, y: 0 }],
+	">": [{ x: 1, y: 0 }],
+	"^": [{ x: 0, y: -1 }],
+	"v": [{ x: 0, y: 1 }],
+	".": [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: -1 }, { x: 0, y: 1 }]
+};
+
+const getPossibleMoves = (lines: string[], x: number, y: number, isPart1: boolean) => {
+	const possibleMoves = isPart1
+		? directionsAllowed[lines[y][x]]
+		: lines[y][x] != "#" ? directionsAllowed["."] : [];
+
+	return possibleMoves
+		.map(n => ({ x: x + n.x, y: y + n.y }))
+		.filter(n => n.x >= 0 && n.x < lines[0].length && n.y >= 0 && n.y < lines.length && lines[n.y][n.x] != "#");
+};
+
 const parseInput = (rawInput: string, isPart1: boolean) => {
 	const lines = util.parseLines(rawInput);	
 	const start = { x: lines[0].indexOf("."), y: 0 };
@@ -13,14 +31,8 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 	for (let y = 0; y < lines.length; y++) {
 		for (let x = 0; x < lines[y].length; x++) {
 			if (lines[y][x] != "#") {
-				const neighbors = [
-					{ x: x - 1, y: y },
-					{ x: x + 1, y: y },
-					{ x: x, y: y - 1 },
-					{ x: x, y: y + 1 }
-				].filter(n => n.x >= 0 && n.x < lines[0].length && n.y >= 0 && n.y < lines.length && lines[n.y][n.x] != "#");
-
-				if (neighbors.length >= 3) {
+				// Pass false for possible moves here b/c everything is allowed
+				if (getPossibleMoves(lines, x, y, false).length >= 3) {
 					points.set(`${x},${y}`, { x, y });
 				}
 			}
@@ -28,14 +40,6 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 	}
 
 	const graph: Map<string, Map<string, number>> = new Map();
-		
-	const directionsAllowed: Record<string, Array<{ x: number, y: number }>> = {
-		"<": [{ x: -1, y: 0 }],
-		">": [{ x: 1, y: 0 }],
-		"^": [{ x: 0, y: -1 }],
-		"v": [{ x: 0, y: 1 }],
-		".": [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: -1 }, { x: 0, y: 1 }]
-	};
 	
 	// Find distance to next point of interest and make a graph element
 	points.forEach(start => {
@@ -53,13 +57,8 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 				continue;
 			}
 
-			const possibleMoves = isPart1
-				? directionsAllowed[lines[current.y][current.x]]
-				: lines[current.y][current.x] != "#" ? directionsAllowed["."] : [];
-			
-			possibleMoves
-				.map(n => ({ x: current.x + n.x, y: current.y + n.y }))
-				.filter(n => n.x >= 0 && n.x < lines[0].length && n.y >= 0 && n.y < lines.length && lines[n.y][n.x] != "#" && !visited.has(`${n.x},${n.y}`))
+			getPossibleMoves(lines, current.x, current.y, isPart1)
+				.filter(n => !visited.has(`${n.x},${n.y}`))
 				.forEach(n => {
 					stack.push({ x: n.x, y: n.y, distance: current.distance + 1 });
 					visited.add(`${n.x},${n.y}`);
