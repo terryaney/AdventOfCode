@@ -1,27 +1,6 @@
 import run from "aocrunner";
 import * as util from '../utils/index.js';
 
-class Node {
-	public x: number;
-	public y: number;
-	public cost: number;
-	public key: string;
-	public totalCost: number;
-	public visited: Set<string>;
-	public parent: Node | undefined;
-
-	constructor(x: number, y: number, cost: number, huristic: number, parent?: Node) {
-		this.x = x;
-		this.y = y;
-		this.cost = cost;
-		this.key = `${this.x},${this.y}`;
-		this.totalCost = this.cost + huristic;
-		this.visited = new Set(parent?.visited.keys() ?? []);
-		this.visited.add(this.key);
-		this.parent = parent;
-	}
-}
-
 const parseInput = (rawInput: string, isPart1: boolean) => {
 	const lines = util.parseLines(rawInput);	
 	const start = { x: lines[0].indexOf("."), y: 0 };
