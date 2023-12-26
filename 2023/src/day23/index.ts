@@ -24,10 +24,8 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 	const start = { x: lines[0].indexOf("."), y: 0 };
 	const finish = { x: lines[lines.length - 1].indexOf("."), y: lines.length - 1 };
 
-	// Changing to be 'edge contraction' friendly, so identify all nodes that have 2 possible neighbors
 	const points = new Map<string, { x: number, y: number }>([start, finish].map(n => [`${n.x},${n.y}`, n]));
 
-	// Find all points of interest by finding nodes with 3 or more valid neighbors
 	for (let y = 0; y < lines.length; y++) {
 		for (let x = 0; x < lines[y].length; x++) {
 			// Pass false for possible moves here b/c everything is allowed
@@ -46,7 +44,7 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 		const visited = new Set([startKey]);
 		
 		while (stack.length > 0) {
-			const current = stack.pop()!;
+			const current = stack.shift()!;
 			const currentKey = `${current.x},${current.y}`;
 
 			if (current.distance != 0 && points.has(currentKey)) {
