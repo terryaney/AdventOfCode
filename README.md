@@ -10,7 +10,7 @@ https://dev.to/this-is-learning/advent-of-code-automation-for-javascripttypescri
 
 <!--SOLUTIONS-->
 
-[![Year](https://badgen.net/badge/2023/★★★★★★★★★★★★★★★★★★★★★★☆⭒⭒/green?icon=typescript&labelColor=blue&scale=1.3)](2023)  
+[![Year](https://badgen.net/badge/2023/★★★★★★★★★★★★★★★★★★★★★★★⭒⭒/green?icon=typescript&labelColor=blue&scale=1.3)](2023)  
 
 <!--/SOLUTIONS-->
 
@@ -24,8 +24,8 @@ _Click a badge to go to the specific year._
 
 ```
 Year 2023
-Total stars: 45/50
-Total time: 449223.54ms
+Total stars: 46/50
+Total time: 451733.566ms
 ```
 
 <!--/RESULTS-->

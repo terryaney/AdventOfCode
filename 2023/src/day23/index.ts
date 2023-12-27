@@ -10,11 +10,11 @@ const directionsAllowed: Record<string, Array<{ x: number, y: number }>> = {
 };
 
 const getPossibleMoves = (lines: string[], x: number, y: number, isPart1: boolean) => {
-	if (lines[y][x] == "#") return [];
+	const ch = lines[y][x];
 
-	const possibleMoves = isPart1
-		? directionsAllowed[lines[y][x]]
-		: directionsAllowed["."];
+	if (ch == "#") return [];
+
+	const possibleMoves = directionsAllowed[isPart1 ? ch : "."];
 
 	return possibleMoves
 		.map(n => ({ x: x + n.x, y: y + n.y }))
@@ -30,7 +30,7 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 
 	for (let y = 0; y < lines.length; y++) {
 		for (let x = 0; x < lines[y].length; x++) {
-			// Pass false for possible moves here b/c everything is allowed
+			// Pass false for possible moves here b/c everything is allowed just to find 'intersections'
 			if (getPossibleMoves(lines, x, y, false).length >= 3) {
 				points.set(`${x},${y}`, { x, y });
 			}
@@ -55,12 +55,13 @@ const parseInput = (rawInput: string, isPart1: boolean) => {
 				continue;
 			}
 
-			getPossibleMoves(lines, current.x, current.y, isPart1)
-				.filter(n => !seen.has(`${n.x},${n.y}`))
-				.forEach(n => {
-					stack.push({ x: n.x, y: n.y, distance: current.distance + 1 });
-					seen.add(`${n.x},${n.y}`);
-				});
+			const possibleMoves = getPossibleMoves(lines, current.x, current.y, isPart1)
+				.filter(n => !seen.has(`${n.x},${n.y}`));
+			
+			possibleMoves.forEach(n => {
+				stack.push({ x: n.x, y: n.y, distance: current.distance + 1 });
+				seen.add(`${n.x},${n.y}`);
+			});
 		}
 	});
 
@@ -86,7 +87,7 @@ const solve = (rawInput: string, isPart1: boolean) => {
 			return 0;
 		}
 
-		let maxDistance = -1;
+		let maxDistance = -Infinity;
 
 		// Prevent cycles/backtracking
 		seen.add(pt);
