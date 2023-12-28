@@ -19,9 +19,9 @@ A star is a star...man, I hope day 25 isn't this bad.
 ## Results
 
 ```
-Time part 1: 5.768ms
-Time part 2: -
-Both parts: 5.768ms
+Time part 1: 7.125ms
+Time part 2: 400.979ms
+Both parts: 408.104ms
 ```
 
 ## Notes

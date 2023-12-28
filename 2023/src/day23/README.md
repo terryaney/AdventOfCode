@@ -7,9 +7,9 @@ Task description: [link](https://adventofcode.com/2023/day/23)
 ## Results
 
 ```
-Time part 1: 12.402ms
-Time part 2: 3571.084ms
-Both parts: 3583.487ms
+Time part 1: 982.5ms
+Time part 2: 1608.723ms
+Both parts: 2591.223ms
 ```
 
 ## Notes

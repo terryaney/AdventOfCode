@@ -341,10 +341,10 @@
         "time": 7.125
       },
       "part2": {
-        "solved": false,
+        "solved": true,
         "result": "769281292688187",
         "attempts": [],
-        "time": 6010.9795
+        "time": 400.9795
       }
     },
     {
