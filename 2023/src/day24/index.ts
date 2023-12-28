@@ -1,6 +1,5 @@
 import run from "aocrunner";
 import * as util from '../utils/index.js';
-import { gcd } from "mathjs";
 
 interface IHailStone {
 	px: number;
@@ -14,13 +13,17 @@ interface IHailStone {
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
 
-	return lines.map(line => {
+	const hailstones = lines.map(line => {
 		const [left, right] = line.split(" @ ");
 		const [px, py, pz] = left.split(", ").map(n => parseInt(n));
 		const [vx, vy, vz] = right.split(", ").map(n => parseInt(n));
 		
 		return { px, py, pz, vx, vy, vz } as IHailStone;
 	});
+
+	const stones = hailstones.map(hailstone => new Stone({ x: hailstone.px, y: hailstone.py, z: hailstone.pz }, { x: hailstone.vx, y: hailstone.vy, z: hailstone.vz }));
+
+	return { hailstones, stones };
 };
 
 const getFutureIntersection = (x1: number, y1: number, vx1: number, vy1: number, x2: number, y2: number, vx2: number, vy2: number) => {
@@ -39,50 +42,106 @@ const getFutureIntersection = (x1: number, y1: number, vx1: number, vy1: number,
 	return intersection;
 };
 
-class ChineseRemainderConstructor {
-	private _bases: number[];
-	private _prod: number;
-	private _inverses: number[];
-	private _muls: number[];
-  
-	constructor(bases: number[]) {
-		this._bases = bases;
-		this._prod = bases.reduce((p, x) => p * x, 1);
-		this._inverses = this._bases.map(x => this._prod / x);
-		this._muls = this._inverses.map((inv, i) => inv * this.mulInv(inv, this._bases[i]));
+
+
+interface LongCoordinate { x: number; y: number; }
+interface Coordinate3D { x: number; y: number; z: number; }
+/**
+ * Stone projected unto some axis (basically eliminating the projected axis, being x, y or z).
+ */
+class ProjectedStone {
+	a: bigint; b: bigint; c: bigint;
+
+	constructor(public position: LongCoordinate, public velocity: LongCoordinate) {
+		this.a = BigInt(velocity.y);
+		this.b = BigInt(-velocity.x);
+		this.c = BigInt(velocity.y * position.x - velocity.x * position.y);
 	}
-  
-	rem(mods: number[]): number {
-		let ret = 0;
-		for (let i = 0; i < this._muls.length; i++) {
-			ret += this._muls[i] * mods[i];
-		}
-		return ret % this._prod;
-	}
-  
-	mulInv(a: number, b: number): number {
-		let initialB = b;
-		let x0 = 0, x1 = 1;
-		if (b === 1) {
-			return 1;
-		}
-		while (a > 1) {
-			const div = Math.floor(a / b);
-			const mod = a % b;
-			a = b;
-			b = mod;
-			[x0, x1] = [x1 - div * x0, x0];
-		}
-		return x1 >= 0 ? x1 : x1 + initialB;
+	
+	addingVelocity(delta: LongCoordinate): ProjectedStone {
+		return new ProjectedStone(this.position, { x: this.velocity.x + delta.x, y: this.velocity.y + delta.y });
 	}
 }
-  
-function chineseRemainder(n: number[], mods: number[]): number {
-	return new ChineseRemainderConstructor(n).rem(mods);
+class Stone {
+	constructor(public position: Coordinate3D, public velocity: Coordinate3D) { }
+
+	projected(component: number): ProjectedStone {
+		switch (component) {
+			case 0: return new ProjectedStone({ x: this.position.y, y: this.position.z }, { x: this.velocity.y, y: this.velocity.z });
+			case 1: return new ProjectedStone({ x: this.position.x, y: this.position.z }, { x: this.velocity.x, y: this.velocity.z });
+			case 2: return new ProjectedStone({ x: this.position.x, y: this.position.y }, { x: this.velocity.x, y: this.velocity.y });
+			default: throw new Error(`Invalid component: ${component}`);
+		}
+	}
 }
 
+// Solve two linear equations for x and y
+// Equations of the form: ax + by = c
+function solveLinearEquation(a1: bigint, b1: bigint, c1: bigint, a2: bigint, b2: bigint, c2: bigint): LongCoordinate | undefined {
+	const d = b2 * a1 - b1 * a2;
+	if (d == BigInt(0) ) return undefined;
+	const x = (b2 * c1 - b1 * c2) / d;
+	const y = (c2 * a1 - c1 * a2) / d;
+	return { x: Number(x), y: Number(y) };
+}
+/**
+ * Processes all pairs of stones by projecting them unto the specified component (0 == x, 1 == y, 2 == z).
+ *
+ * Optionally a delta velocity is applied to each stone.
+ *
+ * If the processing block returns false this function immediately exits
+ */
+function processPairs(stones: Stone[], projectedComponent: number, deltaSpeed: LongCoordinate = { x: 0, y: 0 }, process: (arg: LongCoordinate | null) => boolean) {
+	for (let i = 0; i < stones.length; i++) {
+		for (let j = i + 1; j < stones.length; j++) {
+			const firstStone = stones[i].projected(projectedComponent).addingVelocity(deltaSpeed);
+			const secondStone = stones[j].projected(projectedComponent).addingVelocity(deltaSpeed);
+			let intersection = solveLinearEquation(firstStone.a, firstStone.b, firstStone.c, secondStone.a, secondStone.b, secondStone.c);
+			if (intersection != undefined && [firstStone, secondStone].every(it => Math.sign(intersection!.y - it.position.y) === Math.sign(it.velocity.y))) {
+				if (!process(intersection)) return;
+			}
+		}
+	}
+}
+/**
+ * Searches for multiple intersection position using the specified projected component (x, y or z-axis).
+ *
+ * Brute forces over combinations of vx, vy to find a possible solution.
+ *
+ * The key insight is that a minus delta velocity can be applied to any stone and assume the rock to remain stationary (speed zero).
+ * Because the rock has to collide with every stone, the stone paths should all have an intersection (which is the position of the rock).
+ *
+ * Returns a pair of position to velocity of the rock found for the projection, or null if no solution could be found.
+ */
+function findRockPositionAndVelocity(stones: Stone[], component: number): [LongCoordinate, LongCoordinate] | null {
+	const maxValue = 400;
+	const minResultCount = 5;
+	for (let vx = -maxValue; vx <= maxValue; vx++) {
+		for (let vy = -maxValue; vy <= maxValue; vy++) {
+			const deltaV = { x: vx, y: vy };
+			const matchingPositions: LongCoordinate[] = [];
+			let resultCount = 0;
+			processPairs(stones, component, deltaV, intersection => {
+				if (intersection) {
+					matchingPositions.push(intersection);
+					resultCount++;
+					return resultCount < minResultCount;
+				} else {
+					return false;
+				}
+			});
+			if (matchingPositions.length === 1 && resultCount >= Math.min(minResultCount, stones.length / 2)) {
+				return [matchingPositions[0], { x: -deltaV.x, y: -deltaV.y }];
+			}
+		}
+	}
+	return null;
+}
+  
 const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
-	const hailstones = parseInput(rawInput);
+	const input = parseInput(rawInput);
+	const hailstones = input.hailstones;
+	const stones = input.stones;
 	const testAreaMin = testName != undefined ? 7 : 200000000000000;
 	const testAreaMax = testName != undefined ? 27 : 400000000000000;
 
@@ -103,46 +162,49 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 		return inTestArea;
 	}
 	else {
-		// https://www.youtube.com/watch?v=91qd9Uv2I9E
-		// https://github.com/joshackland/advent_of_code/blob/master/2023/python/24.py
-		function isPositiveInteger(x: number): boolean {
-			return x > 0 && Math.floor(x) === x;
-		}
+		// Project to z-axis
+		const result1 = findRockPositionAndVelocity(stones, 2);
+		if (!result1) throw new Error("Could not find result");
 
-		const s = hailstones.map(h => h.px + h.py + h.pz);
-		const sv = hailstones.map(h => h.vx + h.vy + h.vz);
-		let value = 0;
+		// Project to x-axis
+		const result2 = findRockPositionAndVelocity(stones, 0);
+		if (!result2) throw new Error("Could not find result");
 
-		for (let sv_r = -1000; sv_r < 1000; sv_r++) {
-			if (sv.includes(sv_r)) {
-				continue;
-			}
-			
-			let m_and_s = s.map((s_i, i) => [(sv[i] - sv_r), s_i % (sv[i] - sv_r)]);
-			
-			for (let i = 0; i < m_and_s.length; i++) {
-			  if (m_and_s[i][0] < 0) {
-				m_and_s[i][0] = -m_and_s[i][0];
-				m_and_s[i][1] = m_and_s[i][1] + m_and_s[i][0];
-			  }
-			}
+		// Project to y-axis
+		const result3 = findRockPositionAndVelocity(stones, 1);
+		if (!result3) throw new Error("Could not find result");
 
-			m_and_s.sort((a, b) => b[0] - a[0]);
-			let m: number[] = [];
-			let s_: number[] = [];
+		/*
+		const [x1, y1] = result1[0];
+		const [y2, z1] = result2[0];
+		const [x2, z2] = result3[0];
+		const [vx1, vy1] = result1[1];
+		const [vy2, vz1] = result2[1];
+		const [vx2, vz2] = result3[1];
+		*/
+		const x1 = result1[0].x;
+		const y1 = result1[0].y;
+		const y2 = result2[0].x;
+		const z1 = result2[0].y;
+		const x2 = result3[0].x;
+		const z2 = result3[0].y;
+		const vx1 = result1[1].x;
+		const vy1 = result1[1].y;
+		const vy2 = result2[1].x;
+		const vz1 = result2[1].y;
+		const vx2 = result3[1].x;
+		const vz2 = result3[1].y;
 		
-			while (m_and_s.length > 0) {
-			  let [m_i, s_i] = m_and_s.shift()!;
-			  m.push(m_i);
-			  s_.push(s_i);
-			  m_and_s = m_and_s.filter(([m_j, s_j]) => gcd(m_j, m_i) === 1);
-			}
-			let s_r = chineseRemainder(m, s_);
-			if (s.every((s_i, i) => isPositiveInteger((s_r - s_i) / (sv[i] - sv_r)))) {
-			  value = s_r;
-			}
+		if (y1 !== y2 || x1 !== x2 || z1 !== z2) {
+			throw new Error("Expected positions to match");
 		}
-		return value;
+		if (vy1 !== vy2 || vx1 !== vx2 || vz1 !== vz2) {
+			throw new Error("Expected velocities to match");
+		}
+
+		console.log(`Found rock position and velocity: ${x1},${y1},${z1} @ ${vx1},${vy1},${vz1}`);
+
+		console.log(x1 + y1 + z1);
 	}
 };
 
@@ -150,7 +212,7 @@ const part1 = (rawInput: string, testName?: string) => solve(rawInput, true, tes
 const part2 = (rawInput: string, testName?: string) => solve(rawInput, false, testName);
 
 run({
-	onlyTests: false,
+	onlyTests: true,
 	part1: {
 		tests: [
 			{
