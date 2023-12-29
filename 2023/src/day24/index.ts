@@ -44,7 +44,7 @@ const getFutureIntersection = (x1: number, y1: number, vx1: number, vy1: number,
 };
 
 
-
+// Code implemented from https://aoc.csokavar.hu/?day=24 and https://github.com/encse/adventofcode/blob/master/2023/Day24/Solution.cs
 class Vec2 {
 	constructor(public x0: BigNumber, public x1: BigNumber) { }
 }
