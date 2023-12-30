@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2023 - day 22 🎄
+# 🎄 Advent of Code 2023 - Day 22 - Sand Slabs 🎄
 
 ## Info
 

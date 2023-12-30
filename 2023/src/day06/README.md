@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2023 - day 6 🎄
+# 🎄 Advent of Code 2023 - Day 6 - Wait For It 🎄
 
 ## Info
 

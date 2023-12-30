@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2023 - day 5 🎄
+# 🎄 Advent of Code 2023 - Day 5 - If You Give A Seed A Fertilizer 🎄
 
 ## Info
 

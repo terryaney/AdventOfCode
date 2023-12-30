@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2023 - day 21 🎄
+# 🎄 Advent of Code 2023 - Day 21 - Step Counter 🎄
 
 ## Info
 

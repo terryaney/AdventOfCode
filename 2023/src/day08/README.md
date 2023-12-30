@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2023 - day 8 🎄
+# 🎄 Advent of Code 2023 - Day 8 - Haunted Wasteland 🎄
 
 ## Info
 

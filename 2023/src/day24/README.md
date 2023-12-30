@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2023 - day 24 🎄
+# 🎄 Advent of Code 2023 - Day 24 - Never Tell Me The Odds 🎄
 
 ## Info
 

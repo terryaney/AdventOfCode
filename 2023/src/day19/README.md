@@ -1,4 +1,4 @@
-# 🎄 Advent of Code 2023 - day 19 🎄
+# 🎄 Advent of Code 2023 - Day 19 - Aplenty 🎄
 
 ## Info
 
