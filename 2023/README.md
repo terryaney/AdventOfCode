@@ -88,175 +88,175 @@ npm start 1
 <!--RESULTS-->
 
 ```
-Day 01
+Day 01 - Trebuchet?!
 Time part 1: 1.629ms
 Time part 2: 3.217ms
 Both parts: 4.846ms
 ```
 
 ```
-Day 02
+Day 02 - Cube Conundrum
 Time part 1: 0.853ms
 Time part 2: 3.081ms
 Both parts: 3.934ms
 ```
 
 ```
-Day 03
+Day 03 - Gear Ratios
 Time part 1: 2ms
 Time part 2: 1.435ms
 Both parts: 3.435ms
 ```
 
 ```
-Day 04
+Day 04 - Scratchcards
 Time part 1: 1.13ms
 Time part 2: 1.519ms
 Both parts: 2.649ms
 ```
 
 ```
-Day 05
+Day 05 - If You Give A Seed A Fertilizer
 Time part 1: 0.253ms
 Time part 2: 367113.692ms
 Both parts: 367113.944ms
 ```
 
 ```
-Day 06
+Day 06 - Wait For It
 Time part 1: 0.033ms
 Time part 2: 12.935ms
 Both parts: 12.968ms
 ```
 
 ```
-Day 07
+Day 07 - Camel Cards
 Time part 1: 3.999ms
 Time part 2: 2.222ms
 Both parts: 6.22ms
 ```
 
 ```
-Day 08
+Day 08 - Haunted Wasteland
 Time part 1: 1.71ms
 Time part 2: 7.969ms
 Both parts: 9.678ms
 ```
 
 ```
-Day 09
+Day 09 - Mirage Maintenance
 Time part 1: 2.231ms
 Time part 2: 7.094ms
 Both parts: 9.325ms
 ```
 
 ```
-Day 10
+Day 10 - Pipe Maze
 Time part 1: 2.068ms
 Time part 2: 7.202ms
 Both parts: 9.27ms
 ```
 
 ```
-Day 11
+Day 11 - Cosmic Expansion
 Time part 1: 7.035ms
 Time part 2: 26.262ms
 Both parts: 33.297ms
 ```
 
 ```
-Day 12
+Day 12 - Hot Springs
 Time part 1: 30.366ms
 Time part 2: 590.448ms
 Both parts: 620.814ms
 ```
 
 ```
-Day 13
+Day 13 - Point of Incidence
 Time part 1: 0.889ms
 Time part 2: 1.422ms
 Both parts: 2.311ms
 ```
 
 ```
-Day 14
+Day 14 - Parabolic Reflector Dish
 Time part 1: 1.787ms
 Time part 2: 112.813ms
 Both parts: 114.6ms
 ```
 
 ```
-Day 15
+Day 15 - Lens Library
 Time part 1: 0.722ms
 Time part 2: 2.545ms
 Both parts: 3.267ms
 ```
 
 ```
-Day 16
+Day 16 - The Floor Will Be Lava
 Time part 1: 4.346ms
 Time part 2: 824.911ms
 Both parts: 829.257ms
 ```
 
 ```
-Day 17
+Day 17 - Clumsy Crucible
 Time part 1: 5098.281ms
 Time part 2: 74132.015ms
 Both parts: 79230.295ms
 ```
 
 ```
-Day 18
+Day 18 - Lavaduct Lagoon
 Time part 1: 0.375ms
 Time part 2: 0.569ms
 Both parts: 0.944ms
 ```
 
 ```
-Day 19
+Day 19 - Aplenty
 Time part 1: 6.608ms
 Time part 2: 1.826ms
 Both parts: 8.434ms
 ```
 
 ```
-Day 20
+Day 20 - Pulse Propagation
 Time part 1: 11.71ms
 Time part 2: 17.082ms
 Both parts: 28.791ms
 ```
 
 ```
-Day 21
+Day 21 - Step Counter
 Time part 1: 8.176ms
 Time part 2: 64.142ms
 Both parts: 72.318ms
 ```
 
 ```
-Day 22
+Day 22 - Sand Slabs
 Time part 1: 13.462ms
 Time part 2: 16.019ms
 Both parts: 29.481ms
 ```
 
 ```
-Day 23
+Day 23 - A Long Walk
 Time part 1: 982.5ms
 Time part 2: 1608.723ms
 Both parts: 2591.223ms
 ```
 
 ```
-Day 24
+Day 24 - Never Tell Me The Odds
 Time part 1: 7.125ms
 Time part 2: 400.979ms
 Both parts: 408.104ms
 ```
 
 ```
-Day 25
+Day 25 - Snowverload
 Time part 1: 33627.221ms
 Time part 2: 0ms
 Both parts: 33627.221ms

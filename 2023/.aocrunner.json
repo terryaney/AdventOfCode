@@ -15,7 +15,8 @@
         "result": "54885",
         "attempts": [],
         "time": 3.2168
-      }
+      },
+      "title": "Trebuchet?!"
     },
     {
       "part1": {
@@ -29,7 +30,8 @@
         "result": "65371",
         "attempts": [],
         "time": 3.081
-      }
+      },
+      "title": "Cube Conundrum"
     },
     {
       "part1": {
@@ -43,7 +45,8 @@
         "result": "85010461",
         "attempts": [],
         "time": 1.4353
-      }
+      },
+      "title": "Gear Ratios"
     },
     {
       "part1": {
@@ -57,7 +60,8 @@
         "result": "6874754",
         "attempts": [],
         "time": 1.519
-      }
+      },
+      "title": "Scratchcards"
     },
     {
       "part1": {
@@ -71,7 +75,8 @@
         "result": "10834440",
         "attempts": [],
         "time": 367113.6917
-      }
+      },
+      "title": "If You Give A Seed A Fertilizer"
     },
     {
       "part1": {
@@ -85,7 +90,8 @@
         "result": "41513103",
         "attempts": [],
         "time": 12.9349
-      }
+      },
+      "title": "Wait For It"
     },
     {
       "part1": {
@@ -99,7 +105,8 @@
         "result": "249620106",
         "attempts": [],
         "time": 2.2216
-      }
+      },
+      "title": "Camel Cards"
     },
     {
       "part1": {
@@ -113,7 +120,8 @@
         "result": "16563603485021",
         "attempts": [],
         "time": 7.9686
-      }
+      },
+      "title": "Haunted Wasteland"
     },
     {
       "part1": {
@@ -127,7 +135,8 @@
         "result": "964",
         "attempts": [],
         "time": 7.0936
-      }
+      },
+      "title": "Mirage Maintenance"
     },
     {
       "part1": {
@@ -141,7 +150,8 @@
         "result": "527",
         "attempts": [],
         "time": 7.2021
-      }
+      },
+      "title": "Pipe Maze"
     },
     {
       "part1": {
@@ -155,7 +165,8 @@
         "result": "731244261352",
         "attempts": [],
         "time": 26.2616
-      }
+      },
+      "title": "Cosmic Expansion"
     },
     {
       "part1": {
@@ -169,7 +180,8 @@
         "result": "128741994134728",
         "attempts": [],
         "time": 590.4476
-      }
+      },
+      "title": "Hot Springs"
     },
     {
       "part1": {
@@ -183,7 +195,8 @@
         "result": "33438",
         "attempts": [],
         "time": 1.4218
-      }
+      },
+      "title": "Point of Incidence"
     },
     {
       "part1": {
@@ -197,7 +210,8 @@
         "result": "96447",
         "attempts": [],
         "time": 112.8125
-      }
+      },
+      "title": "Parabolic Reflector Dish"
     },
     {
       "part1": {
@@ -211,7 +225,8 @@
         "result": "212763",
         "attempts": [],
         "time": 2.5452
-      }
+      },
+      "title": "Lens Library"
     },
     {
       "part1": {
@@ -225,7 +240,8 @@
         "result": "7943",
         "attempts": [],
         "time": 824.9107
-      }
+      },
+      "title": "The Floor Will Be Lava"
     },
     {
       "part1": {
@@ -239,7 +255,8 @@
         "result": "1294",
         "attempts": [],
         "time": 74132.0146
-      }
+      },
+      "title": "Clumsy Crucible"
     },
     {
       "part1": {
@@ -253,7 +270,8 @@
         "result": "131265059885080",
         "attempts": [],
         "time": 0.5693
-      }
+      },
+      "title": "Lavaduct Lagoon"
     },
     {
       "part1": {
@@ -267,7 +285,8 @@
         "result": "143760172569135",
         "attempts": [],
         "time": 1.8259
-      }
+      },
+      "title": "Aplenty"
     },
     {
       "part1": {
@@ -281,7 +300,8 @@
         "result": "225386464601017",
         "attempts": [],
         "time": 17.0818
-      }
+      },
+      "title": "Pulse Propagation"
     },
     {
       "part1": {
@@ -299,7 +319,8 @@
           "621289922884314"
         ],
         "time": 64.142
-      }
+      },
+      "title": "Step Counter"
     },
     {
       "part1": {
@@ -313,7 +334,8 @@
         "result": "67468",
         "attempts": [],
         "time": 16.0186
-      }
+      },
+      "title": "Sand Slabs"
     },
     {
       "part1": {
@@ -331,7 +353,8 @@
           "6562"
         ],
         "time": 1608.723
-      }
+      },
+      "title": "A Long Walk"
     },
     {
       "part1": {
@@ -345,7 +368,8 @@
         "result": "769281292688187",
         "attempts": [],
         "time": 400.9795
-      }
+      },
+      "title": "Never Tell Me The Odds"
     },
     {
       "part1": {
@@ -359,7 +383,8 @@
         "result": null,
         "attempts": [],
         "time": 0
-      }
+      },
+      "title": "Snowverload"
     }
   ]
 }
