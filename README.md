@@ -11,30 +11,16 @@ https://dev.to/this-is-learning/advent-of-code-automation-for-javascripttypescri
 ![Language](https://badgen.net/badge/Language/TypeScript/blue)
 [![Template](https://badgen.net/badge/Template/aocrunner/blue)](https://github.com/caderek/aocrunner)
 
-## To Do
+## My Runner To Do
 
-1. Put global badge gen in readmMD.ts
-1. `dist/<year>` folder
-1. Review 'init' and make sure it works
-	1. utils and template folders at root
-	1. create aocrunner in each year
-	1. update tsconfigs (global and year)
 1. index.ts at aocrunner root has a run() that takes a file name, need to figure out how to parse year
 
 ## Years
 
 <!--SOLUTIONS-->
 
-<!--SOLUTIONS-->
-
-<!--SOLUTIONS-->
-
-[![Year](https://badgen.net/badge/2023/✨★★★★★★★★★★★★★★★★★★★★★★★★/green?icon=typescript&labelColor=blue&scale=1.3)](src/2023)  
+[![Year](https://badgen.net/badge/2023/✨★★★★★★★★★★★★★★★★★★★★★★★★/green?icon=typescript&labelColor=blue&scale=1.3)](2023)  
 [![Year](https://badgen.net/badge/2015/★★⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒/gray?icon=typescript&labelColor=blue&scale=1.3)](2015)  
-
-<!--/SOLUTIONS-->
-
-<!--/SOLUTIONS-->
 
 <!--/SOLUTIONS-->
 
@@ -87,14 +73,10 @@ npm start 2023 1
 
 <!--RESULTS-->
 
-<!--RESULTS-->
-
-<!--RESULTS-->
-
 ```
 Year 2023
 Total stars: 50/50
-Total time: 484776.628ms
+Total time: 451926.426ms
 ```
 
 ```
@@ -102,10 +84,6 @@ Year 2015
 Total stars: 4/50
 Total time: 1.55ms
 ```
-
-<!--/RESULTS-->
-
-<!--/RESULTS-->
 
 <!--/RESULTS-->
 
