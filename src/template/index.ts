@@ -25,6 +25,7 @@ run({
 		tests: [
 			{
 				input: `
+				{testData}
 				`,
 				expected: 0
 			}
