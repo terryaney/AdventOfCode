@@ -73,12 +73,16 @@ npm start 2023 1
 
 <!--RESULTS-->
 
-
 ```
 Year 2023
 Total stars: 50/50
 Total time: 451926.426ms
 ```
+
+```
+Year 2015
+Total stars: 4/50
+Total time: 1.55ms
 ```
 
 <!--/RESULTS-->
