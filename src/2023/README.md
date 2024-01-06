@@ -72,9 +72,9 @@ Both parts: 2.649ms
 
 ```
 Day 05 - If You Give A Seed A Fertilizer
-Time part 1: 0.253ms
-Time part 2: 367113.692ms
-Both parts: 367113.944ms
+Time part 1: 0.262ms
+Time part 2: 100.693ms
+Both parts: 100.955ms
 ```
 
 ```
@@ -219,7 +219,7 @@ Both parts: 777.019ms
 
 ```
 Total stars: 51/50
-Total time: 451926.426ms
+Total time: 84913.436ms
 ```
 
 <!--/RESULTS-->

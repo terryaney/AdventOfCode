@@ -384,6 +384,386 @@
       ]
     },
     {
+      "year": 2016,
+      "days": [
+        {
+          "title": "No Time for a Taxicab",
+          "part1": {
+            "solved": true,
+            "result": "288",
+            "attempts": [],
+            "time": 0.1321
+          },
+          "part2": {
+            "solved": false,
+            "result": "288",
+            "attempts": [],
+            "time": 0.0893
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        },
+        {
+          "title": null,
+          "part1": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          },
+          "part2": {
+            "solved": false,
+            "result": null,
+            "attempts": [],
+            "time": null
+          }
+        }
+      ]
+    },
+    {
       "year": 2023,
       "days": [
         {
@@ -451,13 +831,13 @@
             "solved": true,
             "result": "836040384",
             "attempts": [],
-            "time": 0.2527
+            "time": 0.2624
           },
           "part2": {
             "solved": true,
             "result": "10834440",
             "attempts": [],
-            "time": 367113.6917
+            "time": 100.6926
           },
           "title": "If You Give A Seed A Fertilizer"
         },

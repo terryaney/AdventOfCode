@@ -3,20 +3,13 @@ import * as util from '../../utils/index.js';
 
 class Map {
 	public fromStart: number;
+	public fromEnd: number;
 	public toStart: number;
-	public range: number;
 
 	constructor(from: number, to: number, length: number) {
 		this.fromStart = from;
+		this.fromEnd = from + length - 1;
 		this.toStart = to;
-		this.range = length;
-	}
-
-	public fromEnd(): number {
-		return this.fromStart + this.range - 1;
-	}
-	public toEnd(): number {
-		return this.toStart + this.range - 1;
 	}
 }
 
@@ -31,11 +24,11 @@ class ParsedInput {
 	public humidityToLocationMappings: Array<Map> = [];
 }
 
-const parseMaps = (rawMaps: string): Array<Map> => {
-	return rawMaps.split("\n").slice(1).map(l => l.split(" ").map(Number)).map(mapInfo => new Map(mapInfo[1], mapInfo[0], mapInfo[2]));
-};
-
 const parseInput = (rawInput: string): ParsedInput => {
+	const parseMaps = (rawMaps: string): Array<Map> => {
+		return rawMaps.split("\n").slice(1).map(l => l.split(" ").map(Number)).map(mapInfo => new Map(mapInfo[1], mapInfo[0], mapInfo[2]));
+	};
+	
 	const info = rawInput.split("\n\n");
 
 	return {
@@ -50,72 +43,141 @@ const parseInput = (rawInput: string): ParsedInput => {
 	} as ParsedInput;
 };
 
-function findMapTo(mappings: Array<Map>, fromNumber: number): number {
-	// Mappings: - length = 2
-	// 50 98 2 - mappings[0], index = 0
-	// 52 50 48 - mappings[1], index = 1
-	// index = 2
-	// fromNumber (seed first round): 79
-	for (let index = 0; index < mappings.length; index++) {
-		const desintationMap = mappings[index];
-		if (desintationMap.fromStart <= fromNumber && fromNumber <= desintationMap.fromEnd()) {
-			// 52 + (79 - 50) -> 52 + 29 -> 81
-			// Search for 51
-			// 52 + 51 - 50 -> 52 + 1 -> 53
-			return desintationMap.toStart + (fromNumber - desintationMap.fromStart);
-		}
-	}
-
-	return fromNumber;
-}
-
 function findLocation(parsedInput: ParsedInput, seedNumber: number): number {
-	const soilNumber = findMapTo(parsedInput.seedToSoilMappings, seedNumber);
-	const fertilizerNumber = findMapTo(parsedInput.soilToFertilizerMappings, soilNumber);
-	const waterNumber = findMapTo(parsedInput.fertilizerToWaterMappings, fertilizerNumber);
-	const lightNumber = findMapTo(parsedInput.waterToLightMappings, waterNumber);
-	const temperatureNumber = findMapTo(parsedInput.lightToTemperatureMappings, lightNumber);
-	const humidityNumber = findMapTo(parsedInput.temperatureHumidityMappings, temperatureNumber);
-	const locationNumber = findMapTo(parsedInput.humidityToLocationMappings, humidityNumber);
+	const translateMapping = (mappings: Array<Map>, from: number): number => {
+		// Mappings: - length = 2
+		// 50 98 2 - mappings[0], index = 0
+		// 52 50 48 - mappings[1], index = 1
+		// index = 2
+		// fromNumber (seed first round): 79
+		for (let index = 0; index < mappings.length; index++) {
+			const desintationMap = mappings[index];
+			if (desintationMap.fromStart <= from && from <= desintationMap.fromEnd) {
+				// 52 + (79 - 50) -> 52 + 29 -> 81
+				// Search for 51
+				// 52 + 51 - 50 -> 52 + 1 -> 53
+				// return desintationMap.toStart + (fromNumber - desintationMap.fromStart);
+				return from + desintationMap.toStart - desintationMap.fromStart;
+			}
+		}
+	
+		return from;
+	};
+	
+	const soilNumber = translateMapping(parsedInput.seedToSoilMappings, seedNumber);
+	const fertilizerNumber = translateMapping(parsedInput.soilToFertilizerMappings, soilNumber);
+	const waterNumber = translateMapping(parsedInput.fertilizerToWaterMappings, fertilizerNumber);
+	const lightNumber = translateMapping(parsedInput.waterToLightMappings, waterNumber);
+	const temperatureNumber = translateMapping(parsedInput.lightToTemperatureMappings, lightNumber);
+	const humidityNumber = translateMapping(parsedInput.temperatureHumidityMappings, temperatureNumber);
+	const locationNumber = translateMapping(parsedInput.humidityToLocationMappings, humidityNumber);
 	return locationNumber;
 }
 
 function findLowestLocation(parsedInput: ParsedInput, seeds: Array<{from: number, to: number}>): number {
-	let lowestLocation = Number.MAX_SAFE_INTEGER;
+	const locations = seeds.flatMap(seedInfo =>
+		new Array(seedInfo.to - seedInfo.from + 1).fill(0)
+			.map((_, index) => findLocation(parsedInput, seedInfo.from + index))
+	);
 
-	for (let index = 0; index < seeds.length; index ++) {
-		const seedInfo = seeds[index];
-		// console.log(`Search ${seedInfo.from} to ${seedInfo.to} (${seedInfo.to - seedInfo.from + 1} items)...`);
-		for (let seed = seedInfo.from; seed <= seedInfo.to; seed++) {
-			const locationNumber = findLocation(parsedInput, seed);
-			if ( locationNumber < lowestLocation) {
-				lowestLocation = locationNumber;
-				// console.log(`Seed ${seed} -> Location ${lowestLocation} is new lowest...`);
-			}
-		}
-	}
-	
-	return lowestLocation;
+	return Math.min(...locations);
 }
 
 const part1 = (rawInput: string) => {
 	const parsedInput = parseInput(rawInput);
-	return findLowestLocation(parsedInput, parsedInput.seeds.map(seedNumber => { return { from: seedNumber, to: seedNumber }; }));
+	return Math.min(...parsedInput.seeds.map(seedNumber => findLocation(parsedInput, seedNumber)));
 };
 
 const part2 = (rawInput: string) => {
 	const parsedInput = parseInput(rawInput);
 
-	let seedRanges: Array<{from: number, to: number}> = [];
+	let values: Array<{ from: number, to: number }> = [];
+	
 	for (let index = 0; index < parsedInput.seeds.length; index += 2) {
 		const from = parsedInput.seeds[index];
-		seedRanges.push({ from: from, to: from + parsedInput.seeds[index + 1] - 1 });
+		values.push({ from: from, to: from + parsedInput.seeds[index + 1] - 1 });
 	}
 
-	return findLowestLocation(parsedInput, seedRanges);
+	const mappings = [
+		parsedInput.seedToSoilMappings,
+		parsedInput.soilToFertilizerMappings,
+		parsedInput.fertilizerToWaterMappings,
+		parsedInput.waterToLightMappings,
+		parsedInput.lightToTemperatureMappings,
+		parsedInput.temperatureHumidityMappings,
+		parsedInput.humidityToLocationMappings
+	];
+
+	mappings.forEach(ranges => {
+		const newValues: Array<{ from: number, to: number }> = [];
+
+		while (values.length > 0) {
+			const seed = values.pop()!;
+			let foundRange = false;
+
+			ranges.forEach(range => {
+				/*
+				[111111111111]					[22222222222222]
+						[SSSSSSSSSSSSSSSSSSSSSSSSSSS]
+
+				1's and 2's are mappings, S's are seeds
+				Mapping 1: overlapStart = left of seeds, overlapEnd = right of 1's - these seeds will be mapped to 1's
+				Mapping 2: overlapStart = left of 2's, overlapEnd = right of seeds - these seeds will be mapped to 2's
+				Seeds without overlap will simply return the same value as passed in.
+				*/
+				const overlapStart = Math.max(seed.from, range.fromStart)
+				const overlapEnd = Math.min(seed.to, range.fromEnd);
+
+				// If mappings and values overlap...
+				if (overlapStart < overlapEnd) {
+					// Add new translated values into the values array
+					newValues.push({
+						from: overlapStart + range.toStart - range.fromStart,
+						to: overlapEnd + range.toStart - range.fromStart
+					});
+
+					// If some values are less than current mapping start, add back to values to be processed by next mapping range
+					if (seed.from < overlapStart) {
+						values.push({
+							from: seed.from,
+							to: overlapStart - 1
+						});
+					}
+
+					// If some values are greater than current mapping end, add back to values to be processed by next mapping range
+					if (overlapEnd < seed.to) {
+						values.push({
+							from: overlapEnd + 1,
+							to: seed.to
+						});
+					}
+					foundRange = true;
+					return;
+				}
+			});
+
+			// No mappings, so just append the entire range as is back to newValues to be processed
+			if ( !foundRange) {
+				newValues.push(seed);
+			}
+		}
+
+		values = newValues;
+	});
+
+	const locations = values.map(v => v.from);
+	let minLocation = Number.MAX_SAFE_INTEGER;
+	locations.forEach(location => {
+		if (location < minLocation) {
+			minLocation = location;
+		}
+	});
+	// const minLocation = Math.min(...values.map(v => v.from));
+	return minLocation;
 }
 
 run({
+	onlyTests: false,
 	part1: {
 		tests: [
 			{
@@ -202,6 +264,5 @@ run({
 		],
 		solution: part2,
 	},
-	trimTestInputs: true,
-	onlyTests: false,
+	trimTestInputs: true
 });
