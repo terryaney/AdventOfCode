@@ -11,7 +11,7 @@
 
 <!--SOLUTIONS-->
 
-[![Day](https://badgen.net/badge/01/%E2%98%85%E2%98%86/yellow)](day01)
+[![Day](https://badgen.net/badge/01/%E2%98%85%E2%98%85/green)](day01)
 ![Day](https://badgen.net/badge/02/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/03/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/04/%E2%98%86%E2%98%86/gray)
@@ -49,9 +49,9 @@ _Click a badge to go to the specific day._
 
 ```
 Day 01 - No Time for a Taxicab
-Time part 1: 0.12ms
-Time part 2: -
-Both parts: 0.12ms
+Time part 1: 0.153ms
+Time part 2: 1.1ms
+Both parts: 1.252ms
 ```
 
 ```
@@ -223,8 +223,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 1/50
-Total time: 0.12ms
+Total stars: 2/50
+Total time: 1.252ms
 ```
 
 <!--/RESULTS-->

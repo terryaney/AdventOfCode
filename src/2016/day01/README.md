@@ -7,9 +7,9 @@ Task description: [link](https://adventofcode.com/2016/day/1)
 ## Results
 
 ```
-Time part 1: 0.12ms
-Time part 2: -
-Both parts: 0.12ms
+Time part 1: 0.153ms
+Time part 2: 1.1ms
+Both parts: 1.252ms
 ```
 
 ## Notes
