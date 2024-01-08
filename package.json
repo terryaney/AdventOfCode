@@ -1,13 +1,13 @@
 {
-  "name": "aoc2023",
+  "name": "advent-of-code",
   "version": "1.0.0",
-  "description": "Advent of Code 2023 - solutions",
+  "description": "Advent of Code Solutions",
   "type": "module",
   "scripts": {
-    "start": "aocrunner day",
-    "build": "aocrunner build",
+    "start": "aoc-automation day",
+    "build": "aoc-automation build",
     "format": "prettier -w src",
-    "update:readme": "aocrunner update:readme"
+    "update:readme": "aoc-automation update:readme"
   },
   "keywords": [
     "aoc"
@@ -16,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.11.6",
-    "aocrunner": "^1.9.6",
+    "aoc-automation": "^2.0.0",
     "mathjs": "^12.2.1",
     "prettier": "^2.8.0"
   },
