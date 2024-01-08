@@ -1,4 +1,4 @@
-import run from "aocrunner";
+import run from "aoc-automation";
 import * as util from '../../utils/index.js';
 import { assert } from "console";
 

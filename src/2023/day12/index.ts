@@ -1,4 +1,4 @@
-import run from "aocrunner";
+import run from "aoc-automation";
 import * as util from '../../utils/index.js';
 
 function getArrangements(cache: { [key: string]: number }, conditionInfo: string, conditionPosition: number, sizes: Array<number>, sizePosition: number, damagedSprings: number ) : number {

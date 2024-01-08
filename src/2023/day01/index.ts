@@ -1,4 +1,4 @@
-import run from "aocrunner";
+import run from "aoc-automation";
 import * as util from '../../utils/index.js';
 
 const parseInput = (rawInput: string): { lines: Array<string>, patterns: Array<{ value: string, word: string }> } => {
