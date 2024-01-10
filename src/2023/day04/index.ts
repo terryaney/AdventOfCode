@@ -1,20 +1,31 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 const part1 = (rawInput: string) =>
-	util.parseLines(rawInput)
-		.reduce((total, line) => {
-			const lineParts = line.split("|");
-			const winningNumbers = lineParts[0].split(":")[1].trim().split(" ").filter(n => n != "").map(n => Number(n.trim()));
-			const myNumbers = lineParts[1].trim().split(" ").filter(n => n != "").map(n => Number(n.trim()));
-			const matchingNumbers = winningNumbers.filter(n => myNumbers.includes(n));
-		
-			const increment = matchingNumbers.length > 0
+	util.parseLines(rawInput).reduce((total, line) => {
+		const lineParts = line.split("|");
+		const winningNumbers = lineParts[0]
+			.split(":")[1]
+			.trim()
+			.split(" ")
+			.filter(n => n != "")
+			.map(n => Number(n.trim()));
+		const myNumbers = lineParts[1]
+			.trim()
+			.split(" ")
+			.filter(n => n != "")
+			.map(n => Number(n.trim()));
+		const matchingNumbers = winningNumbers.filter(n =>
+			myNumbers.includes(n),
+		);
+
+		const increment =
+			matchingNumbers.length > 0
 				? Math.pow(2, matchingNumbers.length - 1)
 				: 0;
-			
-			return total + increment;
-		}, 0);
+
+		return total + increment;
+	}, 0);
 
 const part2 = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
@@ -23,10 +34,21 @@ const part2 = (rawInput: string) => {
 	for (let index = 0; index < lines.length; index++) {
 		const line = lines[index];
 		const lineParts = line.split("|");
-		const winningNumbers = lineParts[0].split(":")[1].trim().split(" ").filter(n => n != "").map(n => Number(n.trim()));
-		const myNumbers = lineParts[1].trim().split(" ").filter(n => n != "").map(n => Number(n.trim()));
-		const matchingNumbers = winningNumbers.filter(n => myNumbers.includes(n));
-	
+		const winningNumbers = lineParts[0]
+			.split(":")[1]
+			.trim()
+			.split(" ")
+			.filter(n => n != "")
+			.map(n => Number(n.trim()));
+		const myNumbers = lineParts[1]
+			.trim()
+			.split(" ")
+			.filter(n => n != "")
+			.map(n => Number(n.trim()));
+		const matchingNumbers = winningNumbers.filter(n =>
+			myNumbers.includes(n),
+		);
+
 		/*
 		cp[0] = 1 - 4 matches
 		cp[1] = 2 - 2 matches
@@ -57,7 +79,7 @@ run({
 					Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
 				`,
 				expected: 13,
-			}
+			},
 		],
 		solution: part1,
 	},
@@ -73,7 +95,7 @@ run({
 					Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
 				`,
 				expected: 30,
-			}
+			},
 		],
 		solution: part2,
 	},

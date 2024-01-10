@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 import { lcm } from "mathjs";
 
 class Node {
@@ -19,7 +19,7 @@ const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
 	const nodeDictionary: { [key: string]: Node } = {};
 	const nodesEndingInA: Node[] = [];
-	
+
 	for (let index = 2; index < lines.length; index++) {
 		const line = lines[index];
 		const key = line.substring(0, 3);
@@ -31,42 +31,44 @@ const parseInput = (rawInput: string) => {
 			nodesEndingInA.push(nodeDictionary[key]);
 		}
 	}
-	
+
 	return {
 		directions: lines[0],
 		nodes: nodeDictionary,
-		nodesEndingInA: nodesEndingInA
-	}
+		nodesEndingInA: nodesEndingInA,
+	};
 };
 
-function getNextNode(node: Node, direction: string, nodeDictionary: { [key: string]: Node }): Node {
+function getNextNode(
+	node: Node,
+	direction: string,
+	nodeDictionary: { [key: string]: Node },
+): Node {
 	if (direction === "L") {
 		return nodeDictionary[node.left];
-	}
-	else {
+	} else {
 		return nodeDictionary[node.right];
 	}
 }
 
-
 const solve = (rawInput: string, isPart2: boolean) => {
 	const input = parseInput(rawInput);
 
-	if ( !isPart2 ) {
+	if (!isPart2) {
 		let numberOfSteps = 0;
 		let directionsIndex = 0;
 		let currentNode = input.nodes["AAA"];
-		
+
 		while (currentNode.key !== "ZZZ") {
-			const direction = input.directions[directionsIndex % input.directions.length];
+			const direction =
+				input.directions[directionsIndex % input.directions.length];
 			currentNode = getNextNode(currentNode, direction, input.nodes);
 			numberOfSteps++;
 			directionsIndex++;
 		}
 
 		return numberOfSteps;
-	}
-	else {
+	} else {
 		let currentNode = input.nodes["AAA"];
 
 		for (let index = 0; index < input.nodesEndingInA.length; index++) {
@@ -74,23 +76,26 @@ const solve = (rawInput: string, isPart2: boolean) => {
 			const nodeKey = currentNode.key;
 			let numberOfSteps = 0;
 			let directionsIndex = 0;
-			
+
 			while (input.nodesEndingInA[index].stepsToZNode == 0) {
-				const direction = input.directions[directionsIndex % input.directions.length];
+				const direction =
+					input.directions[directionsIndex % input.directions.length];
 				currentNode = getNextNode(currentNode, direction, input.nodes);
-		
+
 				numberOfSteps++;
 				directionsIndex++;
-		
+
 				if (currentNode.key.endsWith("Z")) {
 					input.nodes[nodeKey].stepsToZNode = numberOfSteps;
 				}
-			}	
+			}
 		}
-		
+
 		var intervals = input.nodesEndingInA.map(n => n.stepsToZNode);
-		
-		const leastCommonMultiple = intervals.reduce((prev, curr) => lcm(prev, curr));
+
+		const leastCommonMultiple = intervals.reduce((prev, curr) =>
+			lcm(prev, curr),
+		);
 		return leastCommonMultiple;
 	}
 };
@@ -125,7 +130,7 @@ run({
 					ZZZ = (ZZZ, ZZZ)
 				`,
 				expected: 6,
-			}
+			},
 		],
 		solution: part1,
 	},
@@ -145,9 +150,9 @@ run({
 					XXX = (XXX, XXX)
 				`,
 				expected: 6,
-			}
+			},
 		],
 		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

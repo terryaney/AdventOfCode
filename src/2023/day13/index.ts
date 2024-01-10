@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
@@ -7,13 +7,12 @@ const parseInput = (rawInput: string) => {
 	const patterns: Array<Array<string>> = [];
 
 	let currentPattern: Array<string> = [];
-	
+
 	for (const line of lines) {
 		if (line === "") {
 			patterns.push(currentPattern);
 			currentPattern = [];
-		}
-		else {
+		} else {
 			currentPattern.push(line);
 		}
 	}
@@ -27,7 +26,7 @@ function isDifferentByOne(above: string, below: string): boolean {
 	for (let i = 0; i < above.length; i++) {
 		if (above[i] != below[i]) {
 			diff++;
-			if ( diff > 1 ) {
+			if (diff > 1) {
 				return false;
 			}
 		}
@@ -36,19 +35,33 @@ function isDifferentByOne(above: string, below: string): boolean {
 	return diff == 1;
 }
 
-function reflectedOn(pattern: Array<string>, isSmudge: boolean, previousReflection?: number): number | undefined {	
+function reflectedOn(
+	pattern: Array<string>,
+	isSmudge: boolean,
+	previousReflection?: number,
+): number | undefined {
 	for (let i = 1; i < pattern.length; i++) {
 		const above = i - 1;
 		const below = i;
-		if (below != previousReflection && ( pattern[below] == pattern[above] || ( isSmudge && isDifferentByOne(pattern[above], pattern[below]) ) ) ) {
+		if (
+			below != previousReflection &&
+			(pattern[below] == pattern[above] ||
+				(isSmudge && isDifferentByOne(pattern[above], pattern[below])))
+		) {
 			let isReflection = true;
 
 			for (let j = above - 1; j > -1; j--) {
 				const diff = above - j;
 				if (above - diff < 0 || below + diff >= pattern.length) {
 					break;
-				}
-				else if (pattern[above - diff] != pattern[below + diff] && ( !isSmudge || !isDifferentByOne(pattern[above - diff], pattern[below + diff]) )) {
+				} else if (
+					pattern[above - diff] != pattern[below + diff] &&
+					(!isSmudge ||
+						!isDifferentByOne(
+							pattern[above - diff],
+							pattern[below + diff],
+						))
+				) {
 					isReflection = false;
 					break;
 				}
@@ -68,38 +81,43 @@ const solve = (rawInput: string, isPart2: boolean) => {
 
 	let summary = 0;
 	let smudgeSummary = 0;
-	
+
 	input.forEach((pattern, patternIndex) => {
 		let reflection = reflectedOn(pattern, false);
 		let smudgeReflection = reflectedOn(pattern, true, reflection);
-	
+
 		if (reflection != undefined) {
 			// console.log(`Pattern ${patternIndex} is a horizontal reflection between ${reflection - 1} and ${reflection}, increase by ${reflection * 100}`);
 			summary += reflection * 100;
 		}
 		if (smudgeReflection != undefined) {
 			// console.log(`Pattern ${patternIndex} is a horizontal smudge reflection between ${smudgeReflection - 1} and ${smudgeReflection}, increase by ${smudgeReflection * 100}`);
-			smudgeSummary += smudgeReflection * 100;	
+			smudgeSummary += smudgeReflection * 100;
 		}
-	
+
 		if (reflection == undefined || smudgeReflection == undefined) {
-			const invertedPattern =
-				Array.from({ length: pattern[0].length }, (_, index) => index)
-					.map(index => { /* 0-8 */
-						return pattern.map(line => line[index]).join("");
-					});		
-	
+			const invertedPattern = Array.from(
+				{ length: pattern[0].length },
+				(_, index) => index,
+			).map(index => {
+				/* 0-8 */
+				return pattern.map(line => line[index]).join("");
+			});
+
 			if (reflection == undefined) {
 				reflection = reflectedOn(invertedPattern, false);
 				// console.log(`Pattern ${patternIndex} is a vertical reflection between ${reflection - 1} and ${reflection}, increase by ${reflection}`);
 				summary += reflection!;
-			}
-			else {
+			} else {
 				reflection = undefined;
 			}
 
-			if ( smudgeReflection == undefined ) {
-				smudgeReflection = reflectedOn(invertedPattern, true, reflection);
+			if (smudgeReflection == undefined) {
+				smudgeReflection = reflectedOn(
+					invertedPattern,
+					true,
+					reflection,
+				);
 				// console.log(`Pattern ${patternIndex} is a smudge reflection between ${smudgeReflection - 1} and ${smudgeReflection}, increase by ${smudgeReflection}`);
 				smudgeSummary += smudgeReflection!;
 			}
@@ -134,8 +152,8 @@ run({
 				..##..###
 				#....#..#
 				`,
-				expected: 405
-			}
+				expected: 405,
+			},
 		],
 		solution: part1,
 	},
@@ -159,10 +177,10 @@ run({
 				..##..###
 				#....#..#
 				`,
-				expected: 400
-			}
+				expected: 400,
+			},
 		],
 		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 class Map {
 	public fromStart: number;
@@ -26,9 +26,13 @@ class ParsedInput {
 
 const parseInput = (rawInput: string): ParsedInput => {
 	const parseMaps = (rawMaps: string): Array<Map> => {
-		return rawMaps.split("\n").slice(1).map(l => l.split(" ").map(Number)).map(mapInfo => new Map(mapInfo[1], mapInfo[0], mapInfo[2]));
+		return rawMaps
+			.split("\n")
+			.slice(1)
+			.map(l => l.split(" ").map(Number))
+			.map(mapInfo => new Map(mapInfo[1], mapInfo[0], mapInfo[2]));
 	};
-	
+
 	const info = rawInput.split("\n\n");
 
 	return {
@@ -39,7 +43,7 @@ const parseInput = (rawInput: string): ParsedInput => {
 		waterToLightMappings: parseMaps(info[4]),
 		lightToTemperatureMappings: parseMaps(info[5]),
 		temperatureHumidityMappings: parseMaps(info[6]),
-		humidityToLocationMappings: parseMaps(info[7])
+		humidityToLocationMappings: parseMaps(info[7]),
 	} as ParsedInput;
 };
 
@@ -52,7 +56,10 @@ function findLocation(parsedInput: ParsedInput, seedNumber: number): number {
 		// fromNumber (seed first round): 79
 		for (let index = 0; index < mappings.length; index++) {
 			const desintationMap = mappings[index];
-			if (desintationMap.fromStart <= from && from <= desintationMap.fromEnd) {
+			if (
+				desintationMap.fromStart <= from &&
+				from <= desintationMap.fromEnd
+			) {
 				// 52 + (79 - 50) -> 52 + 29 -> 81
 				// Search for 51
 				// 52 + 51 - 50 -> 52 + 1 -> 53
@@ -60,24 +67,51 @@ function findLocation(parsedInput: ParsedInput, seedNumber: number): number {
 				return from + desintationMap.toStart - desintationMap.fromStart;
 			}
 		}
-	
+
 		return from;
 	};
-	
-	const soilNumber = translateMapping(parsedInput.seedToSoilMappings, seedNumber);
-	const fertilizerNumber = translateMapping(parsedInput.soilToFertilizerMappings, soilNumber);
-	const waterNumber = translateMapping(parsedInput.fertilizerToWaterMappings, fertilizerNumber);
-	const lightNumber = translateMapping(parsedInput.waterToLightMappings, waterNumber);
-	const temperatureNumber = translateMapping(parsedInput.lightToTemperatureMappings, lightNumber);
-	const humidityNumber = translateMapping(parsedInput.temperatureHumidityMappings, temperatureNumber);
-	const locationNumber = translateMapping(parsedInput.humidityToLocationMappings, humidityNumber);
+
+	const soilNumber = translateMapping(
+		parsedInput.seedToSoilMappings,
+		seedNumber,
+	);
+	const fertilizerNumber = translateMapping(
+		parsedInput.soilToFertilizerMappings,
+		soilNumber,
+	);
+	const waterNumber = translateMapping(
+		parsedInput.fertilizerToWaterMappings,
+		fertilizerNumber,
+	);
+	const lightNumber = translateMapping(
+		parsedInput.waterToLightMappings,
+		waterNumber,
+	);
+	const temperatureNumber = translateMapping(
+		parsedInput.lightToTemperatureMappings,
+		lightNumber,
+	);
+	const humidityNumber = translateMapping(
+		parsedInput.temperatureHumidityMappings,
+		temperatureNumber,
+	);
+	const locationNumber = translateMapping(
+		parsedInput.humidityToLocationMappings,
+		humidityNumber,
+	);
 	return locationNumber;
 }
 
-function findLowestLocation(parsedInput: ParsedInput, seeds: Array<{from: number, to: number}>): number {
+function findLowestLocation(
+	parsedInput: ParsedInput,
+	seeds: Array<{ from: number; to: number }>,
+): number {
 	const locations = seeds.flatMap(seedInfo =>
-		new Array(seedInfo.to - seedInfo.from + 1).fill(0)
-			.map((_, index) => findLocation(parsedInput, seedInfo.from + index))
+		new Array(seedInfo.to - seedInfo.from + 1)
+			.fill(0)
+			.map((_, index) =>
+				findLocation(parsedInput, seedInfo.from + index),
+			),
 	);
 
 	return Math.min(...locations);
@@ -85,17 +119,24 @@ function findLowestLocation(parsedInput: ParsedInput, seeds: Array<{from: number
 
 const part1 = (rawInput: string) => {
 	const parsedInput = parseInput(rawInput);
-	return Math.min(...parsedInput.seeds.map(seedNumber => findLocation(parsedInput, seedNumber)));
+	return Math.min(
+		...parsedInput.seeds.map(seedNumber =>
+			findLocation(parsedInput, seedNumber),
+		),
+	);
 };
 
 const part2 = (rawInput: string) => {
 	const parsedInput = parseInput(rawInput);
 
-	let values: Array<{ from: number, to: number }> = [];
-	
+	let values: Array<{ from: number; to: number }> = [];
+
 	for (let index = 0; index < parsedInput.seeds.length; index += 2) {
 		const from = parsedInput.seeds[index];
-		values.push({ from: from, to: from + parsedInput.seeds[index + 1] - 1 });
+		values.push({
+			from: from,
+			to: from + parsedInput.seeds[index + 1] - 1,
+		});
 	}
 
 	const mappings = [
@@ -105,11 +146,11 @@ const part2 = (rawInput: string) => {
 		parsedInput.waterToLightMappings,
 		parsedInput.lightToTemperatureMappings,
 		parsedInput.temperatureHumidityMappings,
-		parsedInput.humidityToLocationMappings
+		parsedInput.humidityToLocationMappings,
 	];
 
 	mappings.forEach(ranges => {
-		const newValues: Array<{ from: number, to: number }> = [];
+		const newValues: Array<{ from: number; to: number }> = [];
 
 		while (values.length > 0) {
 			const seed = values.pop()!;
@@ -125,7 +166,7 @@ const part2 = (rawInput: string) => {
 				Mapping 2: overlapStart = left of 2's, overlapEnd = right of seeds - these seeds will be mapped to 2's
 				Seeds without overlap will simply return the same value as passed in.
 				*/
-				const overlapStart = Math.max(seed.from, range.fromStart)
+				const overlapStart = Math.max(seed.from, range.fromStart);
 				const overlapEnd = Math.min(seed.to, range.fromEnd);
 
 				// If mappings and values overlap...
@@ -133,14 +174,14 @@ const part2 = (rawInput: string) => {
 					// Add new translated values into the values array
 					newValues.push({
 						from: overlapStart + range.toStart - range.fromStart,
-						to: overlapEnd + range.toStart - range.fromStart
+						to: overlapEnd + range.toStart - range.fromStart,
 					});
 
 					// If some values are less than current mapping start, add back to values to be processed by next mapping range
 					if (seed.from < overlapStart) {
 						values.push({
 							from: seed.from,
-							to: overlapStart - 1
+							to: overlapStart - 1,
 						});
 					}
 
@@ -148,7 +189,7 @@ const part2 = (rawInput: string) => {
 					if (overlapEnd < seed.to) {
 						values.push({
 							from: overlapEnd + 1,
-							to: seed.to
+							to: seed.to,
 						});
 					}
 					foundRange = true;
@@ -157,7 +198,7 @@ const part2 = (rawInput: string) => {
 			});
 
 			// No mappings, so just append the entire range as is back to newValues to be processed
-			if ( !foundRange) {
+			if (!foundRange) {
 				newValues.push(seed);
 			}
 		}
@@ -174,7 +215,7 @@ const part2 = (rawInput: string) => {
 	});
 	// const minLocation = Math.min(...values.map(v => v.from));
 	return minLocation;
-}
+};
 
 run({
 	onlyTests: false,
@@ -217,7 +258,7 @@ run({
 					56 93 4
 				`,
 				expected: 35,
-			}
+			},
 		],
 		solution: part1,
 	},
@@ -260,9 +301,9 @@ run({
 					56 93 4
 				`,
 				expected: 46,
-			}
+			},
 		],
 		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

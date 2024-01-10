@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 class CamelHand {
 	public readonly cards: number[];
@@ -37,15 +37,16 @@ class CamelHand {
 
 		const numberOfJokers = this.cards.filter(card => card == 1).length;
 		// Don't process jokers...
-		const orderedCards = [...this.cards.filter(card => card != 1)].sort((a, b) => a - b);
+		const orderedCards = [...this.cards.filter(card => card != 1)].sort(
+			(a, b) => a - b,
+		);
 
 		for (let index = 0; index < orderedCards.length; index++) {
 			let card = orderedCards[index];
-			
-			if ( card == currentCard ) {
+
+			if (card == currentCard) {
 				consecutiveCards++;
-			}
-			else {
+			} else {
 				this.type = this.getCurrentType(consecutiveCards, this.type);
 				consecutiveCards = 1;
 				currentCard = card;
@@ -69,42 +70,39 @@ class CamelHand {
 		1 - High Card
 		*/
 
-		if ( numberOfJokers == 5 || numberOfJokers == 4 ) {
+		if (numberOfJokers == 5 || numberOfJokers == 4) {
 			return 7; // Five of Kind
-		}
-		else if ( numberOfJokers == 3 ) {
-			if ( currentType == 2 ) { // One Pair
+		} else if (numberOfJokers == 3) {
+			if (currentType == 2) {
+				// One Pair
 				return 7; // Five of Kind
-			}
-			else {
+			} else {
 				return 6; // Four of Kind
 			}
-		}
-		else if (numberOfJokers == 2) {
-			if ( currentType == 4 ) { // Three of Kind
+		} else if (numberOfJokers == 2) {
+			if (currentType == 4) {
+				// Three of Kind
 				return 7; // Five of Kind
-			}
-			else if ( currentType == 2 ) { // One Pair
+			} else if (currentType == 2) {
+				// One Pair
 				return 6; // Four of Kind
-			}
-			else {
+			} else {
 				return 4; // Three of Kind
 			}
-		}
-		else if (numberOfJokers == 1) {
-			if (currentType == 6) { // Four of Kind
+		} else if (numberOfJokers == 1) {
+			if (currentType == 6) {
+				// Four of Kind
 				return 7; // Five of Kind
-			}
-			else if ( currentType == 4 ) { // Three of Kind
+			} else if (currentType == 4) {
+				// Three of Kind
 				return 6; // Four of Kind
-			}
-			else if ( currentType == 3 ) { // Two Pair
+			} else if (currentType == 3) {
+				// Two Pair
 				return 5; // Full House
-			}
-			else if ( currentType == 2 ) { // One Pair
+			} else if (currentType == 2) {
+				// One Pair
 				return 4; // Three of Kind
-			}
-			else {
+			} else {
 				return 2; // One Pair
 			}
 		}
@@ -122,32 +120,28 @@ class CamelHand {
 		2 - One Pair
 		1 - High Card
 		*/
-		if ( consecutiveCards == 5 ) {
+		if (consecutiveCards == 5) {
 			return 7; // five of kind
-		}
-		else if ( consecutiveCards == 4 ) {
+		} else if (consecutiveCards == 4) {
 			return 6; // four of kind
-		}
-		else if ( consecutiveCards == 3 ) {
-			if ( currentType == 2 ) { // one pair
+		} else if (consecutiveCards == 3) {
+			if (currentType == 2) {
+				// one pair
 				return 5; // full house
-			}
-			else {
+			} else {
 				return 4; // three of kind
 			}
-		}
-		else if ( consecutiveCards == 2 ) {
-			if ( currentType == 4 ) { // three of kind
+		} else if (consecutiveCards == 2) {
+			if (currentType == 4) {
+				// three of kind
 				return 5; // full house
-			}
-			else if ( currentType == 2 ) { // one pair
+			} else if (currentType == 2) {
+				// one pair
 				return 3; // two pair
-			}
-			else {
+			} else {
 				return 2; // one pair
 			}
-		}
-		else {
+		} else {
 			// Just return current type
 			return currentType;
 		}
@@ -160,7 +154,7 @@ function compareHands(handA: CamelHand, handB: CamelHand): number {
 		for (let index = 0; index < handA.cards.length; index++) {
 			if (handA.cards[index] != handB.cards[index]) {
 				return handA.cards[index] - handB.cards[index];
-			}			
+			}
 		}
 	}
 
@@ -175,9 +169,16 @@ const parseInput = (rawInput: string) => {
 const solve = (rawInput: string, isPart2: boolean) => {
 	const input = parseInput(rawInput);
 
-	const hands =
-		input.map(line => line.split(" "))
-			.map(info => new CamelHand(info[0].split(""), Number(info[1].trim()), !isPart2));
+	const hands = input
+		.map(line => line.split(" "))
+		.map(
+			info =>
+				new CamelHand(
+					info[0].split(""),
+					Number(info[1].trim()),
+					!isPart2,
+				),
+		);
 
 	hands.sort(compareHands);
 
@@ -202,7 +203,7 @@ run({
 					QQQJA 483
 				`,
 				expected: 6440,
-			}
+			},
 		],
 		solution: part1,
 	},
@@ -217,9 +218,9 @@ run({
 					QQQJA 483
 				`,
 				expected: 5905,
-	}
+			},
 		],
 		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

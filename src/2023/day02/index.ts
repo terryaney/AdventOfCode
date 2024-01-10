@@ -1,44 +1,48 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 const maxes = {
-	"red": 12,
-	"green": 13,
-	"blue": 14
+	red: 12,
+	green: 13,
+	blue: 14,
 };
 
 const part1 = (rawInput: string) =>
-	util.parseLines(rawInput)
-		.reduce((sum, line) => {
-			const lineParts = line.split(":");
-			const draws = lineParts[1].split(";");
-		
-			const isValid = draws.map(d => d.split(',').map(m => m.trim().split(' ')).map(m => ({ Count: parseInt(m[0]), Color: m[1] })))
-				.every(marbles => marbles.every(m => m.Count <= ( maxes as any )[m.Color]));
-		
-			const increment = isValid
-				? parseInt(lineParts[0].split(" ")[1])
-				: 0;
-			
-			return sum + increment;
-		}, 0);
+	util.parseLines(rawInput).reduce((sum, line) => {
+		const lineParts = line.split(":");
+		const draws = lineParts[1].split(";");
+
+		const isValid = draws
+			.map(d =>
+				d
+					.split(",")
+					.map(m => m.trim().split(" "))
+					.map(m => ({ Count: parseInt(m[0]), Color: m[1] })),
+			)
+			.every(marbles =>
+				marbles.every(m => m.Count <= (maxes as any)[m.Color]),
+			);
+
+		const increment = isValid ? parseInt(lineParts[0].split(" ")[1]) : 0;
+
+		return sum + increment;
+	}, 0);
 
 const part2 = (rawInput: string) =>
-	util.parseLines(rawInput)
-		.reduce((sum, line) => {
-			var hands = line.split(':')[1].split(';');
-			var marbles = hands.flatMap(h => h.split(',').map(m => m.trim()));
-			var groups = marbles.reduce((acc, curr) => {
-				var key = curr.split(' ')[1];
-				var value = parseInt(curr.split(' ')[0]);
-				acc[key] = acc[key] || [];
-				acc[key].push(value);
-				return acc;
-			}, {} as any) as { [key: string]: number[] }; // Explicitly cast groups to { [key: string]: number[] }
-		
-			var minMarbles = Object.values(groups).map(g => Math.max(...g));
-			return sum + minMarbles[0] * minMarbles[1] * minMarbles[2];
-		}, 0);
+	util.parseLines(rawInput).reduce((sum, line) => {
+		var hands = line.split(":")[1].split(";");
+		var marbles = hands.flatMap(h => h.split(",").map(m => m.trim()));
+		var groups = marbles.reduce((acc, curr) => {
+			var key = curr.split(" ")[1];
+			var value = parseInt(curr.split(" ")[0]);
+			acc[key] = acc[key] || [];
+			acc[key].push(value);
+			return acc;
+		}, {} as any) as { [key: string]: number[] }; // Explicitly cast groups to { [key: string]: number[] }
+
+		var minMarbles = Object.values(groups).map(g => Math.max(...g));
+		return sum + minMarbles[0] * minMarbles[1] * minMarbles[2];
+	}, 0);
 
 run({
 	part1: {
@@ -52,7 +56,7 @@ run({
 					Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 				`,
 				expected: 8,
-			}
+			},
 		],
 		solution: part1,
 	},
@@ -67,7 +71,7 @@ run({
 					Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 				`,
 				expected: 2286,
-			}
+			},
 		],
 		solution: part2,
 	},

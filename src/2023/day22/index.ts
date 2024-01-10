@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 import { re } from "mathjs";
 
 class Brick {
@@ -14,7 +14,14 @@ class Brick {
 	length: number;
 	height: number;
 
-	constructor(x: number, y: number, z: number, width: number, length: number, height: number) {
+	constructor(
+		x: number,
+		y: number,
+		z: number,
+		width: number,
+		length: number,
+		height: number,
+	) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -27,15 +34,29 @@ class Brick {
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
 
-	const bricks = lines.map(line => {
-		const points = line.split('~');
-		const start = points[0].split(',').map(Number);
-		const end = points[1].split(',').map(Number);
-		return new Brick(start[0], start[1], start[2], end[0] - start[0] + 1, end[1] - start[1] + 1, end[2] - start[2] + 1);
-	}).sort((a, b) => a.z - b.z);
+	const bricks = lines
+		.map(line => {
+			const points = line.split("~");
+			const start = points[0].split(",").map(Number);
+			const end = points[1].split(",").map(Number);
+			return new Brick(
+				start[0],
+				start[1],
+				start[2],
+				end[0] - start[0] + 1,
+				end[1] - start[1] + 1,
+				end[2] - start[2] + 1,
+			);
+		})
+		.sort((a, b) => a.z - b.z);
 
 	const overlaps = (a: Brick, b: Brick) => {
-		return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.length && a.y + a.length > b.y;
+		return (
+			a.x < b.x + b.width &&
+			a.x + a.width > b.x &&
+			a.y < b.y + b.length &&
+			a.y + a.length > b.y
+		);
 	};
 
 	bricks.forEach((brick, index) => {
@@ -60,7 +81,7 @@ const parseInput = (rawInput: string) => {
 				brick.supporting.push(check);
 				check.supportedBy.push(brick);
 			}
-			if ( check.z > top) {
+			if (check.z > top) {
 				break;
 			}
 		}
@@ -82,18 +103,21 @@ const solve = (rawInput: string, isPart1: boolean) => {
 
 		// Bricks are safe to disintegrate if, after removing it, no other bricks would fall further directly downward.
 		return bricks.reduce((acc, brick) => {
-			if ( brick.supporting.length == 0 ) {
+			if (brick.supporting.length == 0) {
 				return acc + 1;
 			}
 
-			return brick.supporting.every(support => support.supportedBy.length > 1)
+			return brick.supporting.every(
+				support => support.supportedBy.length > 1,
+			)
 				? acc + 1
 				: acc;
 		}, 0);
-	}
-	else {
+	} else {
 		return bricks.reduce((acc, brick) => {
-			const queue = brick.supporting.filter(support => support.supportedBy.length == 1);
+			const queue = brick.supporting.filter(
+				support => support.supportedBy.length == 1,
+			);
 			const falling = new Set(queue);
 			falling.add(brick);
 
@@ -101,7 +125,10 @@ const solve = (rawInput: string, isPart1: boolean) => {
 				const check = queue.shift()!;
 
 				check.supporting.forEach(support => {
-					if (!falling.has(support) && support.supportedBy.every(s => falling.has(s))) {
+					if (
+						!falling.has(support) &&
+						support.supportedBy.every(s => falling.has(s))
+					) {
 						falling.add(support);
 						queue.push(support);
 					}
@@ -130,10 +157,10 @@ run({
 				0,1,6~2,1,6
 				1,1,8~1,1,9
 				`,
-				expected: 5
-			}
+				expected: 5,
+			},
 		],
-		solution: part1
+		solution: part1,
 	},
 	part2: {
 		tests: [
@@ -147,10 +174,10 @@ run({
 				0,1,6~2,1,6
 				1,1,8~1,1,9
 				`,
-				expected: 7
-			}
+				expected: 7,
+			},
 		],
-		solution: part2
+		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

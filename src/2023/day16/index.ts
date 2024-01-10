@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 class Tile {
 	public energy = 0;
@@ -12,7 +12,7 @@ class Tile {
 	}
 
 	public hasPassedThrough(direction: string): boolean {
-		if ( this.dictionary[direction] == undefined ) {
+		if (this.dictionary[direction] == undefined) {
 			this.dictionary[direction] = direction;
 			return false;
 		}
@@ -22,7 +22,7 @@ class Tile {
 
 class Beam {
 	static beamId = 1;
-	
+
 	public id: number = Beam.beamId++;
 	public col: number;
 	public row: number;
@@ -36,7 +36,13 @@ class Beam {
 	}
 
 	public getActive(grid: Array<Array<Tile>>) {
-		return !this.isRepeating && this.col >= 0 && this.row >= 0 && this.col < grid[0].length && this.row < grid.length;
+		return (
+			!this.isRepeating &&
+			this.col >= 0 &&
+			this.row >= 0 &&
+			this.col < grid[0].length &&
+			this.row < grid.length
+		);
 	}
 
 	public move(grid: Array<Array<Tile>>): Beam | undefined {
@@ -47,7 +53,7 @@ class Beam {
 
 		if (!tile.hasPassedThrough(this.direction)) {
 			tile.energy++;
-			
+
 			switch (encountered) {
 				case "/":
 					switch (this.direction) {
@@ -138,8 +144,7 @@ class Beam {
 					}
 					break;
 			}
-		}
-		else {
+		} else {
 			this.isRepeating = true;
 		}
 
@@ -173,7 +178,7 @@ function analyzeGrid(grid: Array<Array<Tile>>, start: Beam) {
 		if (split?.getActive(grid) == true) {
 			beams.push(split);
 			// console.log(`Beam ${split.id.toString().padStart(3, '0')}:                Spawned at [${split.col}, ${split.row}] (${grid[split.row][split.col].content}) heading ${split.direction}`)
-			split.id = split.id;		
+			split.id = split.id;
 		}
 
 		if (beams.length > 100) {
@@ -182,41 +187,59 @@ function analyzeGrid(grid: Array<Array<Tile>>, start: Beam) {
 		}
 	}
 
-	return grid.flatMap(row => row).reduce((acc, tile) => acc + ( tile.energy > 0 ? 1 : 0 ), 0);
+	return grid
+		.flatMap(row => row)
+		.reduce((acc, tile) => acc + (tile.energy > 0 ? 1 : 0), 0);
 }
 
 const solve = (rawInput: string, isPart2: boolean) => {
 	if (!isPart2) {
 		return analyzeGrid(parseInput(rawInput), new Beam(0, 0, "E"));
-	}
-	else {
+	} else {
 		let maxTotalEnergy = 0;
 		const grid = parseInput(rawInput);
 		const rows = grid.length;
 		const cols = grid[0].length;
-		
+
 		for (let row = 0; row < rows; row++) {
 			for (let col = 0; col < cols; col++) {
 				const startDirection =
-					row == 0 ? "S" :
-						row == rows - 1 ? "N" :
-							col == 0 ? "E" :
-								col == cols - 1 ? "W" :
-									undefined;
-				
+					row == 0
+						? "S"
+						: row == rows - 1
+						? "N"
+						: col == 0
+						? "E"
+						: col == cols - 1
+						? "W"
+						: undefined;
+
 				if (startDirection != undefined) {
 					let gridEnergy = Math.max(
-						analyzeGrid(parseInput(rawInput), new Beam(row, col, startDirection)),
-						( row == 0 || row == rows - 1 ) && col == 0 ? analyzeGrid(parseInput(rawInput), new Beam(row, col, "E")) : 0,
-						( row == 0 || row == rows - 1 ) && col == cols - 1 ? analyzeGrid(parseInput(rawInput), new Beam(row, col, "W")) : 0
+						analyzeGrid(
+							parseInput(rawInput),
+							new Beam(row, col, startDirection),
+						),
+						(row == 0 || row == rows - 1) && col == 0
+							? analyzeGrid(
+									parseInput(rawInput),
+									new Beam(row, col, "E"),
+							  )
+							: 0,
+						(row == 0 || row == rows - 1) && col == cols - 1
+							? analyzeGrid(
+									parseInput(rawInput),
+									new Beam(row, col, "W"),
+							  )
+							: 0,
 					);
-					if ( gridEnergy > maxTotalEnergy ) {
+					if (gridEnergy > maxTotalEnergy) {
 						maxTotalEnergy = gridEnergy;
 					}
 				}
 			}
 		}
-		return maxTotalEnergy;		
+		return maxTotalEnergy;
 	}
 };
 
@@ -240,10 +263,10 @@ run({
 				.|....-|.\\
 				..//.|....
 				`,
-				expected: 46
-			}
+				expected: 46,
+			},
 		],
-		solution: part1
+		solution: part1,
 	},
 	part2: {
 		tests: [
@@ -260,10 +283,10 @@ run({
 				.|....-|.\\
 				..//.|....
 				`,
-				expected: 51
-			}
+				expected: 51,
+			},
 		],
-		solution: part2
+		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

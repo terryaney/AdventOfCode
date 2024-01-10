@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
@@ -7,11 +7,19 @@ const parseInput = (rawInput: string) => {
 	return grid;
 };
 
-function rollRowRocks(grid: string[][], row: number, rollTo: number, anchor: number, rocks: number, direction: string) {
+function rollRowRocks(
+	grid: string[][],
+	row: number,
+	rollTo: number,
+	anchor: number,
+	rocks: number,
+	direction: string,
+) {
 	if (rocks == 0) return;
 
 	for (let col = 0; col < Math.abs(anchor - rollTo); col++) {
-		grid[row][rollTo + col * ( direction == "W" ? 1 : -1 )] = col < rocks ? "O" : ".";
+		grid[row][rollTo + col * (direction == "W" ? 1 : -1)] =
+			col < rocks ? "O" : ".";
 	}
 }
 
@@ -27,22 +35,29 @@ function rollRow(grid: string[][], row: number, direction: string) {
 		if (grid[row][currentCol] == "O") {
 			rocks++;
 		}
-		
+
 		if (grid[row][currentCol] == "#") {
 			rocks = 0;
 			rollTo = nextCol;
-		}
-		else if (currentCol == lastCol || grid[row][nextCol] == "#") {
+		} else if (currentCol == lastCol || grid[row][nextCol] == "#") {
 			rollRowRocks(grid, row, rollTo, nextCol, rocks, direction);
 		}
 	}
 }
 
-function rollColumnRocks(grid: string[][], column: number, rollTo: number, anchor: number, rocks: number, direction: string) {
+function rollColumnRocks(
+	grid: string[][],
+	column: number,
+	rollTo: number,
+	anchor: number,
+	rocks: number,
+	direction: string,
+) {
 	if (rocks == 0) return;
 
 	for (let row = 0; row < Math.abs(anchor - rollTo); row++) {
-		grid[rollTo + row * ( direction == "N" ? 1 : -1 )][column] = row < rocks ? "O" : ".";
+		grid[rollTo + row * (direction == "N" ? 1 : -1)][column] =
+			row < rocks ? "O" : ".";
 	}
 }
 
@@ -58,12 +73,11 @@ function rollColumn(grid: string[][], column: number, direction: string) {
 		if (grid[currentRow][column] == "O") {
 			rocks++;
 		}
-		
+
 		if (grid[currentRow][column] == "#") {
 			rocks = 0;
 			rollTo = nextRow;
-		}
-		else if (currentRow == lastRow || grid[nextRow][column] == "#") {
+		} else if (currentRow == lastRow || grid[nextRow][column] == "#") {
 			rollColumnRocks(grid, column, rollTo, nextRow, rocks, direction);
 		}
 	}
@@ -72,12 +86,11 @@ function rollColumn(grid: string[][], column: number, direction: string) {
 const solve = (rawInput: string, isPart2: boolean) => {
 	const grid = parseInput(rawInput);
 
-	if ( !isPart2 ) {
+	if (!isPart2) {
 		for (let col = 0; col < grid[0].length; col++) {
 			rollColumn(grid, col, "N");
 		}
-	}
-	else {
+	} else {
 		const cache: { [key: string]: number } = {};
 
 		for (let cycle = 0; cycle < 1000000000; cycle++) {
@@ -97,9 +110,9 @@ const solve = (rawInput: string, isPart2: boolean) => {
 			if (cache[cacheKey] != undefined) {
 				const multiple = cycle - cache[cacheKey];
 				// console.log("found:" + cache[cacheKey], "current: " + cycle, cacheKey);
-				cycle = 1000000000 - ((1000000000 - cycle) % multiple - 1) - 1;
-			}
-			else {
+				cycle =
+					1000000000 - (((1000000000 - cycle) % multiple) - 1) - 1;
+			} else {
 				cache[cacheKey] = cycle;
 			}
 		}
@@ -132,10 +145,10 @@ run({
 				#....###..
 				#OO..#....
 				`,
-				expected: 136
-			}
+				expected: 136,
+			},
 		],
-		solution: part1
+		solution: part1,
 	},
 	part2: {
 		tests: [
@@ -152,10 +165,10 @@ run({
 				#....###..
 				#OO..#....
 				`,
-				expected: 64
-			}
+				expected: 64,
+			},
 		],
-		solution: part2
+		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

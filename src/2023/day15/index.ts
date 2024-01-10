@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 class Lense {
 	public label: string;
@@ -20,7 +20,7 @@ const parseInput = (rawInput: string, isPart2: boolean) => {
 		const char = String.fromCharCode(i);
 		asciiDictionary[char] = i;
 	}
-	
+
 	const boxes: Array<Array<Lense>> = isPart2
 		? new Array(256).fill(null).map(() => [])
 		: [];
@@ -33,22 +33,20 @@ const parseInput = (rawInput: string, isPart2: boolean) => {
 			const focalLength = isAddition ? Number(codeParts[1]) : -1;
 			const boxIndex = hashString(label, asciiDictionary);
 			const box = boxes[boxIndex];
-		
+
 			const lenseIndex = box.findIndex(lense => lense.label == label);
-	
+
 			if (!isAddition && lenseIndex > -1) {
 				// remove lense at index, and move all remaining forward
 				box.splice(lenseIndex, 1);
-			}
-			else if (isAddition && lenseIndex > -1) {
+			} else if (isAddition && lenseIndex > -1) {
 				box[lenseIndex].focalLength = focalLength;
-			}
-			else if (isAddition && lenseIndex == -1) {
+			} else if (isAddition && lenseIndex == -1) {
 				box.push(new Lense(label, focalLength));
 			}
 		});
 	}
-	
+
 	return { codes, asciiDictionary, boxes };
 };
 
@@ -68,13 +66,19 @@ const solve = (rawInput: string, isPart2: boolean) => {
 	const input = parseInput(rawInput, isPart2);
 
 	if (!isPart2) {
-		return input.codes.reduce((totalValue, code) => totalValue + hashString(code, input.asciiDictionary), 0);
-	}
-	else {
+		return input.codes.reduce(
+			(totalValue, code) =>
+				totalValue + hashString(code, input.asciiDictionary),
+			0,
+		);
+	} else {
 		return input.boxes.reduce((totalValue, box, b) => {
-			return totalValue + box.reduce((boxValue, lense, l) => {
-				return boxValue + (b + 1) * (l + 1) * lense.focalLength;
-			}, 0);
+			return (
+				totalValue +
+				box.reduce((boxValue, lense, l) => {
+					return boxValue + (b + 1) * (l + 1) * lense.focalLength;
+				}, 0)
+			);
 		}, 0);
 	}
 };
@@ -88,19 +92,19 @@ run({
 		tests: [
 			{
 				input: `rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7`,
-				expected: 1320
-			}
+				expected: 1320,
+			},
 		],
-		solution: part1
+		solution: part1,
 	},
 	part2: {
 		tests: [
 			{
 				input: `rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7`,
-				expected: 145
-			}
+				expected: 145,
+			},
 		],
-		solution: part2
+		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

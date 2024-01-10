@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 class Dig {
 	public color: string | undefined;
@@ -29,16 +29,16 @@ function convertHexToNumber(hex: string): number {
 
 class Shoelace {
 	private permimeter = 0;
-	private points: Array<{ x: number, y: number }> = [];
+	private points: Array<{ x: number; y: number }> = [];
 	private location = { x: 0, y: 0 };
 
 	public addPoint(direction: string, length: number) {
 		const directions = {
-			"R": { x: 1, y: 0 },
-			"D": { x: 0, y: 1 },
-			"L": { x: -1, y: 0 },
-			"U": { x: 0, y: -1 }
-		} as { [key: string]: { x: number, y: number } };
+			R: { x: 1, y: 0 },
+			D: { x: 0, y: 1 },
+			L: { x: -1, y: 0 },
+			U: { x: 0, y: -1 },
+		} as { [key: string]: { x: number; y: number } };
 		this.permimeter += length;
 		this.location.x += directions[direction].x * length;
 		this.location.y += directions[direction].y * length;
@@ -51,7 +51,7 @@ class Shoelace {
 		for (let index = 1; index < this.points.length; index++) {
 			const p1 = this.points[index - 1];
 			const p2 = this.points[index];
-			area += (p2.x - p1.x) * (p2.y + p1.y);			
+			area += (p2.x - p1.x) * (p2.y + p1.y);
 		}
 
 		return Math.abs(area) / 2 + this.permimeter / 2 + 1;
@@ -62,29 +62,43 @@ const parseInput = (rawInput: string, isPart2: boolean) => {
 	const lines = util.parseLines(rawInput);
 	return !isPart2
 		? lines.map(line => {
-			const parts = line.split(" ");
-			return new Instruction(parts[0], Number(parts[1]), parts[2].substring(1, parts[2].length - 1));
-		})
+				const parts = line.split(" ");
+				return new Instruction(
+					parts[0],
+					Number(parts[1]),
+					parts[2].substring(1, parts[2].length - 1),
+				);
+		  })
 		: lines.map(line => {
-			const parts = line.split(" ");
-			const hex = parts[2].substring(2, parts[2].length - 2)
-			const direction = parts[2].substring(parts[2].length - 2, parts[2].length - 1)
-			return new Instruction(
-				direction == "0" ? "R" :
-				direction == "1" ? "D" :
-				direction == "2" ? "L" : "U",
-				convertHexToNumber(hex),
-				parts[2].substring(1, parts[2].length - 1)
-			);
-		});
+				const parts = line.split(" ");
+				const hex = parts[2].substring(2, parts[2].length - 2);
+				const direction = parts[2].substring(
+					parts[2].length - 2,
+					parts[2].length - 1,
+				);
+				return new Instruction(
+					direction == "0"
+						? "R"
+						: direction == "1"
+						? "D"
+						: direction == "2"
+						? "L"
+						: "U",
+					convertHexToNumber(hex),
+					parts[2].substring(1, parts[2].length - 1),
+				);
+		  });
 };
 
-function findItemsInsideLoop(grid: Array<Array<{ shape: string } | undefined>>, processInsideItems: (row: number, col: number, items: number) => void) {
+function findItemsInsideLoop(
+	grid: Array<Array<{ shape: string } | undefined>>,
+	processInsideItems: (row: number, col: number, items: number) => void,
+) {
 	for (let row = 0; row < grid.length; row++) {
 		const locations = grid[row];
 		for (let col = 0; col < locations.length; col++) {
 			const location = locations[col];
-	
+
 			if (location == undefined) {
 				// Not part of loop, try ray tracing...
 				let crossings = 0;
@@ -96,7 +110,7 @@ function findItemsInsideLoop(grid: Array<Array<{ shape: string } | undefined>>, 
 
 				for (let ray = col + 1; ray < locations.length; ray++) {
 					foundTheLoop ||= locations[ray] != undefined;
-					
+
 					if (locations[ray] == undefined) {
 						// tile we MIGHT need to check...
 						if (!foundTheLoop) {
@@ -104,39 +118,44 @@ function findItemsInsideLoop(grid: Array<Array<{ shape: string } | undefined>>, 
 							// needs to be checked, it will have same result
 							// the location I'm checking...
 							itemsInGroup++;
-						}
-						else if (!foundNextLocation) {
+						} else if (!foundNextLocation) {
 							// Once I've found loop, the first undefined items
 							// I hit will be the next location I check...
 							foundNextLocation = true;
 							nextLocationCol = ray - 1;
 						}
-					}
-					else {
+					} else {
 						const shape = locations[ray]!.shape;
-	
-						if (shape == "|" || ( "L7".indexOf(shape) > -1 && "L7".indexOf(lastCorner!) > -1 ) || ( "FJ".indexOf(shape) > -1 && "FJ".indexOf(lastCorner!) > -1 ) ) {
+
+						if (
+							shape == "|" ||
+							("L7".indexOf(shape) > -1 &&
+								"L7".indexOf(lastCorner!) > -1) ||
+							("FJ".indexOf(shape) > -1 &&
+								"FJ".indexOf(lastCorner!) > -1)
+						) {
 							crossings++;
 						}
-						
+
 						if ("7JLF".indexOf(shape) > -1) {
-							// If I hit a corner, if not already hitting a corner, assign it, otherwise 
+							// If I hit a corner, if not already hitting a corner, assign it, otherwise
 							// clear out (meaning I'm moving up or down again)
-							lastCorner = lastCorner == undefined ? shape : undefined;
+							lastCorner =
+								lastCorner == undefined ? shape : undefined;
 						}
 					}
 				}
-				
+
 				if (crossings % 2 == 1) {
 					processInsideItems(row, col, itemsInGroup);
 				}
-	
+
 				if (!foundNextLocation) {
 					break; // No more locations to search in this row...
 				}
 				col = nextLocationCol;
-			} 
-		}	
+			}
+		}
 	}
 }
 
@@ -145,18 +164,21 @@ function calculateAreaWithRayTracing(instructions: Array<Instruction>) {
 	let position = { x: 0, y: 0 };
 	let height = 0;
 	let width = 0;
-	
+
 	// Size grid...
 	instructions.forEach(instruction => {
 		let growth: number | undefined;
-	
+
 		switch (instruction.direction) {
 			case "R":
 				width = Math.max(width, instruction.distance + position.x + 1);
 				position.x += instruction.distance;
 				break;
 			case "D":
-				height = Math.max(height, instruction.distance + position.y + 1);
+				height = Math.max(
+					height,
+					instruction.distance + position.y + 1,
+				);
 				position.y += instruction.distance;
 				break;
 			case "L":
@@ -165,8 +187,7 @@ function calculateAreaWithRayTracing(instructions: Array<Instruction>) {
 					width += growth;
 					origin.x += growth;
 					position.x = 0;
-				}
-				else {
+				} else {
 					position.x -= instruction.distance;
 				}
 				break;
@@ -176,56 +197,81 @@ function calculateAreaWithRayTracing(instructions: Array<Instruction>) {
 					height += growth;
 					origin.y += growth;
 					position.y = 0;
-				}
-				else {
+				} else {
 					position.y -= instruction.distance;
 				}
 				break;
 		}
 	});
-	
-	const grid: Array<Array<Dig | undefined>> = new Array(height).fill(undefined).map(() => new Array(width));
+
+	const grid: Array<Array<Dig | undefined>> = new Array(height)
+		.fill(undefined)
+		.map(() => new Array(width));
 
 	// Draw grid...
 	let previousDirection = instructions[instructions.length - 1].direction;
 
 	instructions.forEach(instruction => {
 		// console.log(`Instruction: ${instruction.direction} ${instruction.distance} ${instruction.color}`);
-		switch (instruction.direction) {		
+		switch (instruction.direction) {
 			case "R":
-			case "L":			
+			case "L":
 				for (let index = 0; index < instruction.distance; index++) {
 					const dig = new Dig(
 						instruction.color,
-						previousDirection == "U" && instruction.direction == "R" ? "F" :
-							previousDirection == "U" && instruction.direction == "L" ? "7" :
-								previousDirection == "D" && instruction.direction == "R" ? "L" :
-									previousDirection == "D" && instruction.direction == "L" ? "J" :
-										"-"
+						previousDirection == "U" && instruction.direction == "R"
+							? "F"
+							: previousDirection == "U" &&
+							  instruction.direction == "L"
+							? "7"
+							: previousDirection == "D" &&
+							  instruction.direction == "R"
+							? "L"
+							: previousDirection == "D" &&
+							  instruction.direction == "L"
+							? "J"
+							: "-",
 					);
 					previousDirection = instruction.direction;
-					grid[origin.y][origin.x + index * (instruction.direction == "R" ? 1 : -1)] = dig;
+					grid[origin.y][
+						origin.x +
+							index * (instruction.direction == "R" ? 1 : -1)
+					] = dig;
 				}
-				origin.x += instruction.distance * (instruction.direction == "R" ? 1 : -1);
+				origin.x +=
+					instruction.distance *
+					(instruction.direction == "R" ? 1 : -1);
 				break;
 			case "D":
 			case "U":
 				for (let index = 0; index < instruction.distance; index++) {
 					const dig = new Dig(
 						instruction.color,
-						previousDirection == "L" && instruction.direction == "D" ? "F" :
-							previousDirection == "L" && instruction.direction == "U" ? "L" :
-								previousDirection == "R" && instruction.direction == "D" ? "7" :
-									previousDirection == "R" && instruction.direction == "U" ? "J" :
-										"|"
+						previousDirection == "L" && instruction.direction == "D"
+							? "F"
+							: previousDirection == "L" &&
+							  instruction.direction == "U"
+							? "L"
+							: previousDirection == "R" &&
+							  instruction.direction == "D"
+							? "7"
+							: previousDirection == "R" &&
+							  instruction.direction == "U"
+							? "J"
+							: "|",
 					);
 					previousDirection = instruction.direction;
-					grid[origin.y + index * (instruction.direction == "D" ? 1 : -1)][origin.x] = dig;
+					grid[
+						origin.y +
+							index * (instruction.direction == "D" ? 1 : -1)
+					][origin.x] = dig;
 				}
-				origin.y += instruction.distance * (instruction.direction == "D" ? 1 : -1);
+				origin.y +=
+					instruction.distance *
+					(instruction.direction == "D" ? 1 : -1);
 				break;
 		}
-	
+
 		/*
 		console.log("");
 		map.forEach(line => {
@@ -236,13 +282,19 @@ function calculateAreaWithRayTracing(instructions: Array<Instruction>) {
 	});
 
 	// Fill grid
-	findItemsInsideLoop(grid as Array<Array<{ shape: string }>>, (row, col, items) => {
-		for (let index = 0; index < items; index++) {
-			grid[row][col + index] = new Dig("X", "X");	
-		}
-	});
+	findItemsInsideLoop(
+		grid as Array<Array<{ shape: string }>>,
+		(row, col, items) => {
+			for (let index = 0; index < items; index++) {
+				grid[row][col + index] = new Dig("X", "X");
+			}
+		},
+	);
 
-	return grid.reduce((sum, line) => sum + line.filter(dig => dig != undefined).length, 0);
+	return grid.reduce(
+		(sum, line) => sum + line.filter(dig => dig != undefined).length,
+		0,
+	);
 }
 
 const solve = (rawInput: string, isPart2: boolean) => {
@@ -251,7 +303,9 @@ const solve = (rawInput: string, isPart2: boolean) => {
 	// return calculateAreaWithRayTracing(input);
 
 	const shoelace = new Shoelace();
-	input.forEach(instruction => shoelace.addPoint(instruction.direction, instruction.distance));
+	input.forEach(instruction =>
+		shoelace.addPoint(instruction.direction, instruction.distance),
+	);
 	return shoelace.calculateArea();
 };
 
@@ -279,10 +333,10 @@ run({
 				L 2 (#015232)
 				U 2 (#7a21e3)
 				`,
-				expected: 62
-			}
+				expected: 62,
+			},
 		],
-		solution: part1
+		solution: part1,
 	},
 	part2: {
 		tests: [
@@ -303,10 +357,10 @@ run({
 				L 2 (#015232)
 				U 2 (#7a21e3)
 				`,
-				expected: 952408144115
-			}
+				expected: 952408144115,
+			},
 		],
-		solution: part2
+		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

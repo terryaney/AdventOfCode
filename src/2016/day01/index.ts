@@ -1,23 +1,31 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
-type Point = { x: number, y: number };
-type Segment = { start: Point, end: Point };
+type Point = { x: number; y: number };
+type Segment = { start: Point; end: Point };
 
 const turn = (direction: string, turn: string) => {
 	if (turn === "R") {
 		switch (direction) {
-			case "N": return "E";
-			case "E": return "S";
-			case "S": return "W";
-			case "W": return "N";
+			case "N":
+				return "E";
+			case "E":
+				return "S";
+			case "S":
+				return "W";
+			case "W":
+				return "N";
 		}
 	} else {
 		switch (direction) {
-			case "N": return "W";
-			case "E": return "N";
-			case "S": return "E";
-			case "W": return "S";
+			case "N":
+				return "W";
+			case "E":
+				return "N";
+			case "S":
+				return "E";
+			case "W":
+				return "S";
 		}
 	}
 
@@ -26,44 +34,55 @@ const turn = (direction: string, turn: string) => {
 
 const move = (location: Point, direction: string, distance: number): Point => {
 	switch (direction) {
-		case "N": return { x: location.x, y: location.y + distance };
-		case "E": return { x: location.x + distance, y: location.y };
-		case "S": return { x: location.x, y: location.y - distance };
-		case "W": return { x: location.x - distance, y: location.y };
+		case "N":
+			return { x: location.x, y: location.y + distance };
+		case "E":
+			return { x: location.x + distance, y: location.y };
+		case "S":
+			return { x: location.x, y: location.y - distance };
+		case "W":
+			return { x: location.x - distance, y: location.y };
 	}
 
 	throw new Error(`Invalid move direction: ${direction}`);
 };
 
 function intersection(segment1: Segment, segment2: Segment): Point | undefined {
-    const a1 = segment1.end.y - segment1.start.y;
-    const b1 = segment1.start.x - segment1.end.x;
-    const c1 = a1 * segment1.start.x + b1 * segment1.start.y;
+	const a1 = segment1.end.y - segment1.start.y;
+	const b1 = segment1.start.x - segment1.end.x;
+	const c1 = a1 * segment1.start.x + b1 * segment1.start.y;
 
-    const a2 = segment2.end.y - segment2.start.y;
-    const b2 = segment2.start.x - segment2.end.x;
-    const c2 = a2 * segment2.start.x + b2 * segment2.start.y;
+	const a2 = segment2.end.y - segment2.start.y;
+	const b2 = segment2.start.x - segment2.end.x;
+	const c2 = a2 * segment2.start.x + b2 * segment2.start.y;
 
-    const delta = a1 * b2 - a2 * b1;
+	const delta = a1 * b2 - a2 * b1;
 
-    if (delta === 0) { // The lines are parallel
-        return undefined;
-    }
+	if (delta === 0) {
+		// The lines are parallel
+		return undefined;
+	}
 
-    const x = (b2 * c1 - b1 * c2) / delta;
-    const y = (a1 * c2 - a2 * c1) / delta;
+	const x = (b2 * c1 - b1 * c2) / delta;
+	const y = (a1 * c2 - a2 * c1) / delta;
 
-    const withinSegment1 = (Math.min(segment1.start.x, segment1.end.x) <= x && x <= Math.max(segment1.start.x, segment1.end.x)) &&
-                           (Math.min(segment1.start.y, segment1.end.y) <= y && y <= Math.max(segment1.start.y, segment1.end.y));
+	const withinSegment1 =
+		Math.min(segment1.start.x, segment1.end.x) <= x &&
+		x <= Math.max(segment1.start.x, segment1.end.x) &&
+		Math.min(segment1.start.y, segment1.end.y) <= y &&
+		y <= Math.max(segment1.start.y, segment1.end.y);
 
-    const withinSegment2 = (Math.min(segment2.start.x, segment2.end.x) <= x && x <= Math.max(segment2.start.x, segment2.end.x)) &&
-                           (Math.min(segment2.start.y, segment2.end.y) <= y && y <= Math.max(segment2.start.y, segment2.end.y));
+	const withinSegment2 =
+		Math.min(segment2.start.x, segment2.end.x) <= x &&
+		x <= Math.max(segment2.start.x, segment2.end.x) &&
+		Math.min(segment2.start.y, segment2.end.y) <= y &&
+		y <= Math.max(segment2.start.y, segment2.end.y);
 
-    if (withinSegment1 && withinSegment2) {
-        return { x, y };
-    }
+	if (withinSegment1 && withinSegment2) {
+		return { x, y };
+	}
 
-    return undefined;
+	return undefined;
 }
 
 const solve = (rawInput: string, isPart1: boolean) => {
@@ -72,15 +91,15 @@ const solve = (rawInput: string, isPart1: boolean) => {
 	let direction = "N";
 
 	const segments = new Array<Segment>();
-	const instructions = input.split(', ');
+	const instructions = input.split(", ");
 
 	for (let i = 0; i < instructions.length; i++) {
 		const instruction = instructions[i];
 		direction = turn(direction, instruction[0]);
-		
+
 		const start = location;
 		location = move(start, direction, parseInt(instruction.substring(1)));
-		
+
 		if (!isPart1) {
 			const segment = { start, end: location };
 
@@ -88,7 +107,10 @@ const solve = (rawInput: string, isPart1: boolean) => {
 				const intersectionPoint = intersection(segment, segments[s]);
 
 				if (intersectionPoint !== undefined) {
-					return Math.abs(intersectionPoint.x) + Math.abs(intersectionPoint.y);
+					return (
+						Math.abs(intersectionPoint.x) +
+						Math.abs(intersectionPoint.y)
+					);
 				}
 			}
 
@@ -108,19 +130,19 @@ run({
 		tests: [
 			{
 				input: `R5, L5, R5, R3`,
-				expected: 12
-			}
+				expected: 12,
+			},
 		],
-		solution: part1
+		solution: part1,
 	},
 	part2: {
 		tests: [
 			{
 				input: `R8, R4, R4, R8`,
-				expected: 4
-			}
+				expected: 4,
+			},
 		],
-		solution: part2
+		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

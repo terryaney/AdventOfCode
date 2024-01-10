@@ -1,8 +1,7 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
-class Sequence
-{
+class Sequence {
 	public numbers: Array<number>;
 	public leftExtrapolation: number | undefined;
 	public rightExtrapolation: number | undefined;
@@ -26,7 +25,7 @@ const solve = (rawInput: string, isPart2: boolean) => {
 
 		let sequence = sequences[sequences.length - 1];
 		let numbers = sequence.numbers;
-	
+
 		// Generate sequences until all values are 0...
 		while (numbers.some(n => n != 0)) {
 			const nextSequence: Array<number> = [];
@@ -34,7 +33,7 @@ const solve = (rawInput: string, isPart2: boolean) => {
 				nextSequence.push(numbers[i + 1] - numbers[i]);
 			}
 			sequences.push(new Sequence(nextSequence));
-			
+
 			sequence = sequences[sequences.length - 1];
 			numbers = sequence.numbers;
 		}
@@ -48,19 +47,22 @@ const solve = (rawInput: string, isPart2: boolean) => {
 
 		// For all other sequences, determine the next number by finding what value would
 		// be needed so that the difference of numbers is equal to the number appended during extrapolation...
-		
+
 		// Start from the second last sequence...
 		for (let index = sequences.length - 2; index >= 0; index--) {
 			const previous = sequences[index + 1];
 			const current = sequences[index];
-			
+
 			const previousLeftExtrapolation = previous.leftExtrapolation;
 			const firstNumberInCurrent = current.numbers[0];
-			current.leftExtrapolation = firstNumberInCurrent - previousLeftExtrapolation!;
+			current.leftExtrapolation =
+				firstNumberInCurrent - previousLeftExtrapolation!;
 
 			const previousRightExtrapolation = previous.rightExtrapolation;
-			const lastNumberInCurrent = current.numbers[current.numbers.length - 1];		
-			current.rightExtrapolation = lastNumberInCurrent + previousRightExtrapolation!;
+			const lastNumberInCurrent =
+				current.numbers[current.numbers.length - 1];
+			current.rightExtrapolation =
+				lastNumberInCurrent + previousRightExtrapolation!;
 		}
 
 		return !isPart2
@@ -83,7 +85,7 @@ run({
 					10 13 16 21 30 45
 				`,
 				expected: 114,
-			}
+			},
 		],
 		solution: part1,
 	},
@@ -96,9 +98,9 @@ run({
 					10 13 16 21 30 45
 				`,
 				expected: 2,
-			}
+			},
 		],
 		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

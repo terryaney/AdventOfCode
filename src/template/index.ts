@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
@@ -10,9 +10,8 @@ const parseInput = (rawInput: string) => {
 const solve = (rawInput: string, isPart1: boolean) => {
 	const input = parseInput(rawInput);
 
-	if ( isPart1 ) {
-	}
-	else {
+	if (isPart1) {
+	} else {
 	}
 };
 
@@ -27,13 +26,13 @@ run({
 				input: `
 				{testData}
 				`,
-				expected: 0
-			}
+				expected: 0,
+			},
 		],
-		solution: part1
+		solution: part1,
 	},
 	part2: {
-		solution: part2
+		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

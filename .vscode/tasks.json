@@ -1,0 +1,74 @@
+{
+	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "day",
+			"type": "promptString",
+			"description": "Enter the day number"
+		},
+		{
+			"id": "year",
+			"type": "promptString",
+			"description": "Enter the year number"
+		}
+	],
+	"tasks": [
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "npm run build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "start",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"start",
+				"${input:year}",
+				"${input:day}"
+			],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "update readme",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"update-readme",
+				"${input:year}"
+			],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "format code",
+			"type": "shell",
+			"command": "./node_modules/.bin/prettier -w src",
+			"problemMatcher": [],
+		}
+	]
+}

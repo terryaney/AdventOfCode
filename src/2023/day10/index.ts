@@ -1,5 +1,5 @@
 import run from "aoc-automation";
-import * as util from '../../utils/index.js';
+import * as util from "../../utils/index.js";
 
 class Location {
 	public readonly row: number;
@@ -12,45 +12,69 @@ class Location {
 	}
 }
 
-function getNextLocation(lines: string[], previousLocation: Location, currentLocation: Location): Location {
+function getNextLocation(
+	lines: string[],
+	previousLocation: Location,
+	currentLocation: Location,
+): Location {
 	const pipe = lines[currentLocation.row][currentLocation.col];
-	
+
 	switch (pipe) {
 		case "|": // North and South
-			return new Location(currentLocation.row + (previousLocation.row < currentLocation.row ? 1 : -1), currentLocation.col, lines);
+			return new Location(
+				currentLocation.row +
+					(previousLocation.row < currentLocation.row ? 1 : -1),
+				currentLocation.col,
+				lines,
+			);
 		case "-": // East and West
-			return new Location(currentLocation.row, currentLocation.col + (previousLocation.col < currentLocation.col ? 1 : -1), lines);
+			return new Location(
+				currentLocation.row,
+				currentLocation.col +
+					(previousLocation.col < currentLocation.col ? 1 : -1),
+				lines,
+			);
 		case "L": // North and East
 			return new Location(
-				currentLocation.row + (previousLocation.row < currentLocation.row ? 0 : -1),
-				currentLocation.col + (previousLocation.row < currentLocation.row ? 1 : 0),
-				lines
+				currentLocation.row +
+					(previousLocation.row < currentLocation.row ? 0 : -1),
+				currentLocation.col +
+					(previousLocation.row < currentLocation.row ? 1 : 0),
+				lines,
 			);
 		case "J": // North and West
 			return new Location(
-				currentLocation.row + (previousLocation.row < currentLocation.row ? 0 : -1),
-				currentLocation.col + (previousLocation.row < currentLocation.row ? -1 : 0),
-				lines
+				currentLocation.row +
+					(previousLocation.row < currentLocation.row ? 0 : -1),
+				currentLocation.col +
+					(previousLocation.row < currentLocation.row ? -1 : 0),
+				lines,
 			);
 		case "7": // South and West
 			return new Location(
-				currentLocation.row + (previousLocation.row > currentLocation.row ? 0 : 1),
-				currentLocation.col + (previousLocation.row > currentLocation.row ? -1 : 0),
-				lines
+				currentLocation.row +
+					(previousLocation.row > currentLocation.row ? 0 : 1),
+				currentLocation.col +
+					(previousLocation.row > currentLocation.row ? -1 : 0),
+				lines,
 			);
 		// case "F": // South and East
 		default:
 			return new Location(
-				currentLocation.row + (previousLocation.row > currentLocation.row ? 0 : 1),
-				currentLocation.col + (previousLocation.row > currentLocation.row ? 1 : 0),
-				lines
+				currentLocation.row +
+					(previousLocation.row > currentLocation.row ? 0 : 1),
+				currentLocation.col +
+					(previousLocation.row > currentLocation.row ? 1 : 0),
+				lines,
 			);
 	}
 }
 
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
-	const map: Array<Array<Location | undefined>> = lines.map( l => new Array<Location | undefined>(l.length) );
+	const map: Array<Array<Location | undefined>> = lines.map(
+		l => new Array<Location | undefined>(l.length),
+	);
 
 	let rowS = -1;
 	let colS = -1;
@@ -62,61 +86,95 @@ const parseInput = (rawInput: string) => {
 		if (colS > -1) {
 			rowS = index;
 			break;
-		}	
+		}
 	}
-	let previousLocation = map[rowS][colS] = new Location(rowS, colS, lines);
+	let previousLocation = (map[rowS][colS] = new Location(rowS, colS, lines));
 	let currentLocation: Location | undefined;
 
 	// Convert S to a valid pipe shape and choose first pipe to travel, setting currentSteps to 1 since you moved one step finding this...
 	let currentSteps = 1;
-	const startCanMoveUp = previousLocation.row > 0 && "|F7".indexOf(lines[previousLocation.row - 1][previousLocation.col]) > -1;
-	const startCanMoveLeft = previousLocation.col > 0 && "-FL".indexOf(lines[previousLocation.row][previousLocation.col - 1]) > -1;
-	const startCanMoveRight = previousLocation.col < lines[0].length && "-7J".indexOf(lines[previousLocation.row][previousLocation.col + 1]) > -1;
-	const startCanMoveDown = previousLocation.row < lines.length && "|LJ".indexOf(lines[previousLocation.row + 1][previousLocation.col]) > -1;
+	const startCanMoveUp =
+		previousLocation.row > 0 &&
+		"|F7".indexOf(lines[previousLocation.row - 1][previousLocation.col]) >
+			-1;
+	const startCanMoveLeft =
+		previousLocation.col > 0 &&
+		"-FL".indexOf(lines[previousLocation.row][previousLocation.col - 1]) >
+			-1;
+	const startCanMoveRight =
+		previousLocation.col < lines[0].length &&
+		"-7J".indexOf(lines[previousLocation.row][previousLocation.col + 1]) >
+			-1;
+	const startCanMoveDown =
+		previousLocation.row < lines.length &&
+		"|LJ".indexOf(lines[previousLocation.row + 1][previousLocation.col]) >
+			-1;
 
 	if (startCanMoveUp) {
-		map[previousLocation.row - 1][previousLocation.col] = currentLocation = new Location(previousLocation.row - 1, previousLocation.col, lines);
-	}
-	else if (startCanMoveLeft) {
-		map[previousLocation.row][previousLocation.col - 1] = currentLocation = new Location(previousLocation.row, previousLocation.col - 1, lines);
-	}
-	else if (startCanMoveRight) {
-		map[previousLocation.row][previousLocation.col + 1] = currentLocation = new Location(previousLocation.row, previousLocation.col + 1, lines);
-	}
-	else if (startCanMoveDown) {
-		map[previousLocation.row + 1][previousLocation.col] = currentLocation = new Location(previousLocation.row + 1, previousLocation.col, lines);
+		map[previousLocation.row - 1][previousLocation.col] = currentLocation =
+			new Location(previousLocation.row - 1, previousLocation.col, lines);
+	} else if (startCanMoveLeft) {
+		map[previousLocation.row][previousLocation.col - 1] = currentLocation =
+			new Location(previousLocation.row, previousLocation.col - 1, lines);
+	} else if (startCanMoveRight) {
+		map[previousLocation.row][previousLocation.col + 1] = currentLocation =
+			new Location(previousLocation.row, previousLocation.col + 1, lines);
+	} else if (startCanMoveDown) {
+		map[previousLocation.row + 1][previousLocation.col] = currentLocation =
+			new Location(previousLocation.row + 1, previousLocation.col, lines);
 	}
 
 	// Travel path (via lines and line indexes) and fill in the map, stopping once I've looped around
 	while (map[currentLocation!.row][currentLocation!.col]!.shape != "S") {
-		const nextLocation = getNextLocation(lines, previousLocation, currentLocation!);
+		const nextLocation = getNextLocation(
+			lines,
+			previousLocation,
+			currentLocation!,
+		);
 		previousLocation = currentLocation!;
-		map[nextLocation.row][nextLocation.col] = currentLocation = nextLocation;
+		map[nextLocation.row][nextLocation.col] = currentLocation =
+			nextLocation;
 		currentSteps++;
 	}
 
 	if (startCanMoveUp) {
-		currentLocation!.shape = startCanMoveDown ? "|" : startCanMoveLeft ? "J" : "L";
-	}
-	else if (startCanMoveLeft) {
-		currentLocation!.shape = startCanMoveDown ? "7" : startCanMoveRight ? "-" : "J";
-	}
-	else if (startCanMoveRight) {
-		currentLocation!.shape = startCanMoveDown ? "F" : startCanMoveLeft ? "-" : "L";
-	}
-	else if (startCanMoveDown) {
-		currentLocation!.shape = startCanMoveUp ? "|" : startCanMoveLeft ? "7" : "F";
+		currentLocation!.shape = startCanMoveDown
+			? "|"
+			: startCanMoveLeft
+			? "J"
+			: "L";
+	} else if (startCanMoveLeft) {
+		currentLocation!.shape = startCanMoveDown
+			? "7"
+			: startCanMoveRight
+			? "-"
+			: "J";
+	} else if (startCanMoveRight) {
+		currentLocation!.shape = startCanMoveDown
+			? "F"
+			: startCanMoveLeft
+			? "-"
+			: "L";
+	} else if (startCanMoveDown) {
+		currentLocation!.shape = startCanMoveUp
+			? "|"
+			: startCanMoveLeft
+			? "7"
+			: "F";
 	}
 
 	return { map: map, totalSteps: currentSteps, lines: lines };
 };
 
-function findItemsInsideLoop(map: Array<Array<{ shape: string } | undefined>>, processInsideItems: (row: number, col: number, items: number) => void) {
+function findItemsInsideLoop(
+	map: Array<Array<{ shape: string } | undefined>>,
+	processInsideItems: (row: number, col: number, items: number) => void,
+) {
 	for (let row = 0; row < map.length; row++) {
 		const locations = map[row];
 		for (let col = 0; col < locations.length; col++) {
 			const location = locations[col];
-	
+
 			if (location == undefined) {
 				// Not part of loop, try ray tracing...
 				let crossings = 0;
@@ -124,10 +182,10 @@ function findItemsInsideLoop(map: Array<Array<{ shape: string } | undefined>>, p
 				let foundNextLocation = false;
 				let itemsInGroup = 1;
 				let lastCorner: string | undefined;
-	
+
 				for (let ray = col + 1; ray < locations.length; ray++) {
 					foundTheLoop ||= locations[ray] != undefined;
-					
+
 					if (locations[ray] == undefined) {
 						// tile we MIGHT need to check...
 						if (!foundTheLoop) {
@@ -135,38 +193,43 @@ function findItemsInsideLoop(map: Array<Array<{ shape: string } | undefined>>, p
 							// needs to be checked, it will have same result
 							// the location I'm checking...
 							itemsInGroup++;
-						}
-						else if (!foundNextLocation) {
+						} else if (!foundNextLocation) {
 							// Once I've found loop, the first undefined items
 							// I hit will be the next location I check...
 							foundNextLocation = true;
 							col = ray - 1;
 						}
-					}
-					else {
+					} else {
 						const shape = locations[ray]!.shape;
-	
-						if (shape == "|" || ( "L7".indexOf(shape) > -1 && "L7".indexOf(lastCorner!) > -1 ) || ( "FJ".indexOf(shape) > -1 && "FJ".indexOf(lastCorner!) > -1 ) ) {
+
+						if (
+							shape == "|" ||
+							("L7".indexOf(shape) > -1 &&
+								"L7".indexOf(lastCorner!) > -1) ||
+							("FJ".indexOf(shape) > -1 &&
+								"FJ".indexOf(lastCorner!) > -1)
+						) {
 							crossings++;
 						}
-						
+
 						if ("7JLF".indexOf(shape) > -1) {
-							// If I hit a corner, if not already hitting a corner, assign it, otherwise 
+							// If I hit a corner, if not already hitting a corner, assign it, otherwise
 							// clear out (meaning I'm moving up or down again)
-							lastCorner = lastCorner == undefined ? shape : undefined;
+							lastCorner =
+								lastCorner == undefined ? shape : undefined;
 						}
 					}
 				}
-				
+
 				if (crossings % 2 == 1) {
 					processInsideItems(row, col, itemsInGroup);
 				}
-	
+
 				if (!foundNextLocation) {
 					break; // No more locations to search in this row...
 				}
 			}
-		}	
+		}
 	}
 }
 
@@ -174,16 +237,15 @@ const solve = (rawInput: string, isPart2: boolean) => {
 	const input = parseInput(rawInput);
 	const map = input.map;
 	const lines = input.lines;
-	
-	if ( !isPart2 ) {
+
+	if (!isPart2) {
 		return input.totalSteps / 2;
-	}
-	else {
+	} else {
 		let pointsInsideLoop = 0;
 		findItemsInsideLoop(map, (row, col, items) => {
 			pointsInsideLoop += items;
 		});
-		return pointsInsideLoop;		
+		return pointsInsideLoop;
 	}
 };
 
@@ -213,7 +275,7 @@ run({
 				LJ...
 				`,
 				expected: 8,
-			}
+			},
 		],
 		solution: part1,
 	},
@@ -276,9 +338,9 @@ run({
 				L7JLJL-JLJLJL--JLJ.L
 				`,
 				expected: 10,
-			}
+			},
 		],
 		solution: part2,
 	},
-	trimTestInputs: true
+	trimTestInputs: true,
 });

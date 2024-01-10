@@ -14,4 +14,4 @@ Both parts: 72.318ms
 
 ## Notes
 
-HyperNeutrino to the [rescue](https://youtu.be/9UOMZSL0JTg?list=PLnNm9syGLD3zLoIGWeHfnEekEKxPKLivw&t=351) again for part 2.  Too much math for my brain.
+HyperNeutrino to the [rescue](https://youtu.be/9UOMZSL0JTg?list=PLnNm9syGLD3zLoIGWeHfnEekEKxPKLivw&t=351) again for part 2. Too much math for my brain.

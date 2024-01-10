@@ -30,5 +30,5 @@
  *
  */
 
-
-export const parseLines = (rawInput: string): Array<string> => rawInput.split("\n");
+export const parseLines = (rawInput: string): Array<string> =>
+	rawInput.split("\n");
