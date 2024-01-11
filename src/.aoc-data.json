@@ -1105,17 +1105,17 @@
             "solved": true,
             "result": "2238",
             "attempts": [],
-            "time": 982.4999
+            "time": 10.1934
           },
           "part2": {
             "solved": true,
-            "result": "4954",
+            "result": "6398",
             "attempts": [
               "4954",
               "6563",
               "6562"
             ],
-            "time": 1608.723
+            "time": 3287.0155
           },
           "title": "A Long Walk"
         },
