@@ -1185,22 +1185,26 @@
           }
         },
         {
-          "title": null,
+          "title": "Mull It Over",
           "part1": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
+            "solved": true,
+            "result": "178538786",
+            "attempts": [
+              "32677513"
+            ],
+            "time": 0.5089
           },
           "part2": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
+            "solved": true,
+            "result": "102467299",
+            "attempts": [
+              "107519039"
+            ],
+            "time": 0.356
           }
         },
         {
-          "title": null,
+          "title": "Ceres Search",
           "part1": {
             "solved": false,
             "result": null,
