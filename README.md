@@ -6,7 +6,7 @@ https://badgen.net/help#generators
 https://dev.to/this-is-learning/advent-of-code-automation-for-javascripttypescript-4111
 -->
 
-[![AoC](https://badgen.net/badge/AoC/2023/blue)](https://adventofcode.com/2023)
+[![AoC](https://badgen.net/badge/AoC/2024/blue)](https://adventofcode.com/2024)
 [![Node](https://badgen.net/badge/Node/v16.13.0+/blue)](https://nodejs.org/en/download/)
 ![Language](https://badgen.net/badge/Language/TypeScript/blue)
 [![Template](https://badgen.net/badge/Template/aocrunner/blue)](https://github.com/caderek/aocrunner)
