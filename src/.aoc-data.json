@@ -1160,28 +1160,28 @@
             "solved": true,
             "result": "3714264",
             "attempts": [],
-            "time": 3.7412
+            "time": 0.9225
           },
           "part2": {
             "solved": true,
             "result": "18805872",
             "attempts": [],
-            "time": 3.4579
+            "time": 1.421
           }
         },
         {
-          "title": null,
+          "title": "Red-Nosed Reports",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "202",
             "attempts": [],
-            "time": null
+            "time": 1.5304
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "271",
             "attempts": [],
-            "time": null
+            "time": 2.8589
           }
         },
         {

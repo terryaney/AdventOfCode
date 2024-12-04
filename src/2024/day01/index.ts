@@ -3,7 +3,7 @@ import * as util from "../../utils/index.js";
 
 const parseInput = (rawInput: string) => {
 	const lines = util.parseLines(rawInput);
-	console.log(lines);
+	// console.log(lines);
 	return lines;
 };
 
@@ -53,7 +53,7 @@ const part1 = (rawInput: string) => solve(rawInput, true);
 const part2 = (rawInput: string) => solve(rawInput, false);
 
 run({
-	onlyTests: false,
+	onlyTests: true,
 	part1: {
 		tests: [
 			{

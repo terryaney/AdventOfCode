@@ -7,7 +7,7 @@
 <!--SOLUTIONS-->
 
 [![Day](https://badgen.net/badge/01/%E2%98%85%E2%98%85/green)](day01)
-![Day](https://badgen.net/badge/02/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/02/%E2%98%85%E2%98%85/green)](day02)
 ![Day](https://badgen.net/badge/03/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/04/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/05/%E2%98%86%E2%98%86/gray)
@@ -44,16 +44,16 @@ _Click a badge to go to the specific day._
 
 ```
 Day 01 - Historian Hysteria
-Time part 1: 3.741ms
-Time part 2: 3.458ms
-Both parts: 7.199ms
+Time part 1: 0.922ms
+Time part 2: 1.421ms
+Both parts: 2.344ms
 ```
 
 ```
-Day 02
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 02 - Red-Nosed Reports
+Time part 1: 1.53ms
+Time part 2: 2.859ms
+Both parts: 4.389ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 2/50
-Total time: 7.199ms
+Total stars: 4/50
+Total time: 6.733ms
 ```
 
 <!--/RESULTS-->
