@@ -26,7 +26,7 @@ run({
 				input: `
 				{testData}
 				`,
-				expected: 0,
+				expected: {expected}
 			},
 		],
 		solution: part1,

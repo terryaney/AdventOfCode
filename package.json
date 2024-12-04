@@ -7,7 +7,7 @@
     "start": "aoc-automation day",
     "build": "aoc-automation build",
     "format": "prettier -w src",
-    "update:readme": "aoc-automation update:readme"
+    "update-readme": "aoc-automation update:readme"
   },
   "keywords": [
     "aoc"
@@ -16,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.11.6",
-    "aoc-automation": "^2.0.1",
+    "aoc-automation": "^2.0.3",
     "mathjs": "^12.2.1",
     "prettier": "^2.8.0"
   },

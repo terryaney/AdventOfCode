@@ -1155,18 +1155,18 @@
       "year": 2024,
       "days": [
         {
-          "title": null,
+          "title": "Historian Hysteria",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "3714264",
             "attempts": [],
-            "time": null
+            "time": 3.7412
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "18805872",
             "attempts": [],
-            "time": null
+            "time": 3.4579
           }
         },
         {
