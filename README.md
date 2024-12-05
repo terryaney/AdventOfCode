@@ -11,10 +11,6 @@ https://dev.to/this-is-learning/advent-of-code-automation-for-javascripttypescri
 ![Language](https://badgen.net/badge/Language/TypeScript/blue)
 [![Template](https://badgen.net/badge/Template/aoc-automation/blue)](https://github.com/terryaney/aoc-automation)
 
-## My Runner To Do
-
-1. index.ts at aocrunner root has a run() that takes a file name, need to figure out how to parse year
-
 ## Years
 
 <!--SOLUTIONS-->
