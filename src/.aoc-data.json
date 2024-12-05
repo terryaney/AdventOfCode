@@ -1206,16 +1206,16 @@
         {
           "title": "Ceres Search",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "2567",
             "attempts": [],
-            "time": null
+            "time": 4.5708
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "2029",
             "attempts": [],
-            "time": null
+            "time": 9.4937
           }
         },
         {
