@@ -1219,18 +1219,18 @@
           }
         },
         {
-          "title": null,
+          "title": "Print Queue",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "5091",
             "attempts": [],
-            "time": null
+            "time": 1.686
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "4681",
             "attempts": [],
-            "time": null
+            "time": 2.5526
           }
         },
         {

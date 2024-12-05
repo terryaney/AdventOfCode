@@ -19,7 +19,7 @@ https://dev.to/this-is-learning/advent-of-code-automation-for-javascripttypescri
 
 <!--SOLUTIONS-->
 
-[![Year](https://badgen.net/badge/2024/★★★★⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒/gray?icon=typescript&labelColor=blue&scale=1.3)](src/2024)  
+[![Year](https://badgen.net/badge/2024/★★★★★⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒/gray?icon=typescript&labelColor=blue&scale=1.3)](src/2024)  
 [![Year](https://badgen.net/badge/2023/✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨/green?icon=typescript&labelColor=blue&scale=1.3)](src/2023)  
 [![Year](https://badgen.net/badge/2016/★⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒/gray?icon=typescript&labelColor=blue&scale=1.3)](src/2016)  
 [![Year](https://badgen.net/badge/2015/★★⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒⭒/gray?icon=typescript&labelColor=blue&scale=1.3)](src/2015)  
@@ -77,8 +77,8 @@ npm start 2023 1
 
 ```
 Year 2024
-Total stars: 8/50
-Total time: 21.662ms
+Total stars: 10/50
+Total time: 19.347ms
 ```
 
 ```

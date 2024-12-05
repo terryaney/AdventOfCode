@@ -10,7 +10,7 @@
 [![Day](https://badgen.net/badge/02/%E2%98%85%E2%98%85/green)](day02)
 [![Day](https://badgen.net/badge/03/%E2%98%85%E2%98%85/green)](day03)
 [![Day](https://badgen.net/badge/04/%E2%98%85%E2%98%85/green)](day04)
-![Day](https://badgen.net/badge/05/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/05/%E2%98%85%E2%98%85/green)](day05)
 ![Day](https://badgen.net/badge/06/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/07/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/gray)
@@ -65,16 +65,16 @@ Both parts: 0.865ms
 
 ```
 Day 04 - Ceres Search
-Time part 1: 4.571ms
-Time part 2: 9.494ms
-Both parts: 14.065ms
+Time part 1: 6.263ms
+Time part 2: 1.248ms
+Both parts: 7.511ms
 ```
 
 ```
-Day 05
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 05 - Print Queue
+Time part 1: 1.686ms
+Time part 2: 2.553ms
+Both parts: 4.239ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 8/50
-Total time: 21.662ms
+Total stars: 10/50
+Total time: 19.347ms
 ```
 
 <!--/RESULTS-->
