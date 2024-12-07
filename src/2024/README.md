@@ -11,7 +11,7 @@
 [![Day](https://badgen.net/badge/03/%E2%98%85%E2%98%85/green)](day03)
 [![Day](https://badgen.net/badge/04/%E2%98%85%E2%98%85/green)](day04)
 [![Day](https://badgen.net/badge/05/%E2%98%85%E2%98%85/green)](day05)
-![Day](https://badgen.net/badge/06/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/06/%E2%98%85%E2%98%85/green)](day06)
 ![Day](https://badgen.net/badge/07/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/09/%E2%98%86%E2%98%86/gray)
@@ -72,16 +72,16 @@ Both parts: 7.511ms
 
 ```
 Day 05 - Print Queue
-Time part 1: 1.686ms
-Time part 2: 2.553ms
-Both parts: 4.239ms
+Time part 1: 1.823ms
+Time part 2: 3.154ms
+Both parts: 4.977ms
 ```
 
 ```
-Day 06
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 06 - Guard Gallivant
+Time part 1: 4.242ms
+Time part 2: 2911.305ms
+Both parts: 2915.547ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 10/50
-Total time: 19.347ms
+Total stars: 12/50
+Total time: 2935.633ms
 ```
 
 <!--/RESULTS-->
