@@ -12,6 +12,29 @@ const parseInput = (rawInput: string) => {
 
 const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 	const equations = parseInput(rawInput);
+	for (const equation of equations) {
+		equation.valid = isCorrect(equation.result, equation.values, !isPart1);
+	}
+	return equations.filter(e => e.valid).reduce((acc, e) => acc + e.result, 0);
+}
+
+const isCorrect = (result: number, values: number[], allowConcat: boolean): boolean => {
+	if (values.length === 1) return result == values[0];
+	
+	const last = values[values.length - 1];
+	
+	if (result % last == 0 && isCorrect(result / last, values.slice(0, values.length - 1), allowConcat)) return true;
+	if (result > last && isCorrect(result - last, values.slice(0, values.length - 1), allowConcat)) return true;
+
+	const resultString = result.toString();
+	const lastString = last.toString();
+	if (allowConcat && resultString.length > lastString.length && resultString.endsWith(lastString) && isCorrect(parseInt(resultString.substring(0, resultString.length - lastString.length)), values.slice(0, values.length - 1), allowConcat)) return true;
+
+	return false;
+}
+
+const solveMine = (rawInput: string, isPart1: boolean, testName?: string) => {
+	const equations = parseInput(rawInput);
 
 	if (false && testName != undefined) {
 		console.log("");

@@ -7,14 +7,16 @@ Task description: [link](https://adventofcode.com/2024/day/7)
 ## Results
 
 ```
-Time part 1: 47.939ms
-Time part 2: 5299.224ms
-Both parts: 5347.163ms
+Time part 1: 4.578ms
+Time part 2: 5.387ms
+Both parts: 9.965ms
 ```
 
 ## Notes
 
-I didn't read story properly and assumed operator precedence and wrote that first.  Just putting here for reference.
+I re-wrote after listening to HyperNeutrino's algorithm.  Since left to right order always, can go reverse and do some simply calculations with recursive function to solve.  Went from ~5.5 sec to 10ms.
+
+In my solution, (now `solveOld`), I didn't read story properly and assumed operator precedence and wrote that first.  Just putting here for reference.
 
 ```javascript
 for (const permutation of permutations) {

@@ -86,9 +86,9 @@ Both parts: 2915.547ms
 
 ```
 Day 07 - Bridge Repair
-Time part 1: 47.939ms
-Time part 2: 5299.224ms
-Both parts: 5347.163ms
+Time part 1: 4.578ms
+Time part 2: 5.387ms
+Both parts: 9.965ms
 ```
 
 ```
@@ -219,7 +219,7 @@ Both parts: -
 
 ```
 Total stars: 14/50
-Total time: 8282.796ms
+Total time: 2945.598ms
 ```
 
 <!--/RESULTS-->
