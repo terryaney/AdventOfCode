@@ -12,7 +12,7 @@
 [![Day](https://badgen.net/badge/04/%E2%98%85%E2%98%85/green)](day04)
 [![Day](https://badgen.net/badge/05/%E2%98%85%E2%98%85/green)](day05)
 [![Day](https://badgen.net/badge/06/%E2%98%85%E2%98%85/green)](day06)
-![Day](https://badgen.net/badge/07/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/07/%E2%98%85%E2%98%85/green)](day07)
 ![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/09/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/10/%E2%98%86%E2%98%86/gray)
@@ -85,10 +85,10 @@ Both parts: 2915.547ms
 ```
 
 ```
-Day 07
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 07 - Bridge Repair
+Time part 1: 47.939ms
+Time part 2: 5299.224ms
+Both parts: 5347.163ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 12/50
-Total time: 2935.633ms
+Total stars: 14/50
+Total time: 8282.796ms
 ```
 
 <!--/RESULTS-->

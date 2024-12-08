@@ -1251,18 +1251,18 @@
           }
         },
         {
-          "title": null,
+          "title": "Bridge Repair",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "28730327770375",
             "attempts": [],
-            "time": null
+            "time": 47.9391
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "424977609625985",
             "attempts": [],
-            "time": null
+            "time": 5299.224
           }
         },
         {
