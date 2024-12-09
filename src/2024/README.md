@@ -13,7 +13,7 @@
 [![Day](https://badgen.net/badge/05/%E2%98%85%E2%98%85/green)](day05)
 [![Day](https://badgen.net/badge/06/%E2%98%85%E2%98%85/green)](day06)
 [![Day](https://badgen.net/badge/07/%E2%98%85%E2%98%85/green)](day07)
-![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/08/%E2%98%85%E2%98%85/green)](day08)
 ![Day](https://badgen.net/badge/09/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/10/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/11/%E2%98%86%E2%98%86/gray)
@@ -92,10 +92,10 @@ Both parts: 9.965ms
 ```
 
 ```
-Day 08
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 08 - Resonant Collinearity
+Time part 1: 0.348ms
+Time part 2: 0.624ms
+Both parts: 0.972ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 14/50
-Total time: 2945.598ms
+Total stars: 16/50
+Total time: 2946.57ms
 ```
 
 <!--/RESULTS-->
