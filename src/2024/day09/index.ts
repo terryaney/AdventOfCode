@@ -1,29 +1,6 @@
 import run from "aoc-automation";
 import * as util from "../../utils/index.js";
 
-const parseInput = (rawInput: string) => {
-	const diskMap = util.parseLines(rawInput)[0];
-	const segments: Array<{ size: number, available: number, fileBlocks: Array<{id: number, size: number, isEmpty: boolean}> }> = [];
-	
-	for (let i = 0; i < diskMap.length; i += 2) {
-		const id = i / 2;
-		const size = parseInt(diskMap[i]);
-		const fileBlocks = [{ id, size, isEmpty: false }];
-		const available = i + 1 < diskMap.length ? parseInt(diskMap[i + 1]) : 0;
-		segments.push({ size: size + available, available, fileBlocks });
-	}
-
-	return segments;
-};
-
-const logSegments = (segments: Array<{ size: number, available: number, fileBlocks: Array<{ id: number, size: number, isEmpty: boolean }> }>) => {
-	console.log(
-		segments.map((s, i) => {
-			const emptyBlocks = s.fileBlocks.reduce((acc, b) => acc + (b.isEmpty ? b.size : 0), 0);
-			return `${s.fileBlocks.map(b => `${(b.isEmpty ? "." : b.id.toString()).repeat(b.size)}`).join("")}${".".repeat(s.available - emptyBlocks)}`;
-		}).join(""));
-}
-
 const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 	const segments = parseInput(rawInput);
 
@@ -104,6 +81,29 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 
 	return checkSum;
 };
+
+const parseInput = (rawInput: string) => {
+	const diskMap = util.parseLines(rawInput)[0];
+	const segments: Array<{ size: number, available: number, fileBlocks: Array<{id: number, size: number, isEmpty: boolean}> }> = [];
+	
+	for (let i = 0; i < diskMap.length; i += 2) {
+		const id = i / 2;
+		const size = parseInt(diskMap[i]);
+		const fileBlocks = [{ id, size, isEmpty: false }];
+		const available = i + 1 < diskMap.length ? parseInt(diskMap[i + 1]) : 0;
+		segments.push({ size: size + available, available, fileBlocks });
+	}
+
+	return segments;
+};
+
+const logSegments = (segments: Array<{ size: number, available: number, fileBlocks: Array<{ id: number, size: number, isEmpty: boolean }> }>) => {
+	console.log(
+		segments.map((s, i) => {
+			const emptyBlocks = s.fileBlocks.reduce((acc, b) => acc + (b.isEmpty ? b.size : 0), 0);
+			return `${s.fileBlocks.map(b => `${(b.isEmpty ? "." : b.id.toString()).repeat(b.size)}`).join("")}${".".repeat(s.available - emptyBlocks)}`;
+		}).join(""));
+}
 
 const part1 = (rawInput: string, testName?: string) => solve(rawInput, true, testName);
 const part2 = (rawInput: string, testName?: string) => solve(rawInput, false, testName);
