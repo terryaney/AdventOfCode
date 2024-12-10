@@ -14,4 +14,6 @@ Both parts: 70.033ms
 
 ## Notes
 
-...
+For Part 2, I kind of overdid it here given problem.  Could have done a simpler structure and not kept the file map intact since an entire file moves from right to left, I didn't have to try and maintain a newly created empty gap, but I did.  Run time of 60ms seems a bit extreme, but I don't have a reference to any other competitors to know where it stands.
+
+I'm happy with the readability of the solution even given the performance.
