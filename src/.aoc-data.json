@@ -1283,18 +1283,18 @@
           }
         },
         {
-          "title": null,
+          "title": "Disk Fragmenter",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "6337921897505",
             "attempts": [],
-            "time": null
+            "time": 10.8608
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "6362722604045",
             "attempts": [],
-            "time": null
+            "time": 59.1722
           }
         },
         {
