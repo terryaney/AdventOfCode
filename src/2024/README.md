@@ -15,7 +15,7 @@
 [![Day](https://badgen.net/badge/07/%E2%98%85%E2%98%85/green)](day07)
 [![Day](https://badgen.net/badge/08/%E2%98%85%E2%98%85/green)](day08)
 [![Day](https://badgen.net/badge/09/%E2%98%85%E2%98%85/green)](day09)
-![Day](https://badgen.net/badge/10/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/10/%E2%98%85%E2%98%85/green)](day10)
 ![Day](https://badgen.net/badge/11/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/12/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/13/%E2%98%86%E2%98%86/gray)
@@ -100,16 +100,16 @@ Both parts: 0.972ms
 
 ```
 Day 09 - Disk Fragmenter
-Time part 1: 10.861ms
-Time part 2: 59.172ms
-Both parts: 70.033ms
+Time part 1: 10.775ms
+Time part 2: 60.81ms
+Both parts: 71.585ms
 ```
 
 ```
-Day 10
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 10 - Hoof It
+Time part 1: 5.37ms
+Time part 2: 2.843ms
+Both parts: 8.213ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 18/50
-Total time: 3016.603ms
+Total stars: 20/50
+Total time: 3026.368ms
 ```
 
 <!--/RESULTS-->

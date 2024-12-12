@@ -1298,18 +1298,18 @@
           }
         },
         {
-          "title": null,
+          "title": "Hoof It",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "607",
             "attempts": [],
-            "time": null
+            "time": 5.485
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "1384",
             "attempts": [],
-            "time": null
+            "time": 3.201
           }
         },
         {
