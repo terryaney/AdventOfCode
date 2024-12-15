@@ -1313,18 +1313,18 @@
           }
         },
         {
-          "title": null,
+          "title": "Plutonian Pebbles",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "200446",
             "attempts": [],
-            "time": null
+            "time": 2.1489
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "238317474993392",
             "attempts": [],
-            "time": null
+            "time": 79.7339
           }
         },
         {

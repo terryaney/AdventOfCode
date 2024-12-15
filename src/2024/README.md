@@ -16,7 +16,7 @@
 [![Day](https://badgen.net/badge/08/%E2%98%85%E2%98%85/green)](day08)
 [![Day](https://badgen.net/badge/09/%E2%98%85%E2%98%85/green)](day09)
 [![Day](https://badgen.net/badge/10/%E2%98%85%E2%98%85/green)](day10)
-![Day](https://badgen.net/badge/11/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/11/%E2%98%85%E2%98%85/green)](day11)
 ![Day](https://badgen.net/badge/12/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/13/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/14/%E2%98%86%E2%98%86/gray)
@@ -107,16 +107,16 @@ Both parts: 71.585ms
 
 ```
 Day 10 - Hoof It
-Time part 1: 5.37ms
-Time part 2: 2.843ms
-Both parts: 8.213ms
+Time part 1: 5.485ms
+Time part 2: 3.201ms
+Both parts: 8.686ms
 ```
 
 ```
-Day 11
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 11 - Plutonian Pebbles
+Time part 1: 2.149ms
+Time part 2: 79.734ms
+Both parts: 81.883ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 20/50
-Total time: 3026.368ms
+Total stars: 22/50
+Total time: 3108.724ms
 ```
 
 <!--/RESULTS-->
