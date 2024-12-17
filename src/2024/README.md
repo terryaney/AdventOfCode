@@ -18,7 +18,7 @@
 [![Day](https://badgen.net/badge/10/%E2%98%85%E2%98%85/green)](day10)
 [![Day](https://badgen.net/badge/11/%E2%98%85%E2%98%85/green)](day11)
 [![Day](https://badgen.net/badge/12/%E2%98%85%E2%98%85/green)](day12)
-![Day](https://badgen.net/badge/13/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/13/%E2%98%85%E2%98%85/green)](day13)
 ![Day](https://badgen.net/badge/14/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/15/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/16/%E2%98%86%E2%98%86/gray)
@@ -127,10 +127,10 @@ Both parts: 136.738ms
 ```
 
 ```
-Day 13
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 13 - Claw Contraption
+Time part 1: 1.26ms
+Time part 2: 1.375ms
+Both parts: 2.635ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 24/50
-Total time: 3203.14ms
+Total stars: 26/50
+Total time: 3205.775ms
 ```
 
 <!--/RESULTS-->

@@ -1343,18 +1343,18 @@
           }
         },
         {
-          "title": null,
+          "title": "Claw Contraption",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "35255",
             "attempts": [],
-            "time": null
+            "time": 1.2601
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "87582154060429",
             "attempts": [],
-            "time": null
+            "time": 1.3754
           }
         },
         {

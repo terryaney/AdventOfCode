@@ -25,7 +25,7 @@ const parseInput = (rawInput: string) => {
 };
 
 const part1 = (rawInput: string, testName?: string) => solve(rawInput, true, testName);
-const part2 = (rawInput: string, testName?: string) => solve(rawInput, false, testName);
+const part2 = (rawInput: string, testName?: string) => 1 == 1 ? 0 : solve(rawInput, false, testName);
 
 run({
 	part1: {
