@@ -3,8 +3,8 @@ import * as util from "../../utils/index.js";
 
 const solve = (rawInput: string, isPart1: boolean) => {
 	const inputGrid = util.parseGrid(rawInput);
-	const rows = inputGrid.length;
-	const cols = inputGrid[0].length;
+	const rows = inputGrid.rows;
+	const cols = inputGrid.cols;
 
 	let wordCounts = 0;
 
@@ -24,7 +24,7 @@ const solve = (rawInput: string, isPart1: boolean) => {
 
 		for (let r = 0; r < rows; r++) {
 			for (let c = 0; c < cols; c++) {
-				if (inputGrid[r][c] != "X") continue;
+				if (inputGrid.points[r][c].value != "X") continue;
 
 				// Saw this in HyperNeutrino...'faster' to type in competitions :)
 				/*
@@ -42,7 +42,7 @@ const solve = (rawInput: string, isPart1: boolean) => {
 						for (let i = 1; i < 4; i++) {
 							const nr = r + dr * i;
 							const nc = c + dc * i;
-							if (inputGrid[nr][nc] !== "XMAS"[i]) {
+							if (inputGrid.points[nr][nc].value !== "XMAS"[i]) {
 								found = false;
 								break;
 							}
@@ -61,10 +61,10 @@ const solve = (rawInput: string, isPart1: boolean) => {
 		// HyperNeutrino's suggestion of searching for "A"
 		for (let r = 1; r < rows - 1; r++) {
 			for (let c = 1; c < cols - 1; c++) {
-				if (inputGrid[r][c] != "A") continue;
+				if (inputGrid.points[r][c].value != "A") continue;
 
-				const leftToRight = inputGrid[r - 1][c - 1] + inputGrid[r + 1][c + 1];
-				const rightToLeft = inputGrid[r - 1][c + 1] + inputGrid[r + 1][c - 1];
+				const leftToRight = inputGrid.points[r - 1][c - 1].value + inputGrid.points[r + 1][c + 1].value;
+				const rightToLeft = inputGrid.points[r - 1][c + 1].value + inputGrid.points[r + 1][c - 1].value;
 
 				if (["MS", "SM"].includes(leftToRight) && ["MS", "SM"].includes(rightToLeft)) {
 					wordCounts++;
@@ -78,8 +78,8 @@ const solve = (rawInput: string, isPart1: boolean) => {
 
 const part2Original = (rawInput: string) => {
 	const inputGrid = util.parseGrid(rawInput);
-	const rows = inputGrid.length;
-	const cols = inputGrid[0].length;
+	const rows = inputGrid.rows;
+	const cols = inputGrid.cols;
 
 	let wordCounts = 0;
 
@@ -104,7 +104,8 @@ const part2Original = (rawInput: string) => {
 
 	for (let r = 0; r < rows; r++) {
 		for (let c = 0; c < cols; c++) {
-			if (inputGrid[r][c] === "M") {
+			const point = inputGrid.points[r][c];
+			if (!point.visited && point.value === "M") {
 				Object.keys(directions).forEach(key => {
 					var direction = directions[key];
 					let found = true;
@@ -112,7 +113,7 @@ const part2Original = (rawInput: string) => {
 					for (let i = 1; i < 3; i++) {
 						const nr = r + direction.movement.dr * i;
 						const nc = c + direction.movement.dc * i;
-						if (nr < 0 || nr >= rows || nc < 0 || nc >= cols || inputGrid[nr][nc] !== "MAS"[i]) {
+						if (nr < 0 || nr >= rows || nc < 0 || nc >= cols || inputGrid.points[nr][nc].value !== "MAS"[i]) {
 							found = false;
 							break;
 						}
@@ -125,7 +126,7 @@ const part2Original = (rawInput: string) => {
 							for (let i = 0; i < 3; i++) {
 								const nr = r + pair.sr + pairDirection.movement.dr * i;
 								const nc = c + pair.sc + pairDirection.movement.dc * i;
-								if (nr < 0 || nr >= rows || nc < 0 || nc >= cols || inputGrid[nr][nc] !== "MAS"[i]) {
+								if (nr < 0 || nr >= rows || nc < 0 || nc >= cols || inputGrid.points[nr][nc].value !== "MAS"[i]) {
 									return false;
 								}
 							}
@@ -144,7 +145,7 @@ const part2Original = (rawInput: string) => {
 					}
 				});
 
-				inputGrid[r][c] = "."; // visited...
+				point.value = "."; // visited...
 			}
 		}
 	}

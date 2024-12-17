@@ -12,9 +12,9 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 		console.log("------");
 	}
 
-	const rows = grid.length;
-	const cols = grid[0].length;
-	const trailheads = grid.flatMap((row, y) => row.map((cell, x) => cell == 0 ? [x, y] : null)).filter(x => x != null) as [number, number][];
+	const rows = grid.rows;
+	const cols = grid.cols;
+	const trailheads = grid.points.flatMap((row, y) => row.map((cell, x) => cell.value == 0 ? [x, y] : null)).filter(x => x != null) as [number, number][];
 	const deltas = util.movementDeltas();
 
 	const key = (x: number, y: number) => `${x},${y}`;
@@ -27,14 +27,14 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 		let summits = 0;
 		while (queue.length > 0) {
 			const [cx, cy] = queue.shift()!;
-			for (const [dx, dy] of deltas) {
-				const nx = cx + dx;
-				const ny = cy + dy;
+			for (const d of deltas) {
+				const nx = cx + d.dx;
+				const ny = cy + d.dy;
 				// in grid
 				if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
 				// one elevation change
-				const nextValue = grid[ny][nx];
-				if (nextValue != grid[cy][cx] + 1) continue;
+				const nextValue = grid.points[ny][nx].value;
+				if (nextValue != grid.points[cy][cx].value + 1) continue;
 
 				const deltaKey = key(nx, ny);
 				if (isPart1 && visited.has(deltaKey)) continue;
@@ -62,8 +62,8 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 };
 
 const parseInput = (rawInput: string) => {
-	const grid = util.parseGrid(rawInput);
-	return grid.map(row => row.map(c => parseInt(c)));
+	const grid = util.parseGrid(rawInput, c => parseInt(c));
+	return grid;
 };
 
 const part1 = (rawInput: string, testName?: string) => solve(rawInput, true, testName);

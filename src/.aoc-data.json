@@ -1209,13 +1209,13 @@
             "solved": true,
             "result": "2567",
             "attempts": [],
-            "time": 6.2626
+            "time": 9.0483
           },
           "part2": {
             "solved": true,
             "result": "2029",
             "attempts": [],
-            "time": 1.2485
+            "time": 2.1361
           }
         },
         {
@@ -1239,7 +1239,7 @@
             "solved": true,
             "result": "5534",
             "attempts": [],
-            "time": 4.2415
+            "time": 7412.1236
           },
           "part2": {
             "solved": true,
@@ -1247,7 +1247,7 @@
             "attempts": [
               "3271"
             ],
-            "time": 2911.3053
+            "time": 6410.0421
           }
         },
         {
@@ -1273,13 +1273,13 @@
             "attempts": [
               "374"
             ],
-            "time": 0.348
+            "time": 0.6471
           },
           "part2": {
             "solved": true,
             "result": "1221",
             "attempts": [],
-            "time": 0.6236
+            "time": 0.7448
           }
         },
         {
@@ -1303,13 +1303,13 @@
             "solved": true,
             "result": "607",
             "attempts": [],
-            "time": 5.485
+            "time": 6.1984
           },
           "part2": {
             "solved": true,
             "result": "1384",
             "attempts": [],
-            "time": 3.201
+            "time": 2.5354
           }
         },
         {
@@ -1330,16 +1330,16 @@
         {
           "title": "Garden Groups",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "35856",
             "attempts": [],
-            "time": null
+            "time": 63.5594
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "953738",
             "attempts": [],
-            "time": null
+            "time": 73.1783
           }
         },
         {

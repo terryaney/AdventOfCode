@@ -17,7 +17,7 @@
 [![Day](https://badgen.net/badge/09/%E2%98%85%E2%98%85/green)](day09)
 [![Day](https://badgen.net/badge/10/%E2%98%85%E2%98%85/green)](day10)
 [![Day](https://badgen.net/badge/11/%E2%98%85%E2%98%85/green)](day11)
-![Day](https://badgen.net/badge/12/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/12/%E2%98%85%E2%98%85/green)](day12)
 ![Day](https://badgen.net/badge/13/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/14/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/15/%E2%98%86%E2%98%86/gray)
@@ -65,9 +65,9 @@ Both parts: 0.865ms
 
 ```
 Day 04 - Ceres Search
-Time part 1: 6.263ms
-Time part 2: 1.248ms
-Both parts: 7.511ms
+Time part 1: 9.048ms
+Time part 2: 2.136ms
+Both parts: 11.184ms
 ```
 
 ```
@@ -79,9 +79,9 @@ Both parts: 4.977ms
 
 ```
 Day 06 - Guard Gallivant
-Time part 1: 4.242ms
-Time part 2: 2911.305ms
-Both parts: 2915.547ms
+Time part 1: 7412.124ms
+Time part 2: 6410.042ms
+Both parts: 13822.166ms
 ```
 
 ```
@@ -93,9 +93,9 @@ Both parts: 9.965ms
 
 ```
 Day 08 - Resonant Collinearity
-Time part 1: 0.348ms
-Time part 2: 0.624ms
-Both parts: 0.972ms
+Time part 1: 0.647ms
+Time part 2: 0.745ms
+Both parts: 1.392ms
 ```
 
 ```
@@ -107,9 +107,9 @@ Both parts: 71.585ms
 
 ```
 Day 10 - Hoof It
-Time part 1: 5.485ms
-Time part 2: 3.201ms
-Both parts: 8.686ms
+Time part 1: 6.198ms
+Time part 2: 2.535ms
+Both parts: 8.734ms
 ```
 
 ```
@@ -120,10 +120,10 @@ Both parts: 81.883ms
 ```
 
 ```
-Day 12
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 12 - Garden Groups
+Time part 1: 63.432ms
+Time part 2: 71.5ms
+Both parts: 134.932ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 22/50
-Total time: 3108.724ms
+Total stars: 24/50
+Total time: 14154.416ms
 ```
 
 <!--/RESULTS-->

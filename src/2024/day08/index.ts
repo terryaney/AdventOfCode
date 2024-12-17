@@ -6,9 +6,9 @@ const parseInput = (rawInput: string) => util.parseGrid(rawInput);
 const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 	const grid = parseInput(rawInput);
 	const frequencies: Record<string, Array<{ x: number, y: number }>> = {};
-	for (let r = 0; r < grid.length; r++) {
-		for (let c = 0; c < grid[r].length; c++) {
-			const cell = grid[r][c];
+	for (let r = 0; r < grid.rows; r++) {
+		for (let c = 0; c < grid.cols; c++) {
+			const cell = grid.points[r][c].value;
 			if (cell !== ".") {
 				if (frequencies[cell] == undefined) {
 					frequencies[cell] = [];
@@ -28,8 +28,8 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 	}
 
 	const antinodes: Set<string> = new Set();
-	const rows = grid.length;
-	const cols = grid[0].length;
+	const rows = grid.rows;
+	const cols = grid.cols;
 	const tryAntinode = (x: number, y: number): boolean => {
 		if (x >= 0 && x < cols && y >= 0 && y < rows) {
 			const key = `${x}, ${y}`;

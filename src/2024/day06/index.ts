@@ -2,27 +2,25 @@ import run from "aoc-automation";
 import * as util from "../../utils/index.js";
 
 const parseInput = (rawInput: string) => {
-	const grid =
-		util.parseGrid(rawInput)
-			.map((row) => row.map((cell) => ({ value: cell, visited: ["<", ">", "^", "v"].includes(cell) })));
+	const grid = util.parseGrid(rawInput, undefined, cell => ["<", ">", "^", "v"].includes(cell));
 	
-	const row = grid.findIndex(r => r.some(c => c.visited));
-	const col = grid[row].findIndex(c => c.visited);
+	const row = grid.points.findIndex(r => r.some(c => c.visited));
+	const col = grid.points[row].findIndex(c => c.visited);
+
 	return {
-		start: { row, col, orientation: grid[row][col].value },
-		rows: grid.length,
-		cols: grid[0].length,
-		cells: grid,
+		start: { row, col, orientation: grid.points[row][col].value },
+		grid
 	};
 };
 
 const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
-	const grid = parseInput(rawInput);
-	if (false && testName != undefined) {
+	const { start, grid } = parseInput(rawInput);
+
+	if (testName != undefined) {
 		console.log("");
 		console.log("------");
 		console.log(`${testName} Input`);
-		console.log(grid);
+		util.logGrid(grid);
 		console.log("------");
 	}
 
@@ -52,22 +50,22 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 	}
 
 	const walk = (markVisit: boolean = true) => {
-		let row = grid.start.row;
-		let col = grid.start.col;
-		let orientation = grid.start.orientation;
+		let row = start.row;
+		let col = start.col;
+		let orientation = start.orientation;
 		
 		const seen = new Set<string>();
 		seen.add(`${row},${col},${!markVisit ? orientation : ''}`);
 		
 		let moveTo = move(orientation, row, col);
 		while (moveTo != undefined) {
-			if (grid.cells[moveTo.dr + row][moveTo.dc + col].value === "#") {
+			if (grid.points[moveTo.dr + row][moveTo.dc + col].value === "#") {
 				orientation = turn(orientation);
 			} else {
 				row += moveTo.dr;
 				col += moveTo.dc;
 				if (markVisit) {
-					grid.cells[row][col].visited = true;
+					grid.points[row][col].visited = true;
 				}
 				const key = `${row},${col},${!markVisit ? orientation : ''}`;
 				if (!markVisit && seen.has(key)) return undefined;
@@ -88,7 +86,7 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 		// brute force...
 		for (let r = 0; r < grid.rows; r++) {
 			for (let c = 0; c < grid.cols; c++) {
-				const cell = grid.cells[r][c];
+				const cell = grid.points[r][c];
 				if (!cell.visited || cell.value != ".") continue;
 
 				cell.value = "#";
