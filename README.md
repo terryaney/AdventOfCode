@@ -74,7 +74,7 @@ npm start 2023 1
 ```
 Year 2024
 Total stars: 24/50
-Total time: 14154.416ms
+Total time: 3203.14ms
 ```
 
 ```

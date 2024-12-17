@@ -65,9 +65,9 @@ Both parts: 0.865ms
 
 ```
 Day 04 - Ceres Search
-Time part 1: 9.048ms
-Time part 2: 2.136ms
-Both parts: 11.184ms
+Time part 1: 9.538ms
+Time part 2: 2.14ms
+Both parts: 11.678ms
 ```
 
 ```
@@ -79,9 +79,9 @@ Both parts: 4.977ms
 
 ```
 Day 06 - Guard Gallivant
-Time part 1: 7412.124ms
-Time part 2: 6410.042ms
-Both parts: 13822.166ms
+Time part 1: 5.447ms
+Time part 2: 2863.142ms
+Both parts: 2868.589ms
 ```
 
 ```
@@ -121,9 +121,9 @@ Both parts: 81.883ms
 
 ```
 Day 12 - Garden Groups
-Time part 1: 63.432ms
-Time part 2: 71.5ms
-Both parts: 134.932ms
+Time part 1: 63.559ms
+Time part 2: 73.178ms
+Both parts: 136.738ms
 ```
 
 ```
@@ -219,7 +219,7 @@ Both parts: -
 
 ```
 Total stars: 24/50
-Total time: 14154.416ms
+Total time: 3203.14ms
 ```
 
 <!--/RESULTS-->
