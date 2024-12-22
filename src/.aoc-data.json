@@ -1358,18 +1358,18 @@
           }
         },
         {
-          "title": null,
+          "title": "Restroom Redoubt",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "211773366",
             "attempts": [],
-            "time": null
+            "time": 0.8414
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "7344",
             "attempts": [],
-            "time": null
+            "time": 217.0417
           }
         },
         {
