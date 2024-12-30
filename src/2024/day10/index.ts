@@ -15,7 +15,7 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 	const rows = grid.rows;
 	const cols = grid.cols;
 	const trailheads = grid.points.flatMap((row, y) => row.map((cell, x) => cell.value == 0 ? [x, y] : null)).filter(x => x != null) as [number, number][];
-	const deltas = util.movementDeltas();
+	const deltas = util.Movement.Directions;
 
 	const key = (x: number, y: number) => `${x},${y}`;
 

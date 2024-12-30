@@ -13,12 +13,12 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 		console.log("------");
 	}
 
-	const deltas = util.movementDeltas();
+	const deltas = util.Movement.Directions;
 	const deltaMap: Record<string, util.MovementDelta> = {
-		">": deltas.find(d => d.name === "E")!,
-		"<": deltas.find(d => d.name === "W")!,
-		"^": deltas.find(d => d.name === "N")!,
-		"v": deltas.find(d => d.name === "S")!
+		">": deltas.find(d => d.direction === "E")!,
+		"<": deltas.find(d => d.direction === "W")!,
+		"^": deltas.find(d => d.direction === "N")!,
+		"v": deltas.find(d => d.direction === "S")!
 	};
 
 

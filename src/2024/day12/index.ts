@@ -12,7 +12,7 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 		console.log("------");
 	}
 
-	const directions = util.movementDeltas();
+	const directions = util.Movement.Directions;
 	const regions = findRegions(grid, directions);
 
 	const getKey = (s: PointWithSides<string>, d: string) => `${s.x},${s.y},${d}`;
@@ -82,14 +82,14 @@ const findRegions = (grid: GridWithSides<string>, directions: util.MovementDelta
 					const ny = currentPlot.y + d.dy;
 		
 					if (!grid.isInside([nx, ny])) {
-						currentPlot.sides.push(d.name);
+						currentPlot.sides.push(d.direction);
 						continue;
 					}
 		
 					const neighbor = grid.points[ny][nx]!;
 					
 					if (neighbor.value != start.value) {
-						currentPlot.sides.push(d.name);
+						currentPlot.sides.push(d.direction);
 						continue;
 					}
 

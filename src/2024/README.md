@@ -21,7 +21,7 @@
 [![Day](https://badgen.net/badge/13/%E2%98%85%E2%98%85/green)](day13)
 [![Day](https://badgen.net/badge/14/%E2%98%85%E2%98%85/green)](day14)
 [![Day](https://badgen.net/badge/15/%E2%98%85%E2%98%85/green)](day15)
-![Day](https://badgen.net/badge/16/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/16/%E2%98%85%E2%98%85/green)](day16)
 ![Day](https://badgen.net/badge/17/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/18/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/19/%E2%98%86%E2%98%86/gray)
@@ -148,10 +148,10 @@ Both parts: 17.735ms
 ```
 
 ```
-Day 16
-Time part 1: -
-Time part 2: -
-Both parts: -
+Day 16 - Reindeer Maze
+Time part 1: 119.267ms
+Time part 2: 139.733ms
+Both parts: 259ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 30/50
-Total time: 3441.393ms
+Total stars: 32/50
+Total time: 3700.394ms
 ```
 
 <!--/RESULTS-->
