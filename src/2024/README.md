@@ -149,9 +149,9 @@ Both parts: 17.735ms
 
 ```
 Day 16 - Reindeer Maze
-Time part 1: 119.267ms
-Time part 2: 139.733ms
-Both parts: 259ms
+Time part 1: 95.937ms
+Time part 2: 107.516ms
+Both parts: 203.454ms
 ```
 
 ```
@@ -219,7 +219,7 @@ Both parts: -
 
 ```
 Total stars: 32/50
-Total time: 3700.394ms
+Total time: 3644.847ms
 ```
 
 <!--/RESULTS-->

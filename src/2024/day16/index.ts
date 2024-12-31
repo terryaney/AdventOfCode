@@ -4,7 +4,7 @@ import * as util from "../../utils/index.js";
 const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 	const grid = parseInput(rawInput);
 
-	if (testName != undefined) {
+	if (false && testName != undefined) {
 		console.log("");
 		console.log("------");
 		console.log(`${testName} Input`);
@@ -25,7 +25,7 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 		!isPart1
 	)!;
 
-	if (testName != undefined && !isPart1) {
+	if (false && testName != undefined && !isPart1) {
 		console.log("");
 		const finalGrid = parseInput(rawInput);	
 		for (let i = 0; i < allPaths.length; i++) {
@@ -42,7 +42,6 @@ const solve = (rawInput: string, isPart1: boolean, testName?: string) => {
 
 	if (isPart1) return allPaths[0].totalCost;
 
-	console.log(`Found ${allPaths.length} paths`);
 	const points = new Set<string>();
 	for (let i = 0; i < allPaths.length; i++) {
 		for (let j = 0; j < allPaths[i].length; j++) {
