@@ -1363,13 +1363,13 @@
             "solved": true,
             "result": "211773366",
             "attempts": [],
-            "time": 0.8414
+            "time": 1.3881
           },
           "part2": {
             "solved": true,
             "result": "7344",
             "attempts": [],
-            "time": 217.0417
+            "time": 233.0646
           }
         },
         {
@@ -1393,7 +1393,7 @@
             "solved": true,
             "result": "95476",
             "attempts": [],
-            "time": 95.9372
+            "time": 97.1899
           },
           "part2": {
             "solved": true,
@@ -1402,11 +1402,60 @@
               "490",
               "519"
             ],
-            "time": 107.5164
+            "time": 122.602
           }
         },
         {
-          "title": null,
+          "title": "Chronospatial Computer",
+          "part1": {
+            "solved": true,
+            "result": "1,0,2,0,5,7,2,1,3",
+            "attempts": [
+              "5,7,3,1,5,1,7,7,3"
+            ],
+            "time": 0.1437
+          },
+          "part2": {
+            "solved": true,
+            "result": "265652340990875",
+            "attempts": [
+              "265652340990875"
+            ],
+            "time": 0.5184
+          }
+        },
+        {
+          "title": "RAM Run",
+          "part1": {
+            "solved": true,
+            "result": "432",
+            "attempts": [],
+            "time": 66.6522
+          },
+          "part2": {
+            "solved": true,
+            "result": "56,27",
+            "attempts": [],
+            "time": 16.7292
+          }
+        },
+        {
+          "title": "Linen Layout",
+          "part1": {
+            "solved": true,
+            "result": "236",
+            "attempts": [],
+            "time": 10.5961
+          },
+          "part2": {
+            "solved": true,
+            "result": "643685981770598",
+            "attempts": [],
+            "time": 9.1128
+          }
+        },
+        {
+          "title": "Race Condition",
           "part1": {
             "solved": false,
             "result": null,
@@ -1421,7 +1470,7 @@
           }
         },
         {
-          "title": null,
+          "title": "Keypad Conundrum",
           "part1": {
             "solved": false,
             "result": null,
@@ -1436,7 +1485,7 @@
           }
         },
         {
-          "title": null,
+          "title": "Monkey Market",
           "part1": {
             "solved": false,
             "result": null,
@@ -1451,7 +1500,7 @@
           }
         },
         {
-          "title": null,
+          "title": "LAN Party",
           "part1": {
             "solved": false,
             "result": null,
@@ -1466,7 +1515,7 @@
           }
         },
         {
-          "title": null,
+          "title": "Crossed Wires",
           "part1": {
             "solved": false,
             "result": null,
@@ -1481,52 +1530,7 @@
           }
         },
         {
-          "title": null,
-          "part1": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
-          },
-          "part2": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
-          }
-        },
-        {
-          "title": null,
-          "part1": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
-          },
-          "part2": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
-          }
-        },
-        {
-          "title": null,
-          "part1": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
-          },
-          "part2": {
-            "solved": false,
-            "result": null,
-            "attempts": [],
-            "time": null
-          }
-        },
-        {
-          "title": null,
+          "title": "Code Chronicle",
           "part1": {
             "solved": false,
             "result": null,

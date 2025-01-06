@@ -22,9 +22,9 @@
 [![Day](https://badgen.net/badge/14/%E2%98%85%E2%98%85/green)](day14)
 [![Day](https://badgen.net/badge/15/%E2%98%85%E2%98%85/green)](day15)
 [![Day](https://badgen.net/badge/16/%E2%98%85%E2%98%85/green)](day16)
-![Day](https://badgen.net/badge/17/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/18/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/19/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/17/%E2%98%85%E2%98%85/green)](day17)
+[![Day](https://badgen.net/badge/18/%E2%98%85%E2%98%85/green)](day18)
+[![Day](https://badgen.net/badge/19/%E2%98%85%E2%98%85/green)](day19)
 ![Day](https://badgen.net/badge/20/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/21/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/22/%E2%98%86%E2%98%86/gray)
@@ -135,9 +135,9 @@ Both parts: 2.635ms
 
 ```
 Day 14 - Restroom Redoubt
-Time part 1: 0.841ms
-Time part 2: 217.042ms
-Both parts: 217.883ms
+Time part 1: 1.388ms
+Time part 2: 233.065ms
+Both parts: 234.453ms
 ```
 
 ```
@@ -149,77 +149,77 @@ Both parts: 17.735ms
 
 ```
 Day 16 - Reindeer Maze
-Time part 1: 95.937ms
-Time part 2: 107.516ms
-Both parts: 203.454ms
+Time part 1: 97.19ms
+Time part 2: 122.602ms
+Both parts: 219.792ms
 ```
 
 ```
-Day 17
+Day 17 - Chronospatial Computer
+Time part 1: 0.144ms
+Time part 2: 0.518ms
+Both parts: 0.662ms
+```
+
+```
+Day 18 - RAM Run
+Time part 1: 66.652ms
+Time part 2: 16.729ms
+Both parts: 83.381ms
+```
+
+```
+Day 19 - Linen Layout
+Time part 1: 10.596ms
+Time part 2: 9.113ms
+Both parts: 19.709ms
+```
+
+```
+Day 20 - Race Condition
 Time part 1: -
 Time part 2: -
 Both parts: -
 ```
 
 ```
-Day 18
+Day 21 - Keypad Conundrum
 Time part 1: -
 Time part 2: -
 Both parts: -
 ```
 
 ```
-Day 19
+Day 22 - Monkey Market
 Time part 1: -
 Time part 2: -
 Both parts: -
 ```
 
 ```
-Day 20
+Day 23 - LAN Party
 Time part 1: -
 Time part 2: -
 Both parts: -
 ```
 
 ```
-Day 21
+Day 24 - Crossed Wires
 Time part 1: -
 Time part 2: -
 Both parts: -
 ```
 
 ```
-Day 22
+Day 25 - Code Chronicle
 Time part 1: -
 Time part 2: -
 Both parts: -
 ```
 
 ```
-Day 23
-Time part 1: -
-Time part 2: -
-Both parts: -
-```
-
-```
-Day 24
-Time part 1: -
-Time part 2: -
-Both parts: -
-```
-
-```
-Day 25
-Time part 1: -
-Time part 2: -
-Both parts: -
-```
-
-```
-Total stars: 32/50
-Total time: 3644.847ms
+Total stars: 38/50
+Total time: 3781.507ms
 ```
 
 <!--/RESULTS-->
