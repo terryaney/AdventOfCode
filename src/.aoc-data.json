@@ -1457,16 +1457,16 @@
         {
           "title": "Race Condition",
           "part1": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "0",
             "attempts": [],
-            "time": null
+            "time": 91.545
           },
           "part2": {
-            "solved": false,
-            "result": null,
+            "solved": true,
+            "result": "0",
             "attempts": [],
-            "time": null
+            "time": 82.017
           }
         },
         {

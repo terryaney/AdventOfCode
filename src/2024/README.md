@@ -25,7 +25,7 @@
 [![Day](https://badgen.net/badge/17/%E2%98%85%E2%98%85/green)](day17)
 [![Day](https://badgen.net/badge/18/%E2%98%85%E2%98%85/green)](day18)
 [![Day](https://badgen.net/badge/19/%E2%98%85%E2%98%85/green)](day19)
-![Day](https://badgen.net/badge/20/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/20/%E2%98%85%E2%98%85/green)](day20)
 ![Day](https://badgen.net/badge/21/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/22/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/23/%E2%98%86%E2%98%86/gray)
@@ -177,9 +177,9 @@ Both parts: 19.709ms
 
 ```
 Day 20 - Race Condition
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 78.734ms
+Time part 2: 200.34ms
+Both parts: 279.074ms
 ```
 
 ```
@@ -218,8 +218,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 38/50
-Total time: 3781.507ms
+Total stars: 40/50
+Total time: 4060.582ms
 ```
 
 <!--/RESULTS-->

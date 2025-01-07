@@ -49,20 +49,21 @@ export class Movement {
 	static getOppositeDirection = (direction: Direction): Direction => Movement.opposites[direction];
 	static Directions = [
 		{ dx: -1, dy: 0, direction: "W", opposite: Movement.opposites[ "W"] } as MovementDelta,
-		{ dx: 0, dy: 1, direction: "N", opposite: Movement.opposites[ "N"] } as MovementDelta,
+		{ dx: 0, dy: -1, direction: "N", opposite: Movement.opposites[ "N"] } as MovementDelta,
 		{ dx: 1, dy: 0, direction: "E", opposite: Movement.opposites[ "E"] } as MovementDelta,
-		{ dx: 0, dy: -1, direction: "S", opposite: Movement.opposites[ "S"] } as MovementDelta
+		{ dx: 0, dy: 1, direction: "S", opposite: Movement.opposites[ "S"] } as MovementDelta
 	];
 	static DirectionsWithDiagonals = [
 		{ dx: -1, dy: 0, direction: "W", opposite: Movement.opposites[ "W"] } as MovementDelta,
 		{ dx: -1, dy: -1, direction: "NW", opposite: Movement.opposites[ "NW"] } as MovementDelta,
-		{ dx: 0, dy: 1, direction: "N", opposite: Movement.opposites[ "N"] } as MovementDelta,
-		{ dx: 1, dy: 1, direction: "NE", opposite: Movement.opposites[ "NE"] } as MovementDelta,
+		{ dx: 0, dy: -1, direction: "N", opposite: Movement.opposites[ "N"] } as MovementDelta,
+		{ dx: 1, dy: -1, direction: "NE", opposite: Movement.opposites[ "NE"] } as MovementDelta,
 		{ dx: 1, dy: 0, direction: "E", opposite: Movement.opposites[ "E"] } as MovementDelta,
-		{ dx: 1, dy: -1, direction: "SE", opposite: Movement.opposites[ "SE"] } as MovementDelta,
-		{ dx: 0, dy: -1, direction: "S", opposite: Movement.opposites[ "S"] } as MovementDelta,
-		{ dx: -1, dy: 1, direction: "SW", opposite: Movement.opposites[ "SW"] } as MovementDelta,
+		{ dx: 1, dy: 1, direction: "SE", opposite: Movement.opposites[ "SE"] } as MovementDelta,
+		{ dx: 0, dy: 1, direction: "S", opposite: Movement.opposites[ "S"] } as MovementDelta,
+		{ dx: -1, dy: 1, direction: "SW", opposite: Movement.opposites[ "SW"] } as MovementDelta
 	];
+	static manhattanDistance = <TValue = string>(a: { x: number, y: number }, b: { x: number, y: number }): number => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 }
 
 export type MovementDelta = { dx: number, dy: number, direction: Direction, opposite: Direction };
@@ -124,7 +125,7 @@ export const aStar = <TValue = string>(
 	grid: Grid<TValue>,
 	start: PathNode,
 	end: PathNode,
-	movementDeltas: Array<MovementDelta>,	
+	movementDeltas: Array<MovementDelta> = Movement.Directions,
 	movementCost: (current: PathNode, neighbor: PathNode) => number = (_current, _neighbor) => 1,
 	canMove: (neighbor: PathNode) => boolean = (neighbor) => grid.points[neighbor.y][neighbor.x].value != "#",
 	includeAllPaths: boolean = false
@@ -137,7 +138,7 @@ export const aStar = <TValue = string>(
 	//		- If in openList and costFromStart is lower, update costFromStart and parent
 	// Step 4: Repeat
 	
-	start.costToFinish = manhattanDistance(start, end);
+	start.costToFinish = Movement.manhattanDistance(start, end);
 
 	let isStartMovement = true;
 	const pathsFound: Array<PathNode> = [];
@@ -155,9 +156,7 @@ export const aStar = <TValue = string>(
 
 		if (currentNode.x === end.x && currentNode.y === end.y) {
 			// Only ever > 0 if includeAllPaths is true
-			if (pathsFound.length > 0) {
-				const currentCost = currentNode.totalCost;
-				
+			if (includeAllPaths && pathsFound.length > 0) {
 				// If hit end with higher score than current, we can quit since we'll always find lowest to highest and will never find another lower than this
 				if (currentNode.totalCost > pathsFound[0].totalCost) break;
 			}
@@ -226,7 +225,7 @@ export const aStar = <TValue = string>(
 			if (!openNeighbor || (includeAllPaths && costFromStart <= openNeighbor.costFromStart)) {
 			// if (!openNeighbor) {
 				neighbor.costFromStart = costFromStart;
-				neighbor.costToFinish = manhattanDistance(neighbor, end);
+				neighbor.costToFinish = Movement.manhattanDistance(neighbor, end);
 				neighbor.parent = currentNode;
 				openList.push(neighbor);
 			}
@@ -255,8 +254,6 @@ export const aStar = <TValue = string>(
 	}
 	return allPaths;
 };
-
-const manhattanDistance = <TValue = string>(a: Point<TValue> | PathNode, b: Point<TValue> | PathNode): number => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 
 export class Path {
 	nodes: Array<PathNode>;
